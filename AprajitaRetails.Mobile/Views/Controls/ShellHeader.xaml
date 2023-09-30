@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.Controls.ShellHeader"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    HeightRequest="200">
+
+    <Grid BackgroundColor="{x:StaticResource Background_Mid}">
+
+        <Image
+            Aspect="AspectFill"
+            Opacity="0.9"
+            Source="aprajitaretails.png" />
+
+        <Label
+            Margin="20"
+            FontAttributes="Bold"
+            HorizontalTextAlignment="Center"
+            Text="eStore"
+            TextColor="DarkRed"
+            VerticalTextAlignment="Center" />
+    </Grid>
+</ContentView>
+

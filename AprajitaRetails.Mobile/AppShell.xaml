@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+    
+<Shell
+    x:Class="AprajitaRetails.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AprajitaRetails.Mobile"
+    xmlns:controls="clr-namespace:AprajitaRetails.Mobile.Views.Controls"
+    Title="Aprajita Retails"
+    FlyoutBackgroundImage="thearvindstore005.jpg"
+    FlyoutBackgroundImageAspect="Fill"
+    FlyoutHeaderBehavior="CollapseOnScroll"
+    Shell.FlyoutBehavior="Flyout">
+    
+     <!--Shell Resources-->
+    <!--<Shell.Resources>
+
+        <Style x:Key="BaseStyle" TargetType="Element">
+            <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+            <Setter Property="Shell.ForegroundColor" Value="White" />
+            <Setter Property="Shell.TitleColor" Value="White" />
+            <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+            <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+            <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+            <Setter Property="Shell.TabBarForegroundColor" Value="White" />
+            <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF" />
+            <Setter Property="Shell.TabBarTitleColor" Value="White" />
+        </Style>
+        <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="FontSize" Value="Medium" />
+        </Style>
+        <Style BasedOn="{StaticResource BaseStyle}" TargetType="TabBar" />
+        <Style BasedOn="{StaticResource BaseStyle}" TargetType="FlyoutItem" />
+        <Style
+        ApplyToDerivedTypes="True"
+        Class="FlyoutItemLayoutStyle"
+        TargetType="Layout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{x:OnPlatform UWP=Transparent, iOS=White}" />
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Yellow" />
+                                --><!--<Setter TargetName="FlayoutItemLabel" Property="Label" Value="24" />--><!--
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Style
+        ApplyToDerivedTypes="True"
+        Class="MenuItemLayoutStyle"
+        TargetType="Layout">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource Accent_Yellow100}" />
+                                --><!--<Setter TargetName="FlayoutItemLabel" Property="Label.FontSize" Value="18" />--><!--
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+    </Shell.Resources>-->
+    <!--  Shell Header and Footer  -->
+    <Shell.FlyoutHeader>
+        <controls:ShellHeader />
+    </Shell.FlyoutHeader>
+    <Shell.FlyoutFooter>
+        <controls:ShellFooter />
+    </Shell.FlyoutFooter>
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+    <!--  Menu Items  -->
+    <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main"/>
+    <FlyoutItem Title="Inventory">
+        <Tab Title="Sale" Icon="rain_icon.png">
+            <ShellContent
+            Title="Sale"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Sale" />
+        </Tab>
+        <Tab Title="Purchase" Icon="rain_icon.png">
+            <ShellContent
+            Title="Purchase"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Purchase" />
+        </Tab>
+        <Tab Title="Products" Icon="rain_icon.png">
+            <ShellContent
+            Title="Products"
+             ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Products" />
+        </Tab>
+
+    </FlyoutItem>
+    <FlyoutItem Title="Daily Sale">
+        <Tab Title="Daily Sale" Icon="rain_icon.png">
+            <ShellContent
+            Title="Daily Sale"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="DailySale" />
+        </Tab>
+        <Tab Title="Due" Icon="rain_icon.png">
+            <ShellContent
+            Title="Due"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="CustomerDue" />
+        </Tab>
+        <Tab Title="Recovery" Icon="rain_icon.png">
+            <ShellContent
+            Title="Recovery"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="CustomerRecovery" />
+        </Tab>
+
+    </FlyoutItem>
+
+    <FlyoutItem
+    Title="Payroll"
+    FlyoutIcon="rain_icon.png"
+    Icon="rain_icon.png">
+        <Tab Title="Attendace" Icon="rain_icon.png">
+            <ShellContent
+            Title="Attendace List"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Attendance" />
+        </Tab>
+        <Tab Title="Attendace Entry" Icon="rain_icon.png">
+            <ShellContent
+            Title="Attendance Entry"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Attendance.Entry" />
+        </Tab>
+
+        <Tab Title="Monthly Attendance" Icon="rain_icon.png">
+            <ShellContent
+            Title="Monthly"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Attendance.Monthly" />
+        </Tab>
+        <Tab Title="Employees" Icon="rain_icon.png">
+            <ShellContent
+            Title="Employee"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Employees" />
+        </Tab>
+
+    </FlyoutItem>
+
+    <FlyoutItem
+    Title="Voucher"
+    FlyoutIcon="rain_icon.png"
+    Icon="rain_icon.png">
+        <Tab Title="Voucher" Icon="rain_icon.png">
+            <ShellContent
+            Title="Voucher List"
+            ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Voucher" />
+        </Tab>
+
+        <Tab Title="Cash Voucher" Icon="rain_icon.png">
+            <ShellContent
+            Title="Cash Voucher"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="CashVoucher" />
+        </Tab>
+        <Tab Title="Notes" Icon="rain_icon.png">
+            <ShellContent
+            Title="Note(s) List"
+          ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Notes" />
+        </Tab>
+
+
+    </FlyoutItem>
+    <FlyoutItem Title="Banking">
+        <Tab Title="Bank" Icon="rain_icon.png">
+            <ShellContent
+            Title="Store"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Banks" />
+        </Tab>
+        <Tab Title="Bank Account" Icon="rain_icon.png">
+            <ShellContent
+            Title="Add"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="BanksAccount" />
+        </Tab>
+        <Tab Title="Vendor Account" Icon="rain_icon.png">
+            <ShellContent
+            Title="Add"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="VendorAccounts" />
+        </Tab>
+        <Tab Title="Transcation" Icon="rain_icon.png">
+            <ShellContent
+            Title="Add"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="Transcation" />
+        </Tab>
+
+    </FlyoutItem>
+    <FlyoutItem Title="Cash Book">
+        <Tab Title="Petty Cash" Icon="rain_icon.png">
+            <ShellContent
+            Title="Store"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="PettyCashBook" />
+        </Tab>
+        <Tab Title="Cash Detail" Icon="rain_icon.png">
+            <ShellContent
+            Title="Add"
+           ContentTemplate="{DataTemplate local:MainPage}"
+            Route="PettyCashBook.CashDetails" />
+        </Tab>
+
+    </FlyoutItem>
+
+    <!--  CA  -->
+    <!--  Employee  -->
+
+    <!--  Common Menu Items  -->
+    <ShellContent
+    Title="About"
+    ContentTemplate="{DataTemplate local:MainPage}"
+    Icon="wind_icin.png"
+    Route="about" />
+    <!--  When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
+    <MenuItem
+    Clicked="SyncDown_Clicked"
+    StyleClass="MenuItemLayoutStyle"
+    Text="Sync Down" />
+    <MenuItem
+    Clicked="MenuItem_Clicked"
+    StyleClass="MenuItemLayoutStyle"
+    Text="Logout" />
+    <!--<TabBar>
+        <ShellContent ContentTemplate="{DataTemplate libpage:Auth.LoginPage}" Route="LoginPage" />
+    </TabBar>-->
+    <!--  Common Menu items End Here  -->
+
+</Shell>
+
+
+
+    
+    
+    
+    
+    
+
+<!--<Shell
+    x:Class="AprajitaRetails.Mobile.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AprajitaRetails.Mobile"
+    Shell.FlyoutBehavior="Disabled">
+
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+</Shell>-->

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="AprajitaRetails.Mobile.Pages.Auths.LoginPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModel="clr-namespace:AprajitaRetails.Mobile.ViewModels.Auths"
+             xmlns:local="clr-namespace:AprajitaRetails.Mobile.Pages.Auths"    Title="Login">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.BindingContext>
+        <viewModel:AuthViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+    <StackLayout
+        Margin="20,0,20,0"
+        Orientation="Vertical"
+        VerticalOptions="Center">
+        <Border
+            Margin="0,10,0,10"
+            Background="#4f11c1"
+            HorizontalOptions="Center"
+            Padding="16,8"
+            Stroke="#DAA520"
+            StrokeThickness="8">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="40,0,0,40" />
+            </Border.StrokeShape>
+            <Label
+                FontAttributes="Bold"
+                FontSize="18"
+                Text="    Aprajita Retailss Login   "
+                TextColor="White" />
+        </Border>
+        <Border
+            Margin="0,10,0,10"
+            BackgroundColor="White"
+            HorizontalOptions="Center"
+            Padding="18,18,18,18"
+            Stroke="#DAA520"
+            StrokeThickness="15">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="70,0,0,70" />
+            </Border.StrokeShape>
+            <Image
+                HeightRequest="272"
+                HorizontalOptions="Center"
+                Source="arlogo.png"
+                WidthRequest="250" />
+        </Border>
+        <Entry
+            x:Name="UserName"
+            Margin="5"
+            FontAttributes="Italic"
+            IsTextPredictionEnabled="True"
+            Keyboard="Email"
+            Placeholder="Username"
+            Text="{Binding UserName, Mode=TwoWay}"
+            TextTransform="Default">
+            <Entry.Behaviors>
+                <toolkit:EmailValidationBehavior
+                    x:Name="EmailValidator"
+                    DecorationFlags="Trim"
+                    Flags="ValidateOnValueChanged"
+                    InvalidStyle="{StaticResource InvalidEntryStyle}"
+                    IsNotValid="True"
+                    ValidStyle="{StaticResource ValidEntryStyle}" />
+            </Entry.Behaviors>
+            <!--<Entry.Behaviors>
+             <toolkit:EventToCommandBehavior Command="{Binding HasErrors}" EventName="TextChanged" />
+         </Entry.Behaviors>-->
+            <!--<Entry.Triggers>
+             <DataTrigger
+                 Binding="{Binding UserName.IsValid}"
+                 TargetType="Entry"
+                 Value="False">
+                 <Setter Property="BackgroundColor" Value="IndianRed" />
+             </DataTrigger>
+         </Entry.Triggers>-->
+        </Entry>
+        <Entry
+            x:Name="Password"
+            Margin="5"
+            IsPassword="True"
+            Placeholder="Password"
+            Text="{Binding Password, Mode=TwoWay}">
+            <!--<Entry.Behaviors>
+             <toolkit:AnimationBehavior>
+             </toolkit:AnimationBehavior>
+         </Entry.Behaviors>-->
+        </Entry>
+        <Grid
+            x:Name="ButtonControls"
+            ColumnDefinitions="*, *"
+            IsVisible="true">
+            <Button
+                x:Name="signInButton"
+                Margin="5"
+                BackgroundColor="{StaticResource Accent_Blue100}"
+                Command="{Binding SignInCommand}"
+                IsEnabled="{Binding IsEnableSign}"
+                IsVisible="{Binding IsEnableSign}"
+                Text="Sign In" />
+            <Button
+                x:Name="signUpButton"
+                Grid.Column="1"
+                Margin="5"
+                BackgroundColor="{StaticResource Accent_Yellow100}"
+                Command="{Binding SignUPCommand}"
+                 IsEnabled="False"
+ IsVisible="False"
+                Text="Sign Up" />
+        </Grid>
+
+        <Grid ColumnDefinitions="*">
+            <Label x:Name="LastStore" Text="{Binding GuestName, StringFormat='{0:GuestName} had logged in'}" />
+        </Grid>
+    </StackLayout>
+</ContentPage>

@@ -5,10 +5,15 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AprajitaRetails.Mobile", "AprajitaRetails.Mobile\AprajitaRetails.Mobile.csproj", "{D998BB04-2539-41B3-B678-C00A8139B57C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{3429EB44-815B-4751-B002-4918F5F002AE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AprajitaRetails.Shared", "..\..\Aprajita Retails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj", "{973CA0A4-7C93-4244-BDD2-92697C1CB993}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		ReleaseLinux|Any CPU = ReleaseLinux|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{D998BB04-2539-41B3-B678-C00A8139B57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -17,9 +22,21 @@ Global
 		{D998BB04-2539-41B3-B678-C00A8139B57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D998BB04-2539-41B3-B678-C00A8139B57C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D998BB04-2539-41B3-B678-C00A8139B57C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{D998BB04-2539-41B3-B678-C00A8139B57C}.ReleaseLinux|Any CPU.ActiveCfg = Release|Any CPU
+		{D998BB04-2539-41B3-B678-C00A8139B57C}.ReleaseLinux|Any CPU.Build.0 = Release|Any CPU
+		{D998BB04-2539-41B3-B678-C00A8139B57C}.ReleaseLinux|Any CPU.Deploy.0 = Release|Any CPU
+		{973CA0A4-7C93-4244-BDD2-92697C1CB993}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{973CA0A4-7C93-4244-BDD2-92697C1CB993}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{973CA0A4-7C93-4244-BDD2-92697C1CB993}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{973CA0A4-7C93-4244-BDD2-92697C1CB993}.Release|Any CPU.Build.0 = Release|Any CPU
+		{973CA0A4-7C93-4244-BDD2-92697C1CB993}.ReleaseLinux|Any CPU.ActiveCfg = ReleaseLinux|Any CPU
+		{973CA0A4-7C93-4244-BDD2-92697C1CB993}.ReleaseLinux|Any CPU.Build.0 = ReleaseLinux|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{973CA0A4-7C93-4244-BDD2-92697C1CB993} = {3429EB44-815B-4751-B002-4918F5F002AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4FF9ED2-B8E5-4135-8FB2-CF5C8C2DD6F1}

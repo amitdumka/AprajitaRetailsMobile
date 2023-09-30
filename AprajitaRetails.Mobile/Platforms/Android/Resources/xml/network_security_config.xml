@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+	<!--<base-config>
+		<trust-anchors>
+			<certificates src="@raw/a152.67.78.183"/>
+		</trust-anchors>
+	</base-config>-->
+	<debug-overrides>
+	<trust-anchors>
+		<certificates src="@raw/a152.67.78.183"/>
+	</trust-anchors>
+	</debug-overrides>
+</network-security-config>

@@ -29,13 +29,20 @@ namespace AprajitaRetails.Mobile.RemoteServices
         {
             if (_client != null)
                 return _client;
-            _client = new HttpClient();
-            if (string.IsNullOrEmpty(authorizationKey))
-            {
-                authorizationKey = ClientSetting.GetSecureAsync("AuthToken").Result;
-            }
 
-            _client.DefaultRequestHeaders.Add("Authorization", authorizationKey);
+            var handler2 = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback =
+       HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+            };
+           _client = new HttpClient(handler2);// new HttpClient();
+            //_client = new HttpClient();
+           // if (string.IsNullOrEmpty(authorizationKey))
+           // {
+           //     authorizationKey = ClientSetting.GetSecureAsync("AuthToken").Result;
+           // }
+
+           // _client.DefaultRequestHeaders.Add("Authorization", authorizationKey);
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             return _client;
@@ -110,13 +117,14 @@ namespace AprajitaRetails.Mobile.RemoteServices
         public async Task<List<T>> GetAllAsync<T>(string apiUrl)
         {
             Uri uri = new Uri($"{Constants.RestUrl}{apiUrl}");
+            Notify.NotifyLong(uri.ToString());
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<List<T>>(content, _serializerOptions);
+                    var data = JsonSerializer.Deserialize<List<T>>(content);
                     return data;
                 }
                 else

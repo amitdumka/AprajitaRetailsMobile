@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="AprajitaRetails.Mobile.Pages.Payroll.AttendancePage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:rlv="clr-namespace:AprajitaRetails.Mobile.Views.Custom"
+             xmlns:local="clr-namespace:AprajitaRetails.Mobile.Pages.Payroll" 
+             Title="{Binding Title, Mode=TwoWay}">
+    <VerticalStackLayout>
+        <rlv:RecordListingView x:Name="RLV" AddButtonText="Add" />
+    </VerticalStackLayout>
+    </ContentPage>

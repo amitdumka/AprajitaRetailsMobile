@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.Custom.RecordListingView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:app="clr-namespace:AprajitaRetails.Mobile.Resources.Styles"
+    xmlns:sfgrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+    x:Name="this"
+    BackgroundColor="{x:StaticResource Accent_Blue200}">
+    
+    <VerticalStackLayout BackgroundColor="{x:StaticResource Accent_Blue200}">
+        <HorizontalStackLayout HorizontalOptions="Center">
+            <Image>
+                <Image.Source>
+                    <FontImageSource
+                        FontFamily="FontAwesome"
+                        Glyph="{Binding Icon}"
+                        Size="24"
+                        Color="{StaticResource Primary}" />
+                </Image.Source>
+            </Image>
+            <Label
+                Margin="10"
+                FontAttributes="Bold"
+                FontSize="Subtitle"
+                HorizontalOptions="CenterAndExpand"
+                Text="{Binding Title, Mode=TwoWay}"
+                TextColor="Blue"
+                VerticalOptions="Center" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout Margin="10" HorizontalOptions="CenterAndExpand" class="Button-Group">
+            <Button
+                BackgroundColor="{StaticResource Accent_Blue100}"
+                Command="{Binding AddButtonCommand}"
+                Text="Add" />
+            <Button
+                BackgroundColor="{StaticResource Accent}"
+                Command="{Binding DeleteButtonCommand}"
+                Text="Delete" />
+            <Button
+                BackgroundColor="{StaticResource NeutralDarker}"
+                Command="{Binding RefreshButtonCommand}"
+                Text="Refresh" />
+        </HorizontalStackLayout>
+        
+        <VerticalStackLayout x:Name="DetailsLayout" Margin="10">
+            <sfgrid:SfDataGrid
+                x:Name="dataGrid"
+                AutoGenerateColumnsMode="None"
+                BackgroundColor="Black"
+                ColumnWidthMode="FitByCell"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalScrollBarVisibility="Default"
+                ItemsSource="{Binding Entities}"
+                MaximumHeightRequest="570"
+                RowHeight="48"
+                SelectionMode="SingleDeselect"
+                SortingMode="Single"
+                VerticalOptions="CenterAndExpand"
+                VerticalScrollBarVisibility="Default">
+                <sfgrid:SfDataGrid.DefaultStyle>
+                    <sfgrid:DataGridStyle
+                        AlternateRowBackground="#AFD5AA"
+                        GridLineColor="IndianRed"
+                        HeaderRowBackground="#0074E3"
+                        HeaderRowFontAttributes="Bold"
+                        HeaderRowFontFamily="Roboto-Medium"
+                        HeaderRowFontSize="15"
+                        HeaderRowTextColor="White"
+                        RowBackground="#AFD5FB"
+                        RowFontSize="14"
+                        RowTextColor="#212121"
+                        SelectedRowTextColor="{x:StaticResource Tertiary}"
+                        SelectionBackground="{x:StaticResource Accent_Yellow200}" />
+                </sfgrid:SfDataGrid.DefaultStyle>
+                <sfgrid:SfDataGrid.Columns />
+            </sfgrid:SfDataGrid>
+        </VerticalStackLayout>
+        <Label
+            Padding="0,0,10,0"
+            BackgroundColor="{x:StaticResource Accent_Blue100}"
+            FontAttributes="Bold,Italic"
+            FontAutoScalingEnabled="True"
+            HorizontalTextAlignment="End"
+            Text="{Binding RecordCount, StringFormat='Records : {0}  .', Mode=TwoWay}"
+            TextColor="{x:StaticResource TextOnSolid_Light}" />
+    </VerticalStackLayout>
+   
+</ContentView>

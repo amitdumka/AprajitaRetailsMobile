@@ -19,8 +19,8 @@
 		<ApplicationIdGuid>25f1193a-c3da-4a7c-91f7-d4ab87e53597</ApplicationIdGuid>
 
 		<!-- Versions -->
-		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
-		<ApplicationVersion>1</ApplicationVersion>
+		<ApplicationDisplayVersion>2.0</ApplicationDisplayVersion>
+		<ApplicationVersion>2</ApplicationVersion>
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
@@ -32,10 +32,14 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<!--<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+
+		--><!-- Splash Screen --><!--
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />-->
+		<MauiIcon Include="Resources\AppIcon\appicon.png" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\arlogo1.png" Color="#ffffff" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -49,21 +53,52 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Remove="Platforms\Android\Resources\raw\a152.67.78.183.pem" />
+		<None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
+		<None Remove="Resources\Images\add_icon2.svg" />
+		<None Remove="Resources\Images\add_location.png" />
+		<None Remove="Resources\Images\amit.jpg" />
+		<None Remove="Resources\Images\aprajitaretails.png" />
+		<None Remove="Resources\Images\arlogo.png" />
+		<None Remove="Resources\Images\shalini.jpg" />
+		<None Remove="Resources\Images\thearvindstore004.jpg" />
+		<None Remove="Resources\Images\thearvindstore005.jpg" />
 	</ItemGroup>
 	<ItemGroup>
+
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.11" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.11" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.11" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="6.0.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Core" Version="6.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.Maui.DataGridExport" Version="23.1.38" />
+
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
+		<PackageReference Include="SQLitePCLRaw.bundle_green" Version="2.1.6" />
+		<PackageReference Include="Syncfusion.Maui.Backdrop" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.Maui.Buttons" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.Maui.DataForm" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.Maui.DataGrid" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.Maui.DataGridExport" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.38" />
+		<PackageReference Include="Syncfusion.Maui.TreeView" Version="23.1.38" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Aprajita Retails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Auths\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Payroll\AttendancePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Payroll\EmployeePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\AKSTheme.xaml">
@@ -76,6 +111,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Controls\ShellHeader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Custom\RecordListingView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Custom\RecordView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

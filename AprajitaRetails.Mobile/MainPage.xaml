@@ -9,14 +9,25 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <Border
+    Margin="0,10,0,10"
+    BackgroundColor="White"
+    HorizontalOptions="Center"
+    Padding="18,18,18,18"
+    Stroke="#DAA520"
+    StrokeThickness="15">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="70,0,0,70" />
+                </Border.StrokeShape>
+                <Image
+        HeightRequest="272"
+        HorizontalOptions="Center"
+        Source="arlogo.png"
+        WidthRequest="250" />
+            </Border>
 
             <Label
-                Text="Hello, World!"
+                Text="Aprajita Retails"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
@@ -24,18 +35,16 @@
             <Label
                 Text="Welcome to .NET Multi-platform App UI"
                 SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                SemanticProperties.Description="Welcome to Mobile App of Aprajita Retails"
                 FontSize="18"
                 HorizontalOptions="Center" />
 
-            <Button
+            <!--<Button
                 x:Name="CounterBtn"
                 Text="Click me"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
+                HorizontalOptions="Center" />-->
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

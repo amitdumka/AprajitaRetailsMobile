@@ -1,11 +1,93 @@
 ﻿////using AKS.Shared.Commons.Models.Banking;
 using AprajitaRetails.Mobile.DataModels.Base;
+using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Shared.Models.Banking;
 using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Accounting
 {
 
+    public class VendorBankAccountDataModel : BaseDM<VendorBankAccount>
+    {
+        public VendorBankAccountDataModel() : base()
+    {
+        //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+        apiurl = "api/BankAccountList";
+        apiDtoURL = $"api/BankAccountList/bystoredto?storeid={CurrentSession.StoreCode}";
+    }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<VendorBankAccount> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<VendorBankAccount>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class BankAccountListDataModel : BaseDM<BankAccountList>
+    {
+        public BankAccountListDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/BankAccountList";
+            apiDtoURL = $"api/BankAccountList/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<BankAccountList> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<BankAccountList>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    [Obsolete]
     public class BankInfoDataModel : BaseDataModel<BankAccountList, VendorBankAccount>
     {
         public BankInfoDataModel(ConType conType) : base(conType)

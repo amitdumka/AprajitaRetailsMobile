@@ -1,16 +1,141 @@
 ﻿//using AKS.Shared.Commons.Models.Accounts;
+using AprajitaRetails.Mobile.DataModels.Base;
+using AprajitaRetails.Mobile.Operations.Prefernces;
+using AprajitaRetails.Shared.AutoMapper.DTO;
 using AprajitaRetails.Shared.Models.Vouchers;
 using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Accounting
 {
-    public class VoucherDataModel : Base.BaseDataModel<Voucher, CashVoucher, Note>
+
+    public class VoucherDataModel : BaseDM<VoucherDTO>
     {
-        public VoucherDataModel(ConType conType) : base(conType)
+        public VoucherDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/Vouchers";
+            apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<VoucherDTO> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<VoucherDTO>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class CashVoucherDataModel : BaseDM<CashVoucherDTO>
+    {
+        public CashVoucherDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/CashVouchers";
+            apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<CashVoucherDTO> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<CashVoucherDTO>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class NoteDataModel : BaseDM<NoteDTO>
+    {
+        public NoteDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/Notes";
+            apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<NoteDTO> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<NoteDTO>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+    [Obsolete]
+    public class VouchersDataModel : Base.BaseDataModel<Voucher, CashVoucher, Note>
+    {
+        public VouchersDataModel(ConType conType) : base(conType)
         {
         }
 
-        public VoucherDataModel(ConType conType,RolePermission role) : base(conType, role)
+        public VouchersDataModel(ConType conType,RolePermission role) : base(conType, role)
         {
         }
 

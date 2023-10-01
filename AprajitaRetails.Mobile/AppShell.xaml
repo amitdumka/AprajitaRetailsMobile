@@ -100,7 +100,7 @@
         <Tab Title="Monthly Attendance" Icon="rain_icon.png">
             <ShellContent
             Title="Monthly"
-            ContentTemplate="{DataTemplate cust:TestPage}"
+            ContentTemplate="{DataTemplate hrPage:MonthlyAttendancePage}"
             Route="Attendance.Monthly" />
         </Tab>
        

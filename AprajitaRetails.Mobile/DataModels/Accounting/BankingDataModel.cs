@@ -1,11 +1,135 @@
 ﻿using System;
 //using AKS.Shared.Commons.Models.Banking;
 using AprajitaRetails.Mobile.DataModels.Base;
+using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Shared.Models.Banking;
 using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Accounting
 {
+
+    public class BankDataModel : BaseDM<Bank>
+    {
+        public BankDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/Banks";
+            apiDtoURL = $"api/Banks";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<BankAccountList> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<BankAccountList>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class BankAccountDataModel : BaseDM<BankAccount>
+    {
+        public BankAccountDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/BankAccounts";
+            apiDtoURL = $"api/BankAccounts/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<BankAccount> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<BankAccount>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class BankTranscationDataModel : BaseDM<BankTransaction>
+    {
+        public BankTranscationDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/BankTrancations";
+            apiDtoURL = $"api/BankTranscations";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<BankTransaction> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<BankTransaction>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    [Obsolete]
     public partial class BankingDataModel : BaseDataModel<Bank, BankAccount, BankTransaction>
     {
         public BankingDataModel(ConType conType) : base(conType)

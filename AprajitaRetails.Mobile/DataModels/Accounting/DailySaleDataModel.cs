@@ -1,20 +1,145 @@
-﻿using System;
-//using AKS.Shared.Commons.Models;
+﻿//using AKS.Shared.Commons.Models;
 //using AKS.Shared.Commons.Models.Sales;
 using AprajitaRetails.Mobile.DataModels.Base;
+using AprajitaRetails.Mobile.Operations.Prefernces;
+using AprajitaRetails.Shared.AutoMapper.DTO;
 using AprajitaRetails.Shared.Models.Stores;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 
 namespace AprajitaRetails.Mobile.DataModels.Accounting
 {
-    public class DailySaleDataModel : BaseDataModel<DailySale, CustomerDue, DueRecovery>
+    public class DailySaleModel : BaseDM<DailySaleDTO>
     {
-        public DailySaleDataModel(ConType conType) : base(conType)
+        public DailySaleModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/DailySales";
+            apiDtoURL = $"api/DailySales/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DailySaleDTO> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<DailySaleDTO>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+    public class CustomerDueModel : BaseDM<CustomerDue>
+    {
+        public CustomerDueModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/CustomerDues";
+            apiDtoURL = $"api/CustomerDues/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<CustomerDue> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<CustomerDue>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DueRecoveryDataModel : BaseDM<DueRecovery>
+    {
+        public DueRecoveryDataModel() : base()
+        {
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "api/DueRecoverys";
+            apiDtoURL = $"api/DueRecovery/bystoredto?storeid={CurrentSession.StoreCode}";
+        }
+
+        public override Task<string> GenrateID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<DueRecovery> GetFiltered(QueryParam query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<List<DueRecovery>> GetItemsAsync(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList(string storeid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override List<int> GetYearList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<bool> InitContext()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+
+    [Obsolete]
+    public class DailySalesDataModel : BaseDataModel<DailySale, CustomerDue, DueRecovery>
+    {
+        public DailySalesDataModel(ConType conType) : base(conType)
         {
         }
 
-        public DailySaleDataModel(ConType conType,RolePermission role) : base(conType, role)
+        public DailySalesDataModel(ConType conType, RolePermission role) : base(conType, role)
         {
         }
 
@@ -37,6 +162,7 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         {
             throw new NotImplementedException();
         }
+
         public async Task<List<DailySale>> GetItemsAsync(string storeid, bool today, int fil)
         {
             if (today)
@@ -46,10 +172,11 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
             }
             else
             {
-                return await GetContext().DailySales.Where(c => c.StoreId == storeid && c.OnDate.Year == DateTime.Today.Year && c.OnDate.Month == DateTime.Today.Month+fil)
+                return await GetContext().DailySales.Where(c => c.StoreId == storeid && c.OnDate.Year == DateTime.Today.Year && c.OnDate.Month == DateTime.Today.Month + fil)
                   .OrderByDescending(c => c.OnDate).ToListAsync();
             }
         }
+
         public override async Task<List<DailySale>> GetItemsAsync(string storeid)
         {
             var db = GetContext();
@@ -144,13 +271,9 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
                     else
                         _localDb.AddAsync(item);
                 }
-                return  (await _localDb.SaveChangesAsync() > 0);
-
-
+                return (await _localDb.SaveChangesAsync() > 0);
             }
             return true;
-
         }
     }
 }
-

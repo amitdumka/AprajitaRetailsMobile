@@ -79,8 +79,8 @@ namespace AprajitaRetails.Mobile
             builder.Services.AddSingleton<AttendanceViewModel>();
             builder.Services.AddSingleton<AttendancePage>();
             //Monthly Attendance
-            //builder.Services.AddSingleton<MonthlyAttendanceViewModel>();
-            // builder.Services.AddSingleton<MonthlyAttendancePage>();
+            builder.Services.AddSingleton<MonthlyAttendanceViewModel>();
+             builder.Services.AddSingleton<MonthlyAttendancePage>();
             //Attendance
             builder.Services.AddSingleton<EmployeesViewModel>();
             builder.Services.AddSingleton<EmployeePage>();

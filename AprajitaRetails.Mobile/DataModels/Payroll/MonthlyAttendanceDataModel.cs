@@ -1,31 +1,34 @@
 ﻿using AprajitaRetails.Mobile.DataModels.Base;
-using AprajitaRetails.Shared.Models.Stores;
+using AprajitaRetails.Mobile.Operations.Prefernces;
+using AprajitaRetails.Shared.AutoMapper.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AprajitaRetails.Mobile.DataModels.Clients
+namespace AprajitaRetails.Mobile.DataModels.Payroll
 {
-    public class StoreDataModel : BaseDM<Store>
+    public class MonthlyAttendanceDataModel : BaseDM<MonthlyAttendanceDTO>
     {
-        public StoreDataModel() : base()
+        public MonthlyAttendanceDataModel() : base()
         {
-            apiurl = "Stores";
-            apiDtoURL = $"Stores";
+            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
+            apiurl = "MonthlyAttendances";
+            apiDtoURL = $"MonthlyAttendances/bystoredto?storeid={CurrentSession.StoreCode}&isWorking=false";
         }
+
         public override Task<string> GenrateID()
         {
             throw new NotImplementedException();
         }
 
-        public override List<Store> GetFiltered(QueryParam query)
+        public override List<MonthlyAttendanceDTO> GetFiltered(QueryParam query)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<List<Store>> GetItemsAsync(string storeid)
+        public override Task<List<MonthlyAttendanceDTO>> GetItemsAsync(string storeid)
         {
             throw new NotImplementedException();
         }
@@ -45,5 +48,4 @@ namespace AprajitaRetails.Mobile.DataModels.Clients
             throw new NotImplementedException();
         }
     }
-
 }

@@ -111,8 +111,8 @@
                 Margin="5"
                 BackgroundColor="{StaticResource Accent_Yellow100}"
                 Command="{Binding SignUPCommand}"
-                 IsEnabled="False"
- IsVisible="False"
+                 IsEnabled="True"
+
                 Text="Sign Up" />
         </Grid>
 

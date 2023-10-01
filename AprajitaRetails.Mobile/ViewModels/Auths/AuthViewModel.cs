@@ -66,6 +66,12 @@ namespace AprajitaRetails.Mobile.ViewModels.Auths
         }
 
         [RelayCommand]
+        private async Task<bool> SignUP()
+        {
+            Notify.NotifyVLong("You are not authorized to sign up");
+            return true;
+        }
+        [RelayCommand]
         private async Task<bool> SignIn()
         {
             ValidateAllProperties();

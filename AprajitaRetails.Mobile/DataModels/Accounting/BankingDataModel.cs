@@ -22,12 +22,12 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
             throw new NotImplementedException();
         }
 
-        public override List<BankAccountList> GetFiltered(QueryParam query)
+        public override List<Bank> GetFiltered(QueryParam query)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<List<BankAccountList>> GetItemsAsync(string storeid)
+        public override Task<List<Bank>> GetItemsAsync(string storeid)
         {
             throw new NotImplementedException();
         }

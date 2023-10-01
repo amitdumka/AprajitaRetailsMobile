@@ -110,6 +110,7 @@ namespace AprajitaRetails.Mobile.ViewModels.Base
             Rlv = rlv;
             Rlv.BindingContext = this;
             Rlv.Cols = await SetGridCols();
+            
 
         }
         #endregion Abstractfunctions

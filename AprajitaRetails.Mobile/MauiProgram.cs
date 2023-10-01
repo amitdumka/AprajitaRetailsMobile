@@ -5,6 +5,7 @@ using CommunityToolkit.Maui;
 using Syncfusion.Maui.Core.Hosting;
 using AprajitaRetails.Mobile.ViewModels.List.Payroll;
 using AprajitaRetails.Mobile.Pages.Payroll;
+using AprajitaRetails.Mobile.Views.Custom;
 
 namespace AprajitaRetails.Mobile
 {
@@ -83,6 +84,8 @@ namespace AprajitaRetails.Mobile
             //Attendance
             builder.Services.AddSingleton<EmployeesViewModel>();
             builder.Services.AddSingleton<EmployeePage>();
+
+            builder.Services.AddSingleton<TestPage>();
             //Inventory Sale
             //builder.Services.AddSingleton<SaleViewModel>();
             //builder.Services.AddSingleton<StockViewModel>();

@@ -8,7 +8,8 @@
     xmlns:local="clr-namespace:AprajitaRetails.Mobile"
     xmlns:hrPage="clr-namespace:AprajitaRetails.Mobile.Pages.Payroll"
     xmlns:authPage="clr-namespace:AprajitaRetails.Mobile.Pages.Auths"
-    xmlns:controls="clr-namespace:AprajitaRetails.Mobile.Views.Controls"
+    xmlns:controls="clr-namespace:AprajitaRetails.Mobile.Views.Controls" 
+    xmlns:cust="clr-namespace:AprajitaRetails.Mobile.Views.Custom"
     Title="Aprajita Retails"
     FlyoutBackgroundImage="thearvindstore005.jpg"
     FlyoutBackgroundImageAspect="Fill"
@@ -99,7 +100,7 @@
         <Tab Title="Monthly Attendance" Icon="rain_icon.png">
             <ShellContent
             Title="Monthly"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate cust:TestPage}"
             Route="Attendance.Monthly" />
         </Tab>
        

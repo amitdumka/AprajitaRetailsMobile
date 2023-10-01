@@ -1,10 +1,13 @@
-﻿//using AKS.Shared.Commons.Models.Inventory;
+﻿////using AKS.Shared.Commons.Models.Inventory;
 using AprajitaRetails.Mobile.DataModels.Base;
 using AprajitaRetails.Shared.Models.Inventory;
 using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Inventory
 {
+
+
+    [Obsolete]
     public class CategoryDataModel : BaseDataModel<ProductSubCategory, ProductType, Supplier>
     {
         public CategoryDataModel(ConType conType) : base(conType)

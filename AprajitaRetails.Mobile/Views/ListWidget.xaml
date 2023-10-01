@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.ListWidget"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this">
+    <Frame
+        Margin="2"
+        Padding="20"
+        BackgroundColor="{x:StaticResource Background_Mid}"
+        BindingContext="{x:Reference this}"
+        BorderColor="#C49B33"
+        CornerRadius="20"
+        HasShadow="True"
+        HorizontalOptions="Center"
+        MinimumHeightRequest="100"
+        MinimumWidthRequest="10"
+        VerticalOptions="Center">
+        <VerticalStackLayout BindingContext="{x:Reference this}" HorizontalOptions="Center">
+            <HorizontalStackLayout HorizontalOptions="End">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="{Binding HeaderText}"
+                    TextColor="{x:StaticResource Accent_Blue200}" />
+            </HorizontalStackLayout>
+            <BoxView
+                Margin="0,0,0,10"
+                HeightRequest="2"
+                HorizontalOptions="Fill"
+                MaximumWidthRequest="200"
+                Color="{x:StaticResource Accent_Yellow200}" />
+            <HorizontalStackLayout Margin="-1" HorizontalOptions="StartAndExpand">
+                <CollectionView
+                    Margin="{OnIdiom Phone='6,0,0,0',
+                                     Tablet='17,0,0,10'}"
+                    HorizontalScrollBarVisibility="Always"
+                    ItemSizingStrategy="MeasureAllItems"
+                    ItemsSource="{Binding ItemData}"
+                    ItemsUpdatingScrollMode="KeepLastItemInView"
+                    VerticalScrollBarVisibility="Always">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Padding="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    Padding="0,0,5,0"
+                                    FontAttributes="Bold"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Text="{Binding Title}"
+                                    TextColor="{x:StaticResource Accent_Blue100}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Padding="0,0,5,0"
+                                    Text="{Binding Description}"
+                                    TextColor="{x:StaticResource Accent_Yellow100}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        <!--</Border>-->
+    </Frame>
+
+</ContentView>

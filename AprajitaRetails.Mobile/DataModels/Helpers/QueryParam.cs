@@ -3,6 +3,8 @@
 
 namespace AprajitaRetails.Mobile.DataModels
 {
+
+    //TODO: Move to Shared Project
     public class QueryParam
     {
         public int Id { get; set; }

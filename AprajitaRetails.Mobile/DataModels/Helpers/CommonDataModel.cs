@@ -3,6 +3,7 @@ using System.Data;
 
 namespace AprajitaRetails.Mobile.DataModels
 {
+    //Redo this dashboard data Model 
     public class DashboardDataModel
     {
         public string StoreCode = "ARD";

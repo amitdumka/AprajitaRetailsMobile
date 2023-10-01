@@ -1,5 +1,6 @@
 ﻿namespace AprajitaRetails.Mobile.DataModels
 {
+    //TODO: Move to Shared Project
     public class DynVM
     {
         public string StoreId { get; set; }

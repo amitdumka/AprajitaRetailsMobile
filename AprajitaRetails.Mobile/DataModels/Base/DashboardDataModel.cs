@@ -1,6 +1,4 @@
-﻿
-
-using AKS.MAUI.Databases;
+﻿using AKS.MAUI.Databases;
 
 namespace AprajitaRetails.Mobile.DataModels.Base
 {
@@ -17,6 +15,12 @@ namespace AprajitaRetails.Mobile.DataModels.Base
         public AppDBContext GetContextLocal() => _localDb;
 
         public AppDBContext GetContextAzure() => _azureDb;
+
+        public DashboardDataModel()
+        {
+            ConType = ConType.Remote;
+            Mode = DBType.API;
+        }
 
         public DashboardDataModel(ConType conType)
         {
@@ -133,5 +137,4 @@ namespace AprajitaRetails.Mobile.DataModels.Base
             return false;
         }
     }
-
 }

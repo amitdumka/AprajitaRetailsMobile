@@ -1,11 +1,12 @@
-﻿//using AKS.Shared.Commons.Models;
-//using AKS.Shared.Commons.Models.Inventory;
+﻿////using AKS.Shared.Commons.Models;
+////using AKS.Shared.Commons.Models.Inventory;
 using AprajitaRetails.Mobile.DataModels.Base;
 using AprajitaRetails.Shared.Models.Inventory;
 using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Inventory
 {
+    [Obsolete]
     public class PurchaseDataModel : BaseDataModel<ProductPurchase, PurchaseItem, Stock>
     {
         public PurchaseDataModel(ConType conType) : base(conType)

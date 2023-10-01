@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.SearchBar"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <VerticalStackLayout Spacing="12">
+
+        <!--  Search Box  -->
+        <Border
+            Margin="0,0,24,0"
+            Padding="12,4"
+            BackgroundColor="#33CCCCCC"
+            HeightRequest="48"
+            HorizontalOptions="Fill"
+            Stroke="{StaticResource BorderColor}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="6" />
+            </Border.StrokeShape>
+
+            <Grid
+                ColumnDefinitions="Auto,*"
+                ColumnSpacing="16"
+                HorizontalOptions="Fill"
+                VerticalOptions="Center">
+
+                <!--<Image
+                    Grid.Column="0"
+                    HeightRequest="18"
+                    Source="imgsearch.png"
+                    VerticalOptions="Center"
+                    WidthRequest="18" />
+
+                <Label
+                    Grid.Column="1"
+                    Style="{StaticResource MenuLabelStyle}"
+                    Text="Search for your favorite planet"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center" />-->
+
+            </Grid>
+
+        </Border>
+
+        <!--<SearchBar
+                        ios:SearchBar.SearchBarStyle="Minimal"
+                        Placeholder="Search for your favorite planet"
+                        FontFamily="MediumFont"
+                        HorizontalOptions="Fill"
+                        Margin="0,0,24,0"
+                        FontSize="14"
+                        PlaceholderColor="#AAAAAA" />-->
+
+    </VerticalStackLayout>
+</ContentView>

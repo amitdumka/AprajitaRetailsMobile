@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.ColView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <VerticalStackLayout>
+        <!--<CollectionView
+            Margin="0,-6,0,0"
+            HeightRequest="160"
+            ItemsSource="{Binding Images}">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="16" Orientation="Horizontal" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Image
+                        Aspect="AspectFill"
+                        HorizontalOptions="Fill"
+                        Source="{Binding .}"
+                        VerticalOptions="Fill"
+                        WidthRequest="160">
+                        <Image.Clip>
+                            <RoundRectangleGeometry CornerRadius="16" Rect="0,0,160,160" />
+                        </Image.Clip>
+                    </Image>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>-->
+    </VerticalStackLayout>
+</ContentView>

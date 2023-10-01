@@ -1,19 +1,14 @@
-﻿////using AKS.Shared.Commons.Models.Accounts;
+﻿////using AKS.Shared.Commons.Models.Inventory;
 using AprajitaRetails.Mobile.DataModels.Base;
-using AprajitaRetails.Mobile.Operations.Prefernces;
-using AprajitaRetails.Shared.AutoMapper.DTO;
-using AprajitaRetails.Shared.Models.Vouchers;
-using Microsoft.EntityFrameworkCore;
 
-namespace AprajitaRetails.Mobile.DataModels.Accounting
+namespace AprajitaRetails.Mobile.DataModels.Inventory
 {
-
-    public class VoucherDataModel : BaseDM<VoucherDTO>
+    public class SupplierDataModel : BaseDM<SupplierDataModel>
     {
-        public VoucherDataModel() : base()
+        public SupplierDataModel() : base()
         {
-            //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/Vouchers";
+
+            apiurl = "Suppliers";
             apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 
@@ -22,12 +17,12 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
             throw new NotImplementedException();
         }
 
-        public override List<VoucherDTO> GetFiltered(QueryParam query)
+        public override List<SupplierDataModel> GetFiltered(QueryParam query)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<List<VoucherDTO>> GetItemsAsync(string storeid)
+        public override Task<List<SupplierDataModel>> GetItemsAsync(string storeid)
         {
             throw new NotImplementedException();
         }
@@ -47,10 +42,5 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
             throw new NotImplementedException();
         }
     }
-
-    public class Filter
-    {
-        public string PropertyName { get; set; }
-        public object Value { get; set; }
-    }
 }
+

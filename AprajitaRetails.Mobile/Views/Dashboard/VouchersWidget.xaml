@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:widget="clr-namespace:AprajitaRetails.Mobile.Views"
+             x:Class="AprajitaRetails.Mobile.Views.Dashboard.VouchersWidget">
+
+    <HorizontalStackLayout >
+      <widget:ListWidget ItemData="{Binding VoucherList}" HeaderText="Voucher(s)"  BoxColor="{x:StaticResource DarkGrey}" />
+        <widget:ListWidget ItemData="{Binding CashVoucherList}" HeaderText="Cash Voucher(s)"  BoxColor="{x:StaticResource Black}" />
+    </HorizontalStackLayout>
+</ContentView>
+

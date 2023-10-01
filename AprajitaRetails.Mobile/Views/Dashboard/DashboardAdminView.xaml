@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.Dashboard.DashboardAdminView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:widget="clr-namespace:AprajitaRetails.Mobile.Views"
+    x:Name="this">
+    <VerticalStackLayout>
+        <HorizontalStackLayout>
+            <widget:ListWidget
+                x:Name="vouchers"
+                BoxColor="{x:StaticResource DarkGrey}"
+                HeaderText="Voucher(s)" />
+            <widget:ListWidget
+                x:Name="cashVouchers"
+                BoxColor="{x:StaticResource Black}"
+                HeaderText="Cash Voucher(s)" />
+        </HorizontalStackLayout>
+
+        <!--<HorizontalStackLayout BindingContext="{Binding this.BindingContext}">
+            <widget:WidgetStat BindingContext="{Binding BankData}"
+                Title="{Binding Title, StringFormat='Deposit: {0}'}"
+                Margin="4"
+                Description="{Binding Description, StringFormat='Withdrwal: {0}'}"
+                HeaderText="Banking"
+                HorizontalOptions="EndAndExpand" />
+            <widget:WidgetStat
+                Title="{Binding Title, StringFormat='Income: {0}'}"
+                Margin="4"
+                Description="{Binding Description, StringFormat='Expenses: {0}'}"
+                HeaderText="Income \ Expenses"
+                HorizontalOptions="EndAndExpand" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <widget:ListWidget HeaderFontColor="Sale's" ItemData="{Binding SaleData}" />
+            <widget:ListWidget HeaderFontColor="Attendance(s)" ItemData="{Binding AttData}" />
+
+        </HorizontalStackLayout>-->
+    </VerticalStackLayout>
+</ContentView>
+

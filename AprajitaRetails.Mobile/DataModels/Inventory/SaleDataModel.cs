@@ -1,6 +1,6 @@
-﻿//using AKS.Shared.Commons.Models;
-//using AKS.Shared.Commons.Models.Inventory;
-//using AKS.Shared.Commons.Ops;
+﻿////using AKS.Shared.Commons.Models;
+////using AKS.Shared.Commons.Models.Inventory;
+////using AKS.Shared.Commons.Ops;
 using AprajitaRetails.Mobile.DataModels.Base;
 using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Shared.Models.Inventory;
@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Inventory
 {
+
+
+    [Obsolete]
     public class SaleDataModel : BaseDataModel<ProductSale, SaleItem, SalePaymentDetail>
     {
         public SaleDataModel(ConType conType) : base(conType)

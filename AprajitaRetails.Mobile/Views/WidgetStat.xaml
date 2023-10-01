@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.WidgetStat"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="this"
+    BackgroundColor="Transparent">
+    <Frame
+        Padding="20"
+        BackgroundColor="{x:StaticResource Background_Mid}"
+        BindingContext="{x:Reference this}"
+        BorderColor="#C49B33"
+        CornerRadius="30"
+        HasShadow="True"
+        HorizontalOptions="Center"
+        MinimumHeightRequest="100"
+        MinimumWidthRequest="100"
+        VerticalOptions="Center">
+        <VerticalStackLayout BindingContext="{x:Reference this}" HorizontalOptions="Center">
+            <HorizontalStackLayout HorizontalOptions="End">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="18"
+                    Text="{Binding HeaderText}"
+                    TextColor="{x:StaticResource Accent_Blue200}" />
+            </HorizontalStackLayout>
+            <BoxView
+                Margin="0,2,0,10"
+                HeightRequest="2"
+                HorizontalOptions="Fill"
+                MaximumWidthRequest="100"
+                Color="{x:StaticResource Accent_Yellow200}" />
+            <StackLayout HorizontalOptions="Center">
+                <Label
+                    FontAttributes="Italic"
+                    FontSize="Subtitle"
+                    HorizontalOptions="Start"
+                    Text="{Binding Title}"
+                    TextColor="{x:StaticResource Accent_Blue100}" />
+                <Label
+                    Margin="10,0,0,0"
+                    FontSize="Subtitle"
+                    HorizontalOptions="End"
+                    Text="{Binding Description}"
+                    TextColor="{x:StaticResource Accent_Yellow100}" />
+            </StackLayout>
+        </VerticalStackLayout>
+        <!--</Border>-->
+    </Frame>
+</ContentView>

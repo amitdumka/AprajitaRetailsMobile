@@ -2,6 +2,8 @@
 using AprajitaRetails.Mobile.Helpers;
 using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Shared.Models.Auth;
+using AprajitaRetails.Shared.ViewModels;
+using Syncfusion.Pdf.Parsing;
 using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Text;
@@ -383,6 +385,66 @@ namespace AprajitaRetails.Mobile.RemoteServices
         }
 
         #endregion SaveRegion
+    
+    
+        public static async Task<List<SelectOption>> GetStoreListAsync()
+        {
+            var client = GetAuthClient();
+            Uri uri = new Uri($"{Constants.RestUrl}helper/stores");
+            Notify.NotifyLong(uri.ToString());
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var data = JsonSerializer.Deserialize<List<SelectOption>>(content);
+                    return data;
+                }
+                else
+                {
+                    Notify.NotifyLong($"\tERROR {response.StatusCode} # {response.ReasonPhrase}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Notify.NotifyLong($"\tERROR {ex.Message}");
+                return null;
+            }
+
+        }
+        public static async Task<List<SelectOption>> GetEmployeeListAsync(string storeid)
+        {
+            var client = GetAuthClient();
+            Uri uri = new Uri($"{Constants.RestUrl}helper/Employees?StoreId={storeid}");
+            Notify.NotifyLong(uri.ToString());
+            try
+            {
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    var data = JsonSerializer.Deserialize<List<SelectOption>>(content);
+                    return data;
+                }
+                else
+                {
+                    Notify.NotifyLong($"\tERROR {response.StatusCode} # {response.ReasonPhrase}");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Notify.NotifyLong($"\tERROR {ex.Message}");
+                return null;
+            }
+
+        }
+
+
     }
 
     public class RestAPI

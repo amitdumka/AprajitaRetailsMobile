@@ -6,9 +6,13 @@
 using AprajitaRetails.Mobile.DataModels.Payroll;
 using AprajitaRetails.Mobile.Helpers;
 using AprajitaRetails.Mobile.Operations.Prefernces;
+using AprajitaRetails.Mobile.RemoteServices;
 using AprajitaRetails.Mobile.ViewModels.Base;
 using AprajitaRetails.Shared.AutoMapper.DTO;
 using AprajitaRetails.Shared.Models.Payroll;
+using AprajitaRetails.Shared.ViewModels;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Syncfusion.Maui.DataForm;
 using Syncfusion.Maui.DataGrid;
 
 namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
@@ -20,9 +24,10 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
 
 
         }
-        protected override void AddButton()
+        protected override async void AddButton()
         {
-            throw new NotImplementedException();
+            await Shell.Current.GoToAsync("//Attendance/Entry");
+            
         }
 
         protected override void DeleteButton()
@@ -85,4 +90,5 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
             return gridColumns;
         }
     }
+    
 }

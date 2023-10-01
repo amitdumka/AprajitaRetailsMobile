@@ -1,4 +1,6 @@
 ﻿using AprajitaRetails.Mobile.Pages.Auths;
+using AprajitaRetails.Mobile.Pages.EntryPages;
+using AprajitaRetails.Mobile.ViewModels.EntryPages;
 
 namespace AprajitaRetails.Mobile
 {
@@ -21,11 +23,11 @@ namespace AprajitaRetails.Mobile
 
         private void RegisterRoutes()
         {
-           // Routing.RegisterRoute("voucher/Entry", typeof(VoucherEntryPage));
+            // Routing.RegisterRoute("voucher/Entry", typeof(VoucherEntryPage));
             //Routing.RegisterRoute("cashvoucher/Entry", typeof(CashVoucherEntryPage));
             //Routing.RegisterRoute("banking/bank/Entry", typeof(BankEntryPage));
             //Routing.RegisterRoute("sale/Entry", typeof(SaleEntryPage));
-            //Routing.RegisterRoute("banking/banktranscations/Entry", typeof(BankEntryPage));
+            Routing.RegisterRoute("Attendance/Entry", typeof(AttendanceEntryPage));
         }
         async void MenuItem_Clicked(System.Object sender, System.EventArgs e)
         {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="AprajitaRetails.Mobile.Pages.EntryPages.AttendanceEntryPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+    xmlns:local="clr-namespace:AprajitaRetails.Mobile.Pages.EntryPages"
+    xmlns:viewModel="clr-namespace:AprajitaRetails.Mobile.ViewModels.EntryPages">
+    <ContentPage.BindingContext>
+        <viewModel:AttendanceEntryiewModel />
+    </ContentPage.BindingContext>
+
+    
+        <VerticalStackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="Beige">
+            <Label Text="Attendance Entry" TextColor="BlueViolet" HorizontalOptions="Center"/>
+            <dataForm:SfDataForm x:Name="dataForm" DataObject="{Binding info}"  HeightRequest="600"
+                                 HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+        </VerticalStackLayout>
+    
+</ContentPage>

@@ -105,6 +105,9 @@
 	  <MauiXaml Update="Pages\Auths\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\EntryPages\AttendanceEntryPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\eStoreMainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

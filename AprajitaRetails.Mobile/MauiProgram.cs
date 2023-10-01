@@ -11,6 +11,8 @@ using AprajitaRetails.Mobile.ViewModels.List.Accounting.Banking;
 using AprajitaRetails.Mobile.Pages.Banking;
 using AprajitaRetails.Mobile.ViewModels.List.Accounting;
 using AprajitaRetails.Mobile.Pages.Accounting;
+using AprajitaRetails.Mobile.Pages.EntryPages;
+using AprajitaRetails.Mobile.ViewModels.EntryPages;
 
 namespace AprajitaRetails.Mobile
 {
@@ -83,6 +85,8 @@ namespace AprajitaRetails.Mobile
             ////Attendance
             builder.Services.AddSingleton<AttendanceViewModel>();
             builder.Services.AddSingleton<AttendancePage>();
+            builder.Services.AddSingleton<AttendanceEntryiewModel>();
+            builder.Services.AddSingleton<AttendanceEntryPage>();
             //Monthly Attendance
             builder.Services.AddSingleton<MonthlyAttendanceViewModel>();
              builder.Services.AddSingleton<MonthlyAttendancePage>();

@@ -90,15 +90,24 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Aprajita Retails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Pages\Payroll\AttendancePage_old.xaml.cs">
+	    <DependentUpon>AttendancePage_old.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Payroll\EmployeePage_old.xaml.cs">
+	    <DependentUpon>EmployeePage_old.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 	
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Auths\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Payroll\AttendancePage.xaml">
+	  <MauiXaml Update="Pages\Payroll\AttendancePage_old.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Payroll\EmployeePage.xaml">
+	  <MauiXaml Update="Pages\Payroll\EmployeePage_old.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\AKSTheme.xaml">

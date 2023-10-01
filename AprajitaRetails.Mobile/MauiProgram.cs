@@ -6,6 +6,11 @@ using Syncfusion.Maui.Core.Hosting;
 using AprajitaRetails.Mobile.ViewModels.List.Payroll;
 using AprajitaRetails.Mobile.Pages.Payroll;
 using AprajitaRetails.Mobile.Views.Custom;
+using AprajitaRetails.Mobile.ViewModels.List.Inventory;
+using AprajitaRetails.Mobile.ViewModels.List.Accounting.Banking;
+using AprajitaRetails.Mobile.Pages.Banking;
+using AprajitaRetails.Mobile.ViewModels.List.Accounting;
+using AprajitaRetails.Mobile.Pages.Accounting;
 
 namespace AprajitaRetails.Mobile
 {
@@ -26,12 +31,12 @@ namespace AprajitaRetails.Mobile
 
             //Accounting
             //Voucher
-            //builder.Services.AddSingleton<VoucherViewModel>();
-            //builder.Services.AddSingleton<VoucherPage>();
+            builder.Services.AddSingleton<VoucherViewModel>();
+            builder.Services.AddSingleton<VoucherPage>();
             //builder.Services.AddSingleton<VoucherEntryPage>();
             ////CashVoucher
-            //builder.Services.AddSingleton<CashVoucherViewModel>();
-            //builder.Services.AddSingleton<CashVoucherPage>();
+            builder.Services.AddSingleton<CashVoucherViewModel>();
+            builder.Services.AddSingleton<CashVoucherPage>();
             //builder.Services.AddSingleton<CashVoucherEntryPage>();
             ////Dashboardpage
             //builder.Services.AddSingleton<AccountingDashboardViewModel>();
@@ -39,41 +44,41 @@ namespace AprajitaRetails.Mobile
             //builder.Services.AddSingleton<StoreManagerDashboardPage>();
 
             //PettyCash
-            //builder.Services.AddSingleton<PettyCashViewMoldel>();
-            //builder.Services.AddSingleton<PettyCashSheetPage>();
-            //builder.Services.AddSingleton<CashDetailPage>();
+            builder.Services.AddSingleton<PettyCashViewMoldel>();
+            builder.Services.AddSingleton<PettyCashPage>();
+            builder.Services.AddSingleton<CashDetailPage>();
             ////DailySale
-            //builder.Services.AddSingleton<DailySaleViewMoldel>();
-            //builder.Services.AddSingleton<DailySalePage>();
+            builder.Services.AddSingleton<DailySaleViewMoldel>();
+            builder.Services.AddSingleton<DailySalePage>();
             ////CashDetails
-            //builder.Services.AddSingleton<CashDetailViewModel>();
-            //builder.Services.AddSingleton<CashDetailPage>();
+            builder.Services.AddSingleton<CashDetailViewModel>();
+            builder.Services.AddSingleton<CashDetailPage>();
             ////Notes
-            //builder.Services.AddSingleton<NotesViewModel>();
-            //builder.Services.AddSingleton<NotesPage>();
+            builder.Services.AddSingleton<NoteViewModel>();
+            builder.Services.AddSingleton<NotePage>();
 
             ////Banking
-            //builder.Services.AddSingleton<BankViewModel>();
-            //builder.Services.AddSingleton<BankPage>();
+            builder.Services.AddSingleton<BankViewModel>();
+            builder.Services.AddSingleton<BankPage>();
             //builder.Services.AddSingleton<BankEntryPage>();
 
-            //builder.Services.AddSingleton<BankAccountViewModel>();
-            //builder.Services.AddSingleton<BankAccountPage>();
+            builder.Services.AddSingleton<BankAccountViewModel>();
+            builder.Services.AddSingleton<BankAccountPage>();
 
-            //builder.Services.AddSingleton<VendorAccountViewModel>();
-            //builder.Services.AddSingleton<VendorBankAccountPage>();
+            builder.Services.AddSingleton<VendorAccountViewModel>();
+            builder.Services.AddSingleton<VendorAccountPage>();
 
             ////due
-            //builder.Services.AddSingleton<CustomerDueViewModel>();
-            //builder.Services.AddSingleton<CustomerDuesPage>();
+            builder.Services.AddSingleton<CustomerDueViewModel>();
+            builder.Services.AddSingleton<CustomerDuePage>();
 
             ////Due rec
-            //builder.Services.AddSingleton<DueRecoveryViewModel>();
-            //builder.Services.AddSingleton<DueRecoveryPage>();
+            builder.Services.AddSingleton<DueRecoveryViewModel>();
+            builder.Services.AddSingleton<DueRecoveryPage>();
 
             ////Bankfino
-            //builder.Services.AddSingleton<BankTranscationViewModel>();
-            //builder.Services.AddSingleton<BankTranscationPage>();
+            builder.Services.AddSingleton<BankTransactionViewModel>();
+            builder.Services.AddSingleton<BankTranscationPage>();
 
             ////Attendance
             builder.Services.AddSingleton<AttendanceViewModel>();
@@ -85,11 +90,13 @@ namespace AprajitaRetails.Mobile
             builder.Services.AddSingleton<EmployeesViewModel>();
             builder.Services.AddSingleton<EmployeePage>();
 
-            builder.Services.AddSingleton<TestPage>();
+            //builder.Services.AddSingleton<TestPage>();
             //Inventory Sale
-            //builder.Services.AddSingleton<SaleViewModel>();
-            //builder.Services.AddSingleton<StockViewModel>();
-            //builder.Services.AddSingleton<PurchaseViewModel>();
+            builder.Services.AddSingleton<SaleViewModel>();
+            
+
+            builder.Services.AddSingleton<ViewModels.List.Inventory.StockViewModel>();
+            builder.Services.AddSingleton<PurchaseViewModel>();
 
             ////Inventory Sale Entry
             //builder.Services.AddSingleton<SaleEntryViewModel>();

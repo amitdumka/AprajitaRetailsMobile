@@ -13,6 +13,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
 {
     public partial class SaleViewModel : BaseViewModel<ProductSaleDTO, ProductSaleDataModel>
     {
+        public SaleViewModel() { }
         #region Fields
 
         [ObservableProperty]

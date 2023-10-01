@@ -2,11 +2,11 @@
 
 namespace AprajitaRetails.Mobile.Pages.Payroll
 {
-    public partial class AttendancePage : ContentPage
+    public partial class AttendancePage_old : ContentPage
     {
         AttendanceViewModel viewModel;
 
-        public AttendancePage(AttendanceViewModel vm)
+        public AttendancePage_old(AttendanceViewModel vm)
         {
             InitializeComponent();
             BindingContext = viewModel = vm;

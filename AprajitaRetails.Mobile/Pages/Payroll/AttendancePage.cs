@@ -3,10 +3,11 @@ using AprajitaRetails.Mobile.Views.Custom;
 
 namespace AprajitaRetails.Mobile.Pages.Payroll
 {
-    public class MonthlyAttendancePage : ListPage
+    public class AttendancePage : ListPage
     {
-        public MonthlyAttendancePage(MonthlyAttendanceViewModel vm)
+        public AttendancePage(AttendanceViewModel vm)
         {
+
             BindingContext = vm;
             vm.Setup(this, rlv);
             tbRefesh.Command = vm.RefreshButtonCommand;

@@ -9,6 +9,8 @@
     xmlns:hrPage="clr-namespace:AprajitaRetails.Mobile.Pages.Payroll"
     xmlns:authPage="clr-namespace:AprajitaRetails.Mobile.Pages.Auths"
     xmlns:controls="clr-namespace:AprajitaRetails.Mobile.Views.Controls" 
+    xmlns:accs="clr-namespace:AprajitaRetails.Mobile.Pages.Accounting" 
+     xmlns:bank="clr-namespace:AprajitaRetails.Mobile.Pages.Banking" 
     xmlns:cust="clr-namespace:AprajitaRetails.Mobile.Views.Custom"
     Title="Aprajita Retails"
     FlyoutBackgroundImage="thearvindstore005.jpg"
@@ -56,19 +58,19 @@
         <Tab Title="Daily Sale" Icon="rain_icon.png">
             <ShellContent
             Title="Daily Sale"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate accs:DailySalePage}"
             Route="DailySale" />
         </Tab>
         <Tab Title="Due" Icon="rain_icon.png">
             <ShellContent
             Title="Due"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate accs:CustomerDuePage}"
             Route="CustomerDue" />
         </Tab>
         <Tab Title="Recovery" Icon="rain_icon.png">
             <ShellContent
             Title="Recovery"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate accs:DueRecoveryPage}"
             Route="CustomerRecovery" />
         </Tab>
 
@@ -114,20 +116,20 @@
         <Tab Title="Voucher" Icon="rain_icon.png">
             <ShellContent
             Title="Voucher List"
-            ContentTemplate="{DataTemplate local:MainPage}"
+            ContentTemplate="{DataTemplate accs:VoucherPage}"
             Route="Voucher" />
         </Tab>
 
         <Tab Title="Cash Voucher" Icon="rain_icon.png">
             <ShellContent
             Title="Cash Voucher"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate accs:CashVoucherPage}"
             Route="CashVoucher" />
         </Tab>
         <Tab Title="Notes" Icon="rain_icon.png">
             <ShellContent
             Title="Note(s) List"
-          ContentTemplate="{DataTemplate local:MainPage}"
+          ContentTemplate="{DataTemplate accs:NotePage}"
             Route="Notes" />
         </Tab>
 
@@ -137,25 +139,25 @@
         <Tab Title="Bank" Icon="rain_icon.png">
             <ShellContent
             Title="Store"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate bank:BankPage}"
             Route="Banks" />
         </Tab>
         <Tab Title="Bank Account" Icon="rain_icon.png">
             <ShellContent
             Title="Add"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate bank:BankAccountPage}"
             Route="BanksAccount" />
         </Tab>
         <Tab Title="Vendor Account" Icon="rain_icon.png">
             <ShellContent
             Title="Add"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate bank:VendorAccountPage}"
             Route="VendorAccounts" />
         </Tab>
         <Tab Title="Transcation" Icon="rain_icon.png">
             <ShellContent
             Title="Add"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate bank:BankTranscationPage}"
             Route="Transcation" />
         </Tab>
 
@@ -164,13 +166,13 @@
         <Tab Title="Petty Cash" Icon="rain_icon.png">
             <ShellContent
             Title="Store"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate accs:PettyCashPage}"
             Route="PettyCashBook" />
         </Tab>
         <Tab Title="Cash Detail" Icon="rain_icon.png">
             <ShellContent
             Title="Add"
-           ContentTemplate="{DataTemplate local:MainPage}"
+           ContentTemplate="{DataTemplate accs:CashDetailPage}"
             Route="PettyCashBook.CashDetails" />
         </Tab>
 

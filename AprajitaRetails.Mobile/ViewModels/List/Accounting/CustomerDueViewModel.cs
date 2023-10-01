@@ -11,6 +11,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 {
     public class CustomerDueViewModel : BaseViewModel<CustomerDue, CustomerDueDataModel>
     {
+        public CustomerDueViewModel() { }
         protected override void AddButton()
         {
             throw new NotImplementedException();

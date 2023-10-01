@@ -3,9 +3,9 @@ using AprajitaRetails.Mobile.Views.Custom;
 
 namespace AprajitaRetails.Mobile.Pages.Payroll
 {
-    public class MonthlyAttendancePage : ListPage
+    public class EmployeePage : ListPage
     {
-        public MonthlyAttendancePage(MonthlyAttendanceViewModel vm)
+        public EmployeePage(EmployeesViewModel vm)
         {
             BindingContext = vm;
             vm.Setup(this, rlv);

@@ -12,6 +12,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 {
     public partial class CashVoucherViewModel : BaseViewModel<CashVoucherDTO, CashVoucherDataModel>
     {
+        public CashVoucherViewModel() { }
         [ObservableProperty]
         private VoucherType _voucherType;
 

@@ -1,12 +1,12 @@
-﻿using AprajitaRetails.Mobile.ViewModels.List.Payroll;
-using AprajitaRetails.Mobile.Views.Custom;
+﻿using AprajitaRetails.Mobile.ViewModels.List.Accounting;
 
-namespace AprajitaRetails.Mobile.Pages.Payroll
+namespace AprajitaRetails.Mobile.Pages.Accounting
 {
-    public class MonthlyAttendancePage : ListPage
+    public class CashVoucherPage : ListPage
     {
-        public MonthlyAttendancePage(MonthlyAttendanceViewModel vm)
+        public CashVoucherPage(CashVoucherViewModel vm)
         {
+
             BindingContext = vm;
             vm.Setup(this, rlv);
             tbRefesh.Command = vm.RefreshButtonCommand;

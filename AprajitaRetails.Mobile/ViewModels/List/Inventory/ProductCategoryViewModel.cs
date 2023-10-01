@@ -9,6 +9,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
 {
     public class ProductCategoryViewModel : BaseViewModel<ProductSubCategory, ProductSubCategoryDataModel>
     {
+        public ProductCategoryViewModel() { }
         protected override void AddButton()
         {
             throw new NotImplementedException();

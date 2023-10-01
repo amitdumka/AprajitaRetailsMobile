@@ -18,3 +18,4 @@ global using AprajitaRetails.Mobile.ViewModels.Base;
 global using AprajitaRetails.Shared.AutoMapper.DTO;
 global using AprajitaRetails.Shared.Models.Payroll;
 global using Syncfusion.Maui.DataGrid;
+global using AprajitaRetails.Mobile.Views.Custom;

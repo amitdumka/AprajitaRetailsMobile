@@ -15,6 +15,8 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 {
     public partial class DailySaleViewMoldel : BaseViewModel<DailySaleDTO, DailySaleDataModel>
     {
+
+        public DailySaleViewMoldel() :base(){ }
         private bool today = false;
         [ObservableProperty]
         private bool synced = false;

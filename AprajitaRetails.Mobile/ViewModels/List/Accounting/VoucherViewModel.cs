@@ -17,6 +17,8 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 {
     public partial class VoucherViewModel : BaseViewModel<VoucherDTO, VoucherDataModel>
     {
+        public VoucherViewModel() {  }
+
         [ObservableProperty]
         private VoucherType _voucherType;
         //public static ColumnCollection gridColumns;

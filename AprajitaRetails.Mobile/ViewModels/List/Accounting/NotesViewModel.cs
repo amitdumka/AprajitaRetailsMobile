@@ -13,12 +13,12 @@ using Syncfusion.Maui.DataGrid;
 
 namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 {
-    public partial class NoteDTOsViewModel : BaseViewModel<NoteDTO, NoteDataModel>
+    public partial class NoteViewModel : BaseViewModel<NoteDTO, NoteDataModel>
     {
         [ObservableProperty]
         private VoucherType _voucherType;
 
-        
+        public NoteViewModel() { }  
 
         protected override void AddButton()
         {

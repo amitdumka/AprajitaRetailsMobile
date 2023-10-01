@@ -48,7 +48,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
         }
 
         
-        protected override void RefreshButton()
+        private void RefreshButton_Remove()
         {
             Entities.Clear();
             Notify.NotifyShort("Refresh Employees....");
@@ -72,7 +72,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
         }
 
         #region Functions
-        protected async Task FetchAsync()
+        protected override async Task FetchAsync()
         {
             switch (Role)
             {

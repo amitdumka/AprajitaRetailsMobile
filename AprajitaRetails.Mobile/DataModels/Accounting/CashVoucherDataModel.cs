@@ -10,7 +10,7 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public CashVoucherDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/CashVouchers";
+            apiurl = "CashVouchers";
             apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 

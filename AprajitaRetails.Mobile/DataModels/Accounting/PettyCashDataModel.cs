@@ -16,8 +16,8 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public PettyCashDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/PettyCasshSheet";
-            apiDtoURL = $"api/PettyCashSheet/bystoredto?storeid={CurrentSession.StoreCode}";
+            apiurl = "PettyCasshSheet";
+            apiDtoURL = $"PettyCashSheet/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 
         public override Task<string> GenrateID()

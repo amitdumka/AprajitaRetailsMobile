@@ -13,8 +13,8 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public BankDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/Banks";
-            apiDtoURL = $"api/Banks";
+            apiurl = "Banks";
+            apiDtoURL = $"Banks";
         }
 
         public override Task<string> GenrateID()
@@ -53,8 +53,8 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public BankAccountDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/BankAccounts";
-            apiDtoURL = $"api/BankAccounts/bystoredto?storeid={CurrentSession.StoreCode}";
+            apiurl = "BankAccounts";
+            apiDtoURL = $"BankAccounts/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 
         public override Task<string> GenrateID()
@@ -93,8 +93,8 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public BankTranscationDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/BankTrancations";
-            apiDtoURL = $"api/BankTranscations";
+            apiurl = "BankTrancations";
+            apiDtoURL = $"BankTranscations";
         }
 
         public override Task<string> GenrateID()

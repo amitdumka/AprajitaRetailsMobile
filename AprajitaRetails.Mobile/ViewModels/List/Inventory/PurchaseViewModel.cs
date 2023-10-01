@@ -37,12 +37,12 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
             FetchAsync();
         }
 
-        protected override void RefreshButton()
+        private void RefreshButton_Remove()
         {
             Entities.Clear();
             FetchAsync();
         }
-        private async void FetchAsync()
+        protected override async Task FetchAsync()
         {
             switch (Role)
             {

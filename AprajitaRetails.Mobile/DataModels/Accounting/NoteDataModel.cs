@@ -10,7 +10,7 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public NoteDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/Notes";
+            apiurl = "Notes";
             apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 

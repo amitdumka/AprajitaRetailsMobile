@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AprajitaRetails.Mobile.Pages.AboutUsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="About Us">
+
+    <VerticalStackLayout>
+        <Label
+            HorizontalOptions="Center"
+            Text="About Us"
+            VerticalOptions="Center" />
+        <Label
+            HorizontalOptions="Center"
+            Text="Aprajita Retails, Dumka"
+            VerticalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

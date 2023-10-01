@@ -37,7 +37,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
             FetchAsync();
         }
 
-        protected async Task FetchAsync()
+        protected override async Task FetchAsync()
         {
             switch (Role)
             {
@@ -57,7 +57,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
             }
         }
 
-        protected override void RefreshButton()
+        private void RefreshButton_Remove()
         {
             throw new NotImplementedException();
         }

@@ -28,7 +28,7 @@
                 TextColor="Blue"
                 VerticalOptions="Center" />
         </HorizontalStackLayout>
-        <HorizontalStackLayout Margin="10" HorizontalOptions="CenterAndExpand" class="Button-Group">
+        <HorizontalStackLayout Margin="10" HorizontalOptions="CenterAndExpand" class="Button-Group" IsVisible="false">
             <Button
                 BackgroundColor="{StaticResource Accent_Blue100}"
                 Command="{Binding AddButtonCommand}"

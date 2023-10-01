@@ -38,7 +38,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
             FetchAsync();
         }
 
-        protected override void RefreshButton()
+        private void RefreshButton_Remove()
         {
             throw new NotImplementedException();
         }
@@ -60,7 +60,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
 
             return gridColumns;
         }
-        private async void FetchAsync()
+        protected override async Task FetchAsync()
         {
               var data = await DataModel.GetByStoreDTO(CurrentSession.StoreCode);
             UpdateEntities(data);

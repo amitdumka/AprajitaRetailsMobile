@@ -20,10 +20,10 @@
                     <RoundRectangle CornerRadius="70,0,0,70" />
                 </Border.StrokeShape>
                 <Image
-        HeightRequest="272"
+        HeightRequest="172"
         HorizontalOptions="Center"
         Source="arlogo.png"
-        WidthRequest="250" />
+        WidthRequest="150" />
             </Border>
 
             <Label
@@ -33,7 +33,7 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Welcome to .NET Multi-platform App UI"
+                Text="Welcome to Mobile App of Aprajita Retails"
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to Mobile App of Aprajita Retails"
                 FontSize="18"

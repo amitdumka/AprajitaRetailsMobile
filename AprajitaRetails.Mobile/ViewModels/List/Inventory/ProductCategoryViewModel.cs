@@ -25,12 +25,17 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
             throw new NotImplementedException();
         }
 
-        protected override void RefreshButton()
+        private void RefreshButton_Remove()
         {
             throw new NotImplementedException();
         }
 
         protected override Task<ColumnCollection> SetGridCols()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override Task FetchAsync()
         {
             throw new NotImplementedException();
         }

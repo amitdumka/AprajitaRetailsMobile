@@ -105,12 +105,12 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 
         
 
-        protected override void RefreshButton()
-        {
-            Entities.Clear();
-            Notify.NotifyShort("Refresh Vouchers....");
-            FetchAsync();
-        }
+        //private void RefreshButton_Remove()
+        //{
+        //    Entities.Clear();
+        //    Notify.NotifyShort("Refresh Vouchers....");
+        //    FetchAsync();
+        //}
 
         protected new void UpdateEntities(List<VoucherDTO> values)
         {
@@ -122,7 +122,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
             RecordCount = _entities.Count;
         }
 
-        protected async Task FetchAsync()
+        protected override async Task FetchAsync()
         {
             switch (Role)
             {

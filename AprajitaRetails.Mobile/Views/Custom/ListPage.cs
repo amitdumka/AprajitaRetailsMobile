@@ -21,6 +21,7 @@ namespace AprajitaRetails.Mobile.Views.Custom
              };
             tbRefesh = new ToolbarItem {
                 Command = RefreshTBCommand,
+                Order = ToolbarItemOrder.Secondary,
                 Text = "Refresh",
                 IconImageSource = ImageSource.FromFile("add.png")
             };
@@ -28,6 +29,7 @@ namespace AprajitaRetails.Mobile.Views.Custom
             {
                 Command = DeleteTBCommand,
                 Text = "Delete",
+                Order = ToolbarItemOrder.Secondary,
                 IconImageSource = ImageSource.FromFile("add.png")
             };
 

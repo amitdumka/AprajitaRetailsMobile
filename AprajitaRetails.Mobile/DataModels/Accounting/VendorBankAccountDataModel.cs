@@ -10,8 +10,8 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public VendorBankAccountDataModel() : base()
     {
         //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-        apiurl = "api/BankAccountList";
-        apiDtoURL = $"api/BankAccountList/bystoredto?storeid={CurrentSession.StoreCode}";
+        apiurl = "BankAccountList";
+        apiDtoURL = $"BankAccountList/bystoredto?storeid={CurrentSession.StoreCode}";
     }
 
         public override Task<string> GenrateID()

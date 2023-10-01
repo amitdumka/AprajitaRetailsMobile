@@ -11,8 +11,8 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public DueRecoveryDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/DueRecoverys";
-            apiDtoURL = $"api/DueRecovery/bystoredto?storeid={CurrentSession.StoreCode}";
+            apiurl = "DueRecoverys";
+            apiDtoURL = $"DueRecovery/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 
         public override Task<string> GenrateID()

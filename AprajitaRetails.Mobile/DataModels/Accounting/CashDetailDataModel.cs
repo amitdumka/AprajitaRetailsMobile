@@ -11,7 +11,7 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public CashDetailDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/CashDetailsModels";
+            apiurl = "CashDetailsModels";
             apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 

@@ -13,7 +13,7 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public VoucherDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/Vouchers";
+            apiurl = "Vouchers";
             apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 

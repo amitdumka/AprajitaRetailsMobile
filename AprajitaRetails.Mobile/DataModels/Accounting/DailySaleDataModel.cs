@@ -13,8 +13,8 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
         public DailySaleDataModel() : base()
         {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "api/DailySales";
-            apiDtoURL = $"api/DailySales/bystoredto?storeid={CurrentSession.StoreCode}";
+            apiurl = "DailySales";
+            apiDtoURL = $"DailySales/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 
         public override Task<string> GenrateID()

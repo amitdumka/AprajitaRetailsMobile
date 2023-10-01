@@ -84,8 +84,13 @@ namespace AprajitaRetails.Mobile.ViewModels.Base
         protected abstract void DeleteButton();
 
         [RelayCommand]
-        protected abstract void RefreshButton();
-
+        protected  void RefreshButton()
+        {
+            Entities.Clear();
+            Notify.NotifyShort("Refresh Cash Vouches....");
+            FetchAsync();
+        }
+        protected abstract  Task FetchAsync();
         protected abstract void InitViewModel();
 
         //protected abstract void UpdateEntities(List<T> values);

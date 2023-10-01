@@ -94,10 +94,12 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 
         
 
-        protected override void RefreshButton()
-        {
-            throw new NotImplementedException();
-        }
+        //private void RefreshButton_Remove()
+        //{
+        //    Entities.Clear();
+        //    Notify.NotifyShort("Refresh Cash Vouches....");
+        //    FetchAsync();
+        //}
 
         protected new void UpdateEntities(List<CashVoucherDTO> values)
         {
@@ -109,7 +111,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
             RecordCount = _entities.Count;
         }
 
-        protected async Task FetchAsync()
+        protected override async Task FetchAsync()
         {
             switch (Role)
             {
@@ -148,5 +150,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 
             return gridColumns;
         }
+
+        
     }
 }

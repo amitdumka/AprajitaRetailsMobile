@@ -8,7 +8,7 @@ namespace AprajitaRetails.Mobile.DataModels.Inventory
         public ProductPurchaseDataModel() : base()
         {
 
-            apiurl = "api/ProductPurchases";
+            apiurl = "ProductPurchases";
             apiDtoURL = $"{apiurl}/bystoredto?storeid={CurrentSession.StoreCode}";
         }
 

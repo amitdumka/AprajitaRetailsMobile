@@ -3,6 +3,7 @@ using AprajitaRetails.Mobile.Helpers;
 using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Shared.Models.Auth;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Text.Json;
 
@@ -72,7 +73,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
         public static async Task<LoggedUser> DoLoginAsync(string UserName, string Password)
         {
             var client = GetClient();
-            Uri uri = new Uri("https://152.67.78.183:7111/Auths");
+            Uri uri = new Uri($"{Constants.RestUrl}Auths");
             try
             {
                 string json = JsonSerializer.Serialize<LoginVM>(new LoginVM { UserName = UserName, Password = Password, RememberMe = true, StoreId = "ARD" }, _serializerOptions);

@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="AprajitaRetails.Mobile.Pages.eStoreMainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AprajitaRetails.Mobile.Pages"
+    Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <local:eStoreMainViewModel x:Name="viewModel" />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout>
+        <Label
+            HorizontalOptions="Center"
+            Text="{Binding StoreName, StringFormat='Welcome to {0}'}"
+            TextColor="{x:StaticResource Primary}"
+            VerticalOptions="Center" />
+        <VerticalStackLayout x:Name="SaleData">
+            <Label Text="{Binding TotalSale, StringFormat='Monthly Sale: Rs. {0}'}" />
+            <Label Text="{Binding YearlySale, StringFormat='Yearly Sale: Rs. {0}'}" />
+        </VerticalStackLayout>
+        <VerticalStackLayout x:Name="AttendaceData">
+            <Label Text="Today's Attendance(s)" />
+            <CollectionView ItemsSource="{Binding Monkeys}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Column="1"
+                                FontAttributes="Bold"
+                                Text="{Binding Key}" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                FontAttributes="Italic"
+                                Text="{Binding Value}"
+                                VerticalOptions="End" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+        <VerticalStackLayout x:Name="FinData">
+            <Label Text="Fincancial Data" />
+            <Label Text="{Binding TotalReciepts}" />
+            <Label Text="{Binding TotalExpenses}" />
+            <Label Text="{Binding StaffPayment}" />
+
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

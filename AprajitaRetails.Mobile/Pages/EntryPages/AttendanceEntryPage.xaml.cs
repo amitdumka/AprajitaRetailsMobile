@@ -1,4 +1,5 @@
-﻿using AprajitaRetails.Mobile.RemoteServices;
+﻿using AprajitaRetails.Mobile.ModelView;
+using AprajitaRetails.Mobile.RemoteServices;
 using AprajitaRetails.Shared.ViewModels;
 using Syncfusion.Maui.DataForm;
 
@@ -35,6 +36,13 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages
                 var result = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
                 cbEmp.ItemsSource = result;
             }
+            if (e.DataFormItem != null)
+            {
+                if (e.DataFormItem.FieldName == "IsTailoring")
+                {
+                    e.DataFormItem.IsVisible = false;
+                }
+            }
 
         }
     }
@@ -61,11 +69,11 @@ namespace AprajitaRetails.Mobile.ViewModels.EntryPages
 { 
     public class AttendanceEntryiewModel
     {
-        public AttendanceDTO info { get; set; }
+        public AttendanceMV info { get; set; }
 
         public AttendanceEntryiewModel()
         {
-            this.info = new AttendanceDTO();
+            this.info = new AttendanceMV();
         }
     }
 

@@ -13,7 +13,8 @@
     
         <VerticalStackLayout HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" BackgroundColor="Beige">
             <Label Text="Attendance Entry" TextColor="BlueViolet" HorizontalOptions="Center"/>
-            <dataForm:SfDataForm x:Name="dataForm" DataObject="{Binding info}"  HeightRequest="600"
+        <dataForm:SfDataForm x:Name="dataForm" DataObject="{Binding info}"  HeightRequest="600" ValidationMode="LostFocus"
+                             CommitMode="PropertyChanged"
                                  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
         </VerticalStackLayout>
     

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
-    
+   
 <Shell
     x:Class="AprajitaRetails.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -12,6 +11,7 @@
     xmlns:accs="clr-namespace:AprajitaRetails.Mobile.Pages.Accounting" 
      xmlns:bank="clr-namespace:AprajitaRetails.Mobile.Pages.Banking" 
     xmlns:cust="clr-namespace:AprajitaRetails.Mobile.Views.Custom"
+    xmlns:tt="clr-namespace:AprajitaRetails.Mobile.Pages.EntryPages"
     Title="Aprajita Retails"
     FlyoutBackgroundImage="thearvindstore005.jpg"
     FlyoutBackgroundImageAspect="Fill"
@@ -29,10 +29,11 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate tt:TestEntryPage}"
         Route="MainPage" />
     <!--  Menu Items  -->
-    <ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main"/>
+    <!--<ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main"/>-->
+    <ShellContent Title="Main" ContentTemplate="{DataTemplate tt:TestEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main"/>
     <FlyoutItem Title="Inventory">
         <Tab Title="Sale" Icon="rain_icon.png">
             <ShellContent

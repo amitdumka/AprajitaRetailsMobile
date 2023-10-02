@@ -1,12 +1,5 @@
-﻿using Android.Net.Wifi.Aware;
-using AprajitaRetails.Shared.Models.Bases;
-using Syncfusion.Maui.DataForm;
-using System;
-using System.Collections.Generic;
+﻿using Syncfusion.Maui.DataForm;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AprajitaRetails.Mobile.ModelView
 {

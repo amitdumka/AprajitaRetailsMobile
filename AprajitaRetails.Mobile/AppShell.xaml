@@ -32,8 +32,12 @@
         ContentTemplate="{DataTemplate tt:TestEntryPage}"
         Route="MainPage" />
     <!--  Menu Items  -->
-    <!--<ShellContent Title="Main" ContentTemplate="{DataTemplate local:MainPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main"/>-->
-    <ShellContent Title="Main" ContentTemplate="{DataTemplate tt:TestEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main"/>
+    <ShellContent
+        Title="Main"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        FlyoutIcon="{StaticResource  CircleIcon}"
+        Route="Main" />
+    <ShellContent Title="Add Att" ContentTemplate="{DataTemplate tt:Payroll.BaseEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main2"/>
     <FlyoutItem Title="Inventory">
         <Tab Title="Sale" Icon="rain_icon.png">
             <ShellContent

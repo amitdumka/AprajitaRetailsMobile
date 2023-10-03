@@ -145,6 +145,9 @@
 	  <MauiXaml Update="Views\Controls\ShellHeader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Custom\BaseEntryForm.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Custom\RecordListingView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

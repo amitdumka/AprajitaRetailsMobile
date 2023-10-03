@@ -10,34 +10,38 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         public AttendanceEntry() { 
         
             this.AttendanceId=string.Empty;
-            this.EntryTime=DateTime.Now.ToShortTimeString();
+            this.EntryTime=DateTime.Now.ToLongTimeString();
             this.Status = AttUnit.Absent;
             this.Remarks=string.Empty;
             this.StoreId=CurrentSession.StoreCode;
             this.EmployeeId=string.Empty;
             this.OnDate = DateTime.Now;           
-        }    
+        }
+
+        [Required(ErrorMessage = "Please select Store")]
+        public string StoreId { get; set; }
 
         [ReadOnly(true)]
         [Editable(false)]
         [Display(AutoGenerateField = false)]
         public string AttendanceId { get; set; }
 
-        // [Display(Name = "Employee")]
+        //[Display(Name = "Employee")]
         [Required(ErrorMessage = "Please select Employee")]
         public string EmployeeId { get; set; }
 
-        [Display(GroupName = "Date Time")]
+        [Display(GroupName = "Date Time",Name ="Date")]
+        [DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Please select Date")]
         public DateTime OnDate { get; set; }
 
         [Display(GroupName = "Date Time")]
-        [DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
         [DataType(DataType.Time)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Entry Time should not be empty")]
-        public string? EntryTime { get; set; }
+        public string EntryTime { get; set; }
 
+        [Display(Name = "Attndance")]
         [Required(ErrorMessage = "Please select Attendance status")]
         public AttUnit Status { get; set; }
 
@@ -48,7 +52,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         public bool IsTailoring { get; set; }
 
         //[Display(Name = "Store")]
-        public string StoreId { get; set; }
+        
     }
     internal class AttendanceBehvior:BaseEntryBehavior<AttendanceEntry>
     {
@@ -71,19 +75,22 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         protected override void OnAttachedTo(ContentPage bindable)
         {
             base.OnAttachedTo(bindable);
-            this.dataForm = bindable.Content.FindByName<SfDataForm>("AttendanceEntryForm");
+            this.dataForm = bindable.Content.FindByName<SfDataForm>("dataForm");
+            this.dataForm.ColumnCount = 2;
+            this.dataForm.DataObject = new AttendanceEntry();
 
             if (this.dataForm != null)
             {
                 this.dataForm.RegisterEditor(nameof(AttendanceEntry.EmployeeId), DataFormEditorType.ComboBox);
                 this.dataForm.RegisterEditor(nameof(AttendanceEntry.StoreId), DataFormEditorType.ComboBox);
                 this.dataForm.RegisterEditor("IsTailoring", DataFormEditorType.Switch);
-
                 this.dataForm.GenerateDataFormItem += this.OnGenerateDataFormItem;
                 
             }
 
-            this.primaryButton = bindable.Content.FindByName<Button>("Save");
+            this.primaryButton = bindable.Content.FindByName<Button>("PrimaryButton");
+            this.primaryButton.Text = "Save"; 
+
             if (this.primaryButton != null)
             {
                 this.primaryButton.Clicked += OnPrimaryButtonClicked;
@@ -91,22 +98,26 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         }
         private async void OnGenerateDataFormItem(object sender, GenerateDataFormItemEventArgs e)
         {
-            if (e.DataFormItem != null && e.DataFormItem.FieldName == "StoreId" && e.DataFormItem is DataFormComboBoxItem comboBoxItem)
+            if (e.DataFormItem != null && (e.DataFormItem.FieldName == "StoreId"|| e.DataFormItem.FieldName == "Store") && e.DataFormItem is DataFormComboBoxItem comboBoxItem)
             {
-
+                e.DataFormItem.LabelText = "Store";
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
                 var result = await RestService.GetStoreListAsync();
                 comboBoxItem.ItemsSource = result;
+                
             }
-            if (e.DataFormItem != null && e.DataFormItem.FieldName == "EmployeeId" && e.DataFormItem is DataFormComboBoxItem cbEmp)
-            {
 
+            if (e.DataFormItem != null && (e.DataFormItem.FieldName == "EmployeeId"|| e.DataFormItem.FieldName == "Employee" )&& e.DataFormItem is DataFormComboBoxItem cbEmp)
+            {
+                e.DataFormItem.LabelText = "Employee";
                 cbEmp.DisplayMemberPath = "Value";
                 cbEmp.SelectedValuePath = "ID";
                 var result = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
                 cbEmp.ItemsSource = result;
+                
             }
+
             if (e.DataFormItem != null)
             {
                 if (e.DataFormItem.FieldName == "IsTailoring")

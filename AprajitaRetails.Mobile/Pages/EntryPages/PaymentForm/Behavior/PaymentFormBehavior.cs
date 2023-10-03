@@ -44,12 +44,14 @@ namespace AprajitaRetails.Mobile.DataForm
             }
         }
 
+
+
         /// <summary>
         /// Invokes on submit button click.
         /// </summary>
         /// <param name="sender">The submit button.</param>
         /// <param name="e">The event arguments.</param>
-        private async void OnSubmitButtonClicked(object? sender, EventArgs e)
+        protected async void OnSubmitButtonClicked(object? sender, EventArgs e)
         {
             if (this.dataForm != null && App.Current?.MainPage != null)
             {
@@ -69,7 +71,7 @@ namespace AprajitaRetails.Mobile.DataForm
         /// </summary>
         /// <param name="sender">The DataForm</param>
         /// <param name="e">The event arguments.</param>
-        private void OnGeneratingDataFormItem(object? sender, GenerateDataFormItemEventArgs e)
+        protected void OnGeneratingDataFormItem(object? sender, GenerateDataFormItemEventArgs e)
         {
             if (e.DataFormItem != null)
             {

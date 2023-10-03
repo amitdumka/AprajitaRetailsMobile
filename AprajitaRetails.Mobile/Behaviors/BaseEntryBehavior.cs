@@ -7,29 +7,29 @@ using System.Threading.Tasks;
 
 namespace AprajitaRetails.Mobile.Behaviors
 {
-    internal class BaseEntryBehavior <T>: Behavior<ContentPage>
+    internal abstract class BaseEntryBehavior <T>: Behavior<ContentPage>
     {
         /// <summary>
         /// Holds the data form object.
         /// </summary>
-        private SfDataForm? dataForm;
+        protected SfDataForm? dataForm;
 
         /// <summary>
         /// Holds the submit or Primary button instance.
         /// </summary>
-        private Button? primaryButton;
+        protected Button? primaryButton;
         /// <summary>
         /// Holds the secondary button instance.
         /// </summary>
-        private Button? secondaryButton;
+        protected Button? secondaryButton;
         /// <summary>
         /// Holds the cancle button instance.
         /// </summary>
-        private Button? cancleButton;
+        protected Button? cancleButton;
         /// <summary>
         /// Holds the close button instance.
         /// </summary>
-        private Button? closeButton;
+        protected Button? closeButton;
 
 
         /// <summary>
@@ -74,6 +74,14 @@ namespace AprajitaRetails.Mobile.Behaviors
         }
 
 
+        protected abstract   void DoPrimary();
+        protected abstract void DoSecondory(); 
+        protected virtual void DoClose() { }
+        protected virtual void DoCancle() {
+            
+        
+        }
+
 
         /// <summary>
         /// Invokes on submit button click.
@@ -86,12 +94,10 @@ namespace AprajitaRetails.Mobile.Behaviors
             {
                 if (this.dataForm.Validate())
                 {
-                    // TODO: Move to Desired Page or Navigation after operation
-                    await App.Current.MainPage.DisplayAlert("", "Payment Successful", "OK");
+                    DoPrimary();
                 }
                 else
                 {
-
                     await App.Current.MainPage.DisplayAlert("", "Please enter the required details", "OK");
                 }
             }
@@ -104,17 +110,7 @@ namespace AprajitaRetails.Mobile.Behaviors
         /// <param name="e">The event arguments.</param>
         protected virtual async void OnCloseButtonClicked(object? sender, EventArgs e)
         {
-            if (this.dataForm != null && App.Current?.MainPage != null)
-            {
-                if (this.dataForm.Validate())
-                {
-                    await App.Current.MainPage.DisplayAlert("", "Payment Successful", "OK");
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("", "Please enter the required details", "OK");
-                }
-            }
+            DoClose();
         }
 
         /// <summary>
@@ -124,17 +120,7 @@ namespace AprajitaRetails.Mobile.Behaviors
         /// <param name="e">The event arguments.</param>
         protected virtual async void OnSecondaryButtonClicked(object? sender, EventArgs e)
         {
-            if (this.dataForm != null && App.Current?.MainPage != null)
-            {
-                if (this.dataForm.Validate())
-                {
-                    await App.Current.MainPage.DisplayAlert("", "Payment Successful", "OK");
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("", "Please enter the required details", "OK");
-                }
-            }
+            DoSecondory();
         }
         /// <summary>
         /// Invokes on submit button click.
@@ -143,17 +129,7 @@ namespace AprajitaRetails.Mobile.Behaviors
         /// <param name="e">The event arguments.</param>
         protected virtual async void OnCancleButtonClicked(object? sender, EventArgs e)
         {
-            if (this.dataForm != null && App.Current?.MainPage != null)
-            {
-                if (this.dataForm.Validate())
-                {
-                    await App.Current.MainPage.DisplayAlert("", "Payment Successful", "OK");
-                }
-                else
-                {
-                    await App.Current.MainPage.DisplayAlert("", "Please enter the required details", "OK");
-                }
-            }
+            DoCancle();
         }
 
         protected override void OnDetachingFrom(ContentPage bindable)

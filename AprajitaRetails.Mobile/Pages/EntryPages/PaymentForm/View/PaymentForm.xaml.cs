@@ -14,6 +14,9 @@ namespace AprajitaRetails.Mobile.DataForm
         public PaymentForm()
         {
             InitializeComponent();
+            DataFormViewModel viewModel = new DataFormViewModel();
+            this.BindingContext = viewModel;
+            this.Behaviors.Add( new  PaymentFormBehavior());
         }
     }
 }

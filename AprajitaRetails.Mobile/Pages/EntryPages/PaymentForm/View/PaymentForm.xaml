@@ -21,9 +21,9 @@
         <Grid ColumnDefinitions="0.4*, 0.6*">
            
             
-            <Grid.BindingContext>
+            <!--<Grid.BindingContext>
                 <local:DataFormViewModel />
-            </Grid.BindingContext>
+            </Grid.BindingContext>-->
 
             <Grid
                 Margin="0,40"
@@ -36,8 +36,9 @@
                     Grid.Row="2"
                     Margin="50, 0, 0, 0"
                     Aspect="AspectFit"
-                    Source="{converters:SfImageResource creditcard.png}"
+                    Source="{converters:SfImageResource thearvindstore004.jpg}"
                     VerticalOptions="{OnPlatform WinUI=Center}" />
+
                 <Label
                     Grid.Row="0"
                     Margin="50, 0, 0, 0"
@@ -113,7 +114,8 @@
             </Frame>
         </Grid>
     </localCore:BaseView.Content>
-    <localCore:BaseView.Behaviors>
+    
+    <!--<localCore:BaseView.Behaviors>
         <local:PaymentFormBehavior />
-    </localCore:BaseView.Behaviors>
+    </localCore:BaseView.Behaviors>-->
 </localCore:BaseView>

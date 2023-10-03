@@ -4,7 +4,7 @@ namespace AprajitaRetails.Mobile.Views.Custom;
 
 public partial class RecordListingView : ContentView
 {
-    public  SfDataGrid DataGrid;
+    //public  SfDataGrid DataGrid;
     public ColumnCollection gridColumns;
     
     public RecordListingView()

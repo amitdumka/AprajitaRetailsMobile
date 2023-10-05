@@ -2,7 +2,6 @@
 <ContentView x:Class="AprajitaRetails.Mobile.Views.Custom.BaseEntryForm"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             
              Background="{OnPlatform Default=White, WinUI=WhiteSmoke, MacCatalyst=WhiteSmoke}"
              xmlns:converters="clr-namespace:AprajitaRetails.Mobile.Converters;assembly=AprajitaRetails.Mobile"
              xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
@@ -28,7 +27,7 @@
              Grid.Row="2"
              Margin="50, 0, 0, 0"
              Aspect="AspectFit"
-             Source="{converters:SfImageResource thearvindstore004.jpg}"
+             Source="{Binding DisplayImage}"
              VerticalOptions="{OnPlatform WinUI=Center}" />
 
                 <Label
@@ -37,13 +36,13 @@
              FontAttributes="Bold"
              FontSize="30"
              IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}"
-             Text="{Binding Title}"
+             Text="{Binding FormTitle}"
              TextColor="Black" />
                 <Label
              Grid.Row="1"
              Margin="50, 0, 0, 30"
              FontSize="16"
-             Text="A few steps to easily pay."
+             Text="{Binding FormSubTitle}"
              TextColor="Black" />
             </Grid>
 

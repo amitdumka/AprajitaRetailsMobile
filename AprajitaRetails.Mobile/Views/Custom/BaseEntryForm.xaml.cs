@@ -5,7 +5,7 @@
         public BaseEntryForm()
         {
             InitializeComponent();
-            BindingContext=this;    
+            //BindingContext=this;    
         }
     }
 }

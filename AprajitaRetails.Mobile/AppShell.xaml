@@ -29,15 +29,15 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate tt:TestEntryPage}"
+        ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
     <!--  Menu Items  -->
-    <ShellContent
+    <!--<ShellContent
         Title="Main"
         ContentTemplate="{DataTemplate local:MainPage}"
         FlyoutIcon="{StaticResource  CircleIcon}"
-        Route="Main" />
-    <ShellContent Title="Add Att" ContentTemplate="{DataTemplate tt:Payroll.BaseEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main2"/>
+        Route="Main" />-->
+    <ShellContent Title="Attendance Entry" ContentTemplate="{DataTemplate tt:Payroll.BaseEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main2"/>
     <FlyoutItem Title="Inventory">
         <Tab Title="Sale" Icon="rain_icon.png">
             <ShellContent

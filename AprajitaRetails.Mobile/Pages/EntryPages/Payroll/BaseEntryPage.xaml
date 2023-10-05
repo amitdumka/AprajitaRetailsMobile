@@ -7,6 +7,7 @@
              xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
              xmlns:thickness ="clr-namespace:Microsoft.Maui;assembly=Microsoft.Maui"
               xmlns:system="clr-namespace:System;assembly=netstandard"
+              xmlns:enty="clr-namespace:AprajitaRetails.Mobile.Views.Custom"
              xmlns:local="clr-namespace:AprajitaRetails.Mobile.Pages.EntryPages.Payroll">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="thickness:Thickness">
@@ -16,93 +17,6 @@
     </ContentPage.Padding>
 
     <ContentPage.Content>
-        <Grid ColumnDefinitions="0.4*, 0.6*">
-            <Grid
-                Margin="0,40"
-                HeightRequest="{OnPlatform MacCatalyst=460}"
-                IsClippedToBounds="True"
-                IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}"
-                RowDefinitions="40, 60, *"
-                VerticalOptions="{OnPlatform Default=Fill, WinUI=Center}">
-                <Image
-                    Grid.Row="2"
-                    Margin="50, 0, 0, 0"
-                    Aspect="AspectFit"
-                    Source="{converters:SfImageResource thearvindstore004.jpg}"
-                    VerticalOptions="{OnPlatform WinUI=Center}" />
-
-                <Label
-                    Grid.Row="0"
-                    Margin="50, 0, 0, 0"
-                    FontAttributes="Bold"
-                    FontSize="30"
-                    IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}"
-                    Text="{Binding Title}"
-                    TextColor="Black" />
-                <Label
-                    Grid.Row="1"
-                    Margin="50, 0, 0, 30"
-                    FontSize="16"
-                    Text="A few steps to easily pay."
-                    TextColor="Black" />
-            </Grid>
-
-            <Frame
-                 Grid.Column="{OnPlatform Default=0, WinUI=1, MacCatalyst=1}"
-                 Grid.ColumnSpan="{OnPlatform Default=2, WinUI=1, MacCatalyst=1}"
-                 BackgroundColor="White"
-                 CornerRadius="10"
-                 HasShadow="False"
-                 HeightRequest="{OnPlatform WinUI=420, MacCatalyst=450}"
-                 HorizontalOptions="{OnPlatform WinUI=Center, MacCatalyst=Center, Default=Fill}"
-                 VerticalOptions="{OnPlatform Default=Fill, WinUI=Center, MacCatalyst=Center}"
-                 WidthRequest="{OnPlatform WinUI=400, MacCatalyst=400, Default=-1}">
-                <Frame.Padding>
-                    <OnPlatform x:TypeArguments="thickness:Thickness">
-                        <On Value="5,20,5,20" Platform="MacCatalyst" />
-                        <On Value="5,20" Platform="WinUI" />
-                    </OnPlatform>
-                </Frame.Padding>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{OnPlatform Default=0.85*, WinUI=340, MacCatalyst=360}" />
-                        <RowDefinition Height="1" />
-                        <RowDefinition Height="{OnPlatform Default=0.15*, WinUI=30, MacCatalyst=50}" />
-                    </Grid.RowDefinitions>
-                    <!--DataObject="{Binding PaymentFormModel}"-->
-                    <dataForm:SfDataForm
-                                    x:Name="dataForm"
-                                    Grid.Row="0"
-                                    ColumnCount="4"
-                                    LayoutType="TextInputLayout"
-                                    ValidationMode="PropertyChanged">
-                        <dataForm:SfDataForm.TextInputLayoutSettings>
-                            <dataForm:TextInputLayoutSettings FocusedStroke="{StaticResource Primary}" ShowHelperText="True" />
-                        </dataForm:SfDataForm.TextInputLayoutSettings>
-                    </dataForm:SfDataForm>
-                    <Line Grid.Row="1" Background="{OnPlatform Default=WhiteSmoke, WinUI=White, MacCatalyst=White}" />
-                    <Button
-                         x:Name="PrimaryButton"
-                         Grid.Row="2"
-                         Background="{StaticResource PrimaryBrush}"
-                         CornerRadius="5"
-                         FontSize="16"
-                         HeightRequest="40"
-                         HorizontalOptions="Fill"
-                         Padding="0"
-                         Text="{Binding PrimaryButtonText}"
-                         VerticalOptions="Center">
-                        <Button.Margin>
-                            <OnPlatform x:TypeArguments="thickness:Thickness">
-                                <On Value="20, 10, 20, 20" Platform="MacCatalyst" />
-                                <On Value="20, 10, 20, 20" Platform="WinUI" />
-                                <On Value="20, 10" Platform="Android" />
-                                <On Value="20, 10" Platform="iOS" />
-                            </OnPlatform>
-                        </Button.Margin>
-                    </Button>
-                </Grid>
-            </Frame>
-        </Grid>
+        <enty:BaseEntryForm x:Name="FormData" />
     </ContentPage.Content>
 </ContentPage>

@@ -7,12 +7,17 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
          
         public BaseEntryPage()
         {
+            Notify.NotifyVShort("1");
             InitializeComponent();
+            Notify.NotifyVShort("2");
             Atvm attendanceEntry = new Atvm();
+            Notify.NotifyVShort("3");
             this .BindingContext = attendanceEntry;
+            Notify.NotifyVShort("4");
             this.Behaviors.Add(new AttendanceBehvior());
-           
-           
+            Notify.NotifyVShort("5");
+
+
 
         }
 
@@ -30,8 +35,8 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             }
         }
 
-        [INotifyPropertyChanged]
-         partial class FormVilewModel<T>
+        //[INotifyPropertyChanged]
+         partial class FormVilewModel<T>:ObservableObject
         {
             [ObservableProperty]
             protected T _entity;//{ get; set; }

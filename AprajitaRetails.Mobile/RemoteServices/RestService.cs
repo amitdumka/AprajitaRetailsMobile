@@ -62,7 +62,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
             };
             HttpClient client = new HttpClient(handler2);// new HttpClient();
             //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());// new HttpClient();
-            client.BaseAddress = new Uri("https://152.67.78.183:7111");
+            client.BaseAddress = new Uri(Constants.RestUrl);
             _serializerOptions = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -394,7 +394,8 @@ namespace AprajitaRetails.Mobile.RemoteServices
             Notify.NotifyLong(uri.ToString());
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpResponseMessage response = await client.GetAsync(uri);
+                Notify.NotifyShort(await response.Content.ReadAsStringAsync());
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
@@ -417,12 +418,12 @@ namespace AprajitaRetails.Mobile.RemoteServices
         }
         public static async Task<List<SelectOption>> GetEmployeeListAsync(string storeid)
         {
-            var client = GetAuthClient();
+            var client = GetClient();
             Uri uri = new Uri($"{Constants.RestUrl}helper/Employees?StoreId={storeid}");
             Notify.NotifyLong(uri.ToString());
             try
             {
-                HttpResponseMessage response = await _client.GetAsync(uri);
+                HttpResponseMessage response = await client.GetAsync(uri);
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();

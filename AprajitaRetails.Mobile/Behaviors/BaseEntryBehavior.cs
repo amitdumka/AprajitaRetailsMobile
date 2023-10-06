@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AprajitaRetails.Mobile.Behaviors
 {
-    internal abstract class BaseEntryBehavior <T>: Behavior<ContentPage>
+    internal abstract class BaseEntryBehavior <T,DM>: Behavior<ContentPage>
     {
         /// <summary>
         /// Holds the data form object.
@@ -30,6 +30,8 @@ namespace AprajitaRetails.Mobile.Behaviors
         /// Holds the close button instance.
         /// </summary>
         protected Button? closeButton;
+
+        protected DM dataModel;
 
 
         /// <summary>

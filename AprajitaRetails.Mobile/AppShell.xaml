@@ -12,6 +12,7 @@
      xmlns:bank="clr-namespace:AprajitaRetails.Mobile.Pages.Banking" 
     xmlns:cust="clr-namespace:AprajitaRetails.Mobile.Views.Custom"
     xmlns:tt="clr-namespace:AprajitaRetails.Mobile.Pages.EntryPages"
+  
     Title="Aprajita Retails"
     FlyoutBackgroundImage="thearvindstore005.jpg"
     FlyoutBackgroundImageAspect="Fill"
@@ -34,7 +35,7 @@
     <!--  Menu Items  -->
     <!--<ShellContent
         Title="Main"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate df:PaymentForm}"
         FlyoutIcon="{StaticResource  CircleIcon}"
         Route="Main" />-->
     <ShellContent Title="Attendance Entry" ContentTemplate="{DataTemplate tt:Payroll.BaseEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main2"/>

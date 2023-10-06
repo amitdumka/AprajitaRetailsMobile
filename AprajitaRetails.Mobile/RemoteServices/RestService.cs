@@ -342,7 +342,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
 
         public async Task<object> SaveAsync<T>(string apiurl, T item, bool isNewItem = false)
         {
-            Uri uri = new Uri(string.Format(Constants.RestUrl, apiurl));
+            Uri uri = new Uri(string.Concat(Constants.RestUrl, apiurl));
 
             try
             {
@@ -358,7 +358,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\tTodoItem successfully saved.");
+                    
                     if (isNewItem)
                     {
                         Notify.NotifyVShort("Save successfully");

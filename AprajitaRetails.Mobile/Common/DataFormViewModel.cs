@@ -21,7 +21,7 @@ namespace AprajitaRetails.Mobile.DataForm
             //this.EventRegistrationModel = new EventRegistrationModel();
             //this.SignUpFormModel = new SignUpFormModel();
             //this.SignInFormModel = new SignInFormModel();
-            this.PaymentFormModel = new PaymentFormModel();
+            //this.PaymentFormModel = new PaymentFormModel();
             //this.FeedbackFormModel = new FeedbackFormModel();
         }
 
@@ -48,7 +48,7 @@ namespace AprajitaRetails.Mobile.DataForm
         /// <summary>
         /// Gets or sets the payment form model.
         /// </summary>
-        public PaymentFormModel PaymentFormModel { get; set; }
+        //public PaymentFormModel PaymentFormModel { get; set; }
 
         /// <summary>
         /// Gets or sets the feedback form model.

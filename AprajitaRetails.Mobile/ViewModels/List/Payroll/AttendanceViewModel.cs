@@ -37,9 +37,9 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
 
         protected override void InitViewModel()
         {
-            Icon = AprajitaRetails.Mobile.Resources.Styles.IconFont.UserCheck;
+            Icon = Resources.Styles.IconFont.UserCheck;
             DataModel = new AttendanceDataModel();// (ConType.Hybrid, CurrentSession.Role);
-            Entities = new System.Collections.ObjectModel.ObservableCollection<AttendanceDTO>();
+            Entities = new ObservableCollection<AttendanceDTO>();
             DataModel.Mode = DBType.API;
             DataModel.StoreCode = CurrentSession.StoreCode;
             Role = CurrentSession.Role;

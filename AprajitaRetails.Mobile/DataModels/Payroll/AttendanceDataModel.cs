@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Payroll
 {
-    public class AttendanceDataModel : BaseDM<AttendanceDTO>// BaseDataModel<Attendance, Employee, MonthlyAttendance>
+    public class AttendanceDataModel : BaseDM<Attendance,AttendanceDTO>
     {
         private bool _localSynced;
         private DateTime _syncTime;
@@ -33,7 +33,7 @@ namespace AprajitaRetails.Mobile.DataModels.Payroll
 
         
 
-        public override async Task<List<AttendanceDTO>> GetItemsAsync(string storeid)
+        public override async Task<List<Attendance>> GetItemsAsync(string storeid)
         {
             throw new NotImplementedException();
             //if (!_localSynced)
@@ -95,45 +95,7 @@ namespace AprajitaRetails.Mobile.DataModels.Payroll
             return  GetContext().Attendances.Select(c => c.OnDate.Year).Distinct().ToList();
         }
 
-        //public override Task<List<int>> GetYearListY(string storeid)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override Task<List<int>> GetYearListY()
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override async Task<List<int>> GetYearListZ(string storeid)
-        //{
-        //    return await GetContext().MonthlyAttendances.Where(c => c.StoreId == storeid).Select(c => c.OnDate.Year).Distinct().ToListAsync();
-        //}
-
-        //public override async Task<List<int>> GetYearListZ()
-        //{
-        //    return await GetContext().MonthlyAttendances.Select(c => c.OnDate.Year).Distinct().ToListAsync();
-        //}
-
-        //public override Task<List<Employee>> GetYFiltered(QueryParam query)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override Task<List<Employee>> GetYItems(string storeid)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override Task<List<MonthlyAttendance>> GetZFiltered(QueryParam query)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public override Task<List<MonthlyAttendance>> GetZItems(string storeid)
-        //{
-        //    return GetContext().MonthlyAttendances.Where(c => c.StoreId == storeid && c.OnDate.Year == DateTime.Today.Year).OrderByDescending(c => c.OnDate).ToListAsync();
-        //}
+        
 
         public override async Task<bool> InitContext()
         {

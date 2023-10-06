@@ -7,39 +7,48 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
          
         public BaseEntryPage()
         {
-            Notify.NotifyVShort("1");
+            
             InitializeComponent();
-            Notify.NotifyVShort("2");
+            
             Atvm attendanceEntry = new Atvm();
-            Notify.NotifyVShort("3");
-            this .BindingContext = attendanceEntry;
-            Notify.NotifyVShort("4");
+
+            this.BindingContext = attendanceEntry;
             this.Behaviors.Add(new AttendanceBehvior());
-            Notify.NotifyVShort("5");
+            
 
 
 
         }
 
-         
-       partial class Atvm:FormVilewModel<AttendanceEntry>
-        { 
+        [INotifyPropertyChanged]
+        partial class Atvm
+        {
+            //[ObservableProperty]
+            //protected AttendanceEntry _entity;//{ get; set; }
+            [ObservableProperty]
+            protected string _formTitle;// { get; set; }   
+            [ObservableProperty]
+            protected string _formSubTitle;
+            [ObservableProperty]
+            protected string _displayImage;
+            [ObservableProperty]
+            protected string _primaryButtonText;
 
-
-            public Atvm():base()
+            public Atvm()
             {
-                _entity = new AttendanceEntry();
+                //_entity = new AttendanceEntry();
                 _formTitle = "Attendance";
                 _displayImage = "thearvindstore004.jpg";
                 _formSubTitle = "HR Module for managing Attendances!";
+                _primaryButtonText = "Save Attendance";
             }
         }
 
-        //[INotifyPropertyChanged]
-         partial class FormVilewModel<T>:ObservableObject
+        [INotifyPropertyChanged]
+         partial class FormVilewModel<T>
         {
-            [ObservableProperty]
-            protected T _entity;//{ get; set; }
+            //[ObservableProperty]
+            //protected T _entity;//{ get; set; }
             [ObservableProperty]
             protected string _formTitle;// { get; set; }   
             [ObservableProperty]
@@ -48,13 +57,13 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             protected string _displayImage;
 
 
-            public FormVilewModel( )
-            {
+            //public FormVilewModel( )
+            //{
                 //_entity = enty;
                // _formTitle = "Attendance";
                 //_displayImage = "thearvindstore004.jpg";
                // _formSubTitle = "HR Module for managing Attendances!";
-            }
+            //}
         }
     }
 }

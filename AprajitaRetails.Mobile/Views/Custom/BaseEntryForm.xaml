@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ContentView x:Class="AprajitaRetails.Mobile.Views.Custom.BaseEntryForm"
-             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             Background="{OnPlatform Default=White, WinUI=WhiteSmoke, MacCatalyst=WhiteSmoke}"
-             xmlns:converters="clr-namespace:AprajitaRetails.Mobile.Converters;assembly=AprajitaRetails.Mobile"
-             xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
-             xmlns:thickness ="clr-namespace:Microsoft.Maui;assembly=Microsoft.Maui"
-              xmlns:system="clr-namespace:System;assembly=netstandard"
-             xmlns:local="clr-namespace:AprajitaRetails.Mobile.Views.Custom">
+<ContentView
+    x:Class="AprajitaRetails.Mobile.Views.Custom.BaseEntryForm"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:AprajitaRetails.Mobile.Converters;assembly=AprajitaRetails.Mobile"
+    xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+    xmlns:local="clr-namespace:AprajitaRetails.Mobile.Views.Custom"
+    xmlns:thickness ="clr-namespace:Microsoft.Maui;assembly=Microsoft.Maui"
+    Background="{OnPlatform Default=White, WinUI=WhiteSmoke, MacCatalyst=WhiteSmoke}">
     <ContentView.Margin>
         <OnPlatform x:TypeArguments="thickness:Thickness">
             <On Value="-4,-4,-6,-6" Platform="MacCatalyst" />
@@ -17,36 +17,36 @@
     <ContentView.Content>
         <Grid ColumnDefinitions="0.4*, 0.6*">
             <Grid
-         Margin="0,40"
-         HeightRequest="{OnPlatform MacCatalyst=460}"
-         IsClippedToBounds="True"
-         IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}"
-         RowDefinitions="40, 60, *"
-         VerticalOptions="{OnPlatform Default=Fill, WinUI=Center}">
+                Margin="0,40"
+                HeightRequest="{OnPlatform MacCatalyst=460}"
+                IsClippedToBounds="True"
+                IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}"
+                RowDefinitions="40, 60, *"
+                VerticalOptions="{OnPlatform Default=Fill, WinUI=Center}">
                 <Image
-             Grid.Row="2"
-             Margin="50, 0, 0, 0"
-             Aspect="AspectFit"
-             Source="{Binding DisplayImage}"
-             VerticalOptions="{OnPlatform WinUI=Center}" />
+                    Grid.Row="2"
+                    Margin="50, 0, 0, 0"
+                    Aspect="AspectFit"
+                    Source="{Binding DisplayImage}"
+                    VerticalOptions="{OnPlatform WinUI=Center}" />
 
                 <Label
-             Grid.Row="0"
-             Margin="50, 0, 0, 0"
-             FontAttributes="Bold"
-             FontSize="30"
-             IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}"
-             Text="{Binding FormTitle}"
-             TextColor="Black" />
+                    Grid.Row="0"
+                    Margin="50, 0, 0, 0"
+                    FontAttributes="Bold"
+                    FontSize="30"
+                    IsVisible="{OnPlatform WinUI=True, MacCatalyst=True, Default=False}"
+                    Text="{Binding FormTitle}"
+                    TextColor="Black" />
                 <Label
-             Grid.Row="1"
-             Margin="50, 0, 0, 30"
-             FontSize="16"
-             Text="{Binding FormSubTitle}"
-             TextColor="Black" />
+                    Grid.Row="1"
+                    Margin="50, 0, 0, 30"
+                    FontSize="16"
+                    Text="{Binding FormSubTitle}"
+                    TextColor="Black" />
             </Grid>
 
-            <Frame
+               <Frame
           Grid.Column="{OnPlatform Default=0, WinUI=1, MacCatalyst=1}"
           Grid.ColumnSpan="{OnPlatform Default=2, WinUI=1, MacCatalyst=1}"
           BackgroundColor="White"
@@ -56,41 +56,33 @@
           HorizontalOptions="{OnPlatform WinUI=Center, MacCatalyst=Center, Default=Fill}"
           VerticalOptions="{OnPlatform Default=Fill, WinUI=Center, MacCatalyst=Center}"
           WidthRequest="{OnPlatform WinUI=400, MacCatalyst=400, Default=-1}">
-                <Frame.Padding>
+               <Frame.Padding>
                     <OnPlatform x:TypeArguments="thickness:Thickness">
                         <On Value="5,20,5,20" Platform="MacCatalyst" />
                         <On Value="5,20" Platform="WinUI" />
                     </OnPlatform>
                 </Frame.Padding>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{OnPlatform Default=0.85*, WinUI=340, MacCatalyst=360}" />
-                        <RowDefinition Height="1" />
-                        <RowDefinition Height="{OnPlatform Default=0.15*, WinUI=30, MacCatalyst=50}" />
-                    </Grid.RowDefinitions>
-                    <!--DataObject="{Binding PaymentFormModel}"-->
-                    <dataForm:SfDataForm
-                             x:Name="dataForm"
-                             Grid.Row="0"
-                             ColumnCount="4"
-                             LayoutType="TextInputLayout"
-                             ValidationMode="PropertyChanged">
-                        <dataForm:SfDataForm.TextInputLayoutSettings>
-                            <dataForm:TextInputLayoutSettings FocusedStroke="{StaticResource Primary}" ShowHelperText="True" />
-                        </dataForm:SfDataForm.TextInputLayoutSettings>
-                    </dataForm:SfDataForm>
-                    <Line Grid.Row="1" Background="{OnPlatform Default=WhiteSmoke, WinUI=White, MacCatalyst=White}" />
-                    <Button
-                  x:Name="PrimaryButton"
-                  Grid.Row="2"
-                  Background="{StaticResource PrimaryBrush}"
-                  CornerRadius="5"
-                  FontSize="16"
-                  HeightRequest="40"
-                  HorizontalOptions="Fill"
-                  Padding="0"
-                  Text="{Binding PrimaryButtonText}"
-                  VerticalOptions="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{OnPlatform Default=0.85*, WinUI=340, MacCatalyst=360}" />
+                    <RowDefinition Height="1" />
+                    <RowDefinition Height="{OnPlatform Default=0.15*, WinUI=30, MacCatalyst=50}" />
+                </Grid.RowDefinitions>
+                <!--DataObject="{Binding PaymentFormModel}"-->
+                <dataForm:SfDataForm
+                    x:Name="dataForm"
+                    Grid.Row="0"
+                    ColumnCount="4"
+                    LayoutType="TextInputLayout"
+                    ValidationMode="PropertyChanged">
+                    <dataForm:SfDataForm.TextInputLayoutSettings>
+                        <dataForm:TextInputLayoutSettings FocusedStroke="{StaticResource Primary}" ShowHelperText="True" />
+                    </dataForm:SfDataForm.TextInputLayoutSettings>
+                </dataForm:SfDataForm>
+                <Line Grid.Row="1" Background="{OnPlatform Default=WhiteSmoke, WinUI=White, MacCatalyst=White}" />
+                    <Button x:Name="PrimaryButton" Grid.Row="2" Background="{StaticResource Accent_Blue100}" 
+                            CornerRadius="5" FontSize="16" HeightRequest="40" HorizontalOptions="Fill" Padding="0" 
+                            Text="{Binding PrimaryButtonText}" VerticalOptions="Center">
                         <Button.Margin>
                             <OnPlatform x:TypeArguments="thickness:Thickness">
                                 <On Value="20, 10, 20, 20" Platform="MacCatalyst" />
@@ -100,8 +92,12 @@
                             </OnPlatform>
                         </Button.Margin>
                     </Button>
+                    
+
                 </Grid>
             </Frame>
         </Grid>
     </ContentView.Content>
 </ContentView>
+
+<!---->

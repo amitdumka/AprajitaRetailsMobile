@@ -22,43 +22,43 @@ namespace  AprajitaRetails.Mobile.DataForm
         /// <returns>The items source collection.</returns>
         public object GetSource(string sourceName)
         {
-            if (sourceName == nameof(PaymentFormModel.Month))
-            {
-                List<string> months = new List<string>
-                {
-                    "Jan",
-                    "Feb",
-                    "Mar",
-                    "Apr",
-                    "May",
-                    "Jun",
-                    "Jul",
-                    "Aug",
-                    "Sep",
-                    "Oct",
-                    "Nov",
-                    "Dec"
-                };
-                return months;
-            }
-            else if (sourceName == nameof(PaymentFormModel.Year))
-            {
-                List<string> years = new List<string>
-                {
-                    "2022",
-                    "2023",
-                    "2024",
-                    "2025",
-                    "2026",
-                    "2027",
-                    "2028",
-                    "2029",
-                    "2030",
-                    "2031",
-                    "2032"
-                };
-                return years;
-            }
+           // if (sourceName == nameof(PaymentFormModel.Month))
+            //{
+            //    List<string> months = new List<string>
+            //    {
+            //        "Jan",
+            //        "Feb",
+            //        "Mar",
+            //        "Apr",
+            //        "May",
+            //        "Jun",
+            //        "Jul",
+            //        "Aug",
+            //        "Sep",
+            //        "Oct",
+            //        "Nov",
+            //        "Dec"
+            //    };
+            //    return months;
+            //}
+           // else if (sourceName == nameof(PaymentFormModel.Year))
+            //{
+            //    List<string> years = new List<string>
+            //    {
+            //        "2022",
+            //        "2023",
+            //        "2024",
+            //        "2025",
+            //        "2026",
+            //        "2027",
+            //        "2028",
+            //        "2029",
+            //        "2030",
+            //        "2031",
+            //        "2032"
+            //    };
+            //    return years;
+            //}
             //else if (sourceName == nameof(SignUpFormModel.Country))
             //{
             //    List<string> countries = new List<string>();

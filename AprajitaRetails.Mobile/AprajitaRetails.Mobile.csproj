@@ -54,6 +54,12 @@
 
 	<ItemGroup>
 		<None Remove="Platforms\Android\Resources\xml\network_security_config.xml" />
+		<None Remove="Resources\Fonts\fa-brands-400.ttf" />
+		<None Remove="Resources\Fonts\fa-brands-400.woff2" />
+		<None Remove="Resources\Fonts\fa-regular-400.ttf" />
+		<None Remove="Resources\Fonts\fa-regular-400.woff2" />
+		<None Remove="Resources\Fonts\fa-solid-900.ttf" />
+		<None Remove="Resources\Fonts\fa-solid-900.woff2" />
 		<None Remove="Resources\Fonts\InputLayoutIcons.ttf" />
 		<None Remove="Resources\Images\add_icon2.svg" />
 		<None Remove="Resources\Images\add_location.png" />
@@ -104,12 +110,6 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Auths\LoginPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\EntryPages\AttendanceEntryPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\EntryPages\PaymentForm\View\PaymentForm.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\EntryPages\Payroll\BaseEntryPage.xaml">

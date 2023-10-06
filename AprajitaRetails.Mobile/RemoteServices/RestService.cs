@@ -1,13 +1,7 @@
 ﻿using AprajitaRetails.Mobile.AppSettings;
-using AprajitaRetails.Mobile.Helpers;
-using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Shared.Models.Auth;
 using AprajitaRetails.Shared.ViewModels;
-using Syncfusion.Pdf.Parsing;
-using System.Diagnostics;
-using System.Reflection.Metadata;
 using System.Text;
-using System.Text.Json;
 
 namespace AprajitaRetails.Mobile.RemoteServices
 {
@@ -38,14 +32,14 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 ServerCertificateCustomValidationCallback =
        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
             };
-           _client = new HttpClient(handler2);// new HttpClient();
-            //_client = new HttpClient();
-           // if (string.IsNullOrEmpty(authorizationKey))
-           // {
-           //     authorizationKey = ClientSetting.GetSecureAsync("AuthToken").Result;
-           // }
+            _client = new HttpClient(handler2);// new HttpClient();
+                                               //_client = new HttpClient();
+                                               // if (string.IsNullOrEmpty(authorizationKey))
+                                               // {
+                                               //     authorizationKey = ClientSetting.GetSecureAsync("AuthToken").Result;
+                                               // }
 
-           // _client.DefaultRequestHeaders.Add("Authorization", authorizationKey);
+            // _client.DefaultRequestHeaders.Add("Authorization", authorizationKey);
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             return _client;
@@ -348,7 +342,6 @@ namespace AprajitaRetails.Mobile.RemoteServices
             {
                 string json = JsonSerializer.Serialize<T>(item, _serializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-
                 HttpResponseMessage response = null;
 
                 if (isNewItem)
@@ -358,7 +351,6 @@ namespace AprajitaRetails.Mobile.RemoteServices
 
                 if (response.IsSuccessStatusCode)
                 {
-                    
                     if (isNewItem)
                     {
                         Notify.NotifyVShort("Save successfully");
@@ -385,17 +377,16 @@ namespace AprajitaRetails.Mobile.RemoteServices
         }
 
         #endregion SaveRegion
-    
-    
+
         public static async Task<List<SelectOption>> GetStoreListAsync()
         {
             var client = GetAuthClient();
             Uri uri = new Uri($"{Constants.RestUrl}helper/stores");
-            Notify.NotifyLong(uri.ToString());
+            // Notify.NotifyLong(uri.ToString());
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
-                Notify.NotifyShort(await response.Content.ReadAsStringAsync());
+                //   Notify.NotifyShort(await response.Content.ReadAsStringAsync());
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
@@ -414,13 +405,13 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 Notify.NotifyLong($"\tERROR {ex.Message}");
                 return null;
             }
-
         }
+
         public static async Task<List<SelectOption>> GetEmployeeListAsync(string storeid)
         {
             var client = GetClient();
             Uri uri = new Uri($"{Constants.RestUrl}helper/Employees?StoreId={storeid}");
-            Notify.NotifyLong(uri.ToString());
+           // Notify.NotifyLong(uri.ToString());
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
@@ -442,10 +433,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 Notify.NotifyLong($"\tERROR {ex.Message}");
                 return null;
             }
-
         }
-
-
     }
 
     public class RestAPI

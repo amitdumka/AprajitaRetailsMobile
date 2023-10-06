@@ -1,4 +1,5 @@
-﻿using AprajitaRetails.Mobile.Behaviors;
+﻿using AprajitaRetails.Mobil.Converters;
+using AprajitaRetails.Mobile.Behaviors;
 using AprajitaRetails.Mobile.DataModels.Payroll;
 using AprajitaRetails.Mobile.RemoteServices;
 using AprajitaRetails.Shared.Models.Auth;
@@ -8,20 +9,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 {
-    internal class AttendanceEntry
+    [INotifyPropertyChanged]
+    internal partial class AttendanceEntry
     {
         public AttendanceEntry()
         {
             this.AttendanceId = string.Empty;
-            this.EntryTime = DateTime.Now.ToLongTimeString();
-            this.Status = AttUnit.Absent;
+            this.EntryTime = DateTime.Now.ToShortTimeString();
+            this.Status = AttUnit.StoreClosed;
             this.Remarks = string.Empty;
             this.StoreId = CurrentSession.StoreCode;
             this.EmployeeId = string.Empty;
             this.OnDate = DateTime.Now;
         }
 
-        [Required(ErrorMessage = "Please select Store")]
+       [Required(ErrorMessage = "Please select Store")]
+        //[ObservableProperty]
         public string StoreId { get; set; }
 
         [ReadOnly(true)]
@@ -42,6 +45,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         [Display(GroupName = "Date Time")]
         [DataType(DataType.Time)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Entry Time should not be empty")]
+        [DataFormValueConverter(typeof(StringToTimeConverter))]
         public string EntryTime { get; set; }
 
         [Display(Name = "Attndance")]
@@ -59,7 +63,26 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 
     internal class AttendanceBehvior : BaseEntryBehavior<AttendanceEntry, AttendanceDataModel>
     {
+        AttendanceEntry entity;
 
+        private async Task<bool> FetchAttendance()
+        {
+           
+            if (dataModel == null)
+            {
+                dataModel = new AttendanceDataModel();
+                dataModel.Mode = DBType.API;
+                dataModel.StoreCode = CurrentSession.StoreCode;
+                dataModel.Connect();
+            }
+            var list = (await dataModel.GetByStoreDTO(CurrentSession.StoreCode)).FirstOrDefault();
+            if (list == null) return false;
+            entity = new AttendanceEntry {
+            AttendanceId=list.AttendanceId, EmployeeId=list.EmployeeId, EntryTime=entity.EntryTime, IsTailoring=list.IsTailoring, 
+             OnDate=entity.OnDate, Remarks = list.Remarks, Status = list.Status, StoreId=list.StoreId
+            };
+            return true;
+        }
         
         protected override async void DoPrimary()
         {
@@ -102,7 +125,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             throw new NotImplementedException();
         }
 
-        protected override void OnAttachedTo(ContentPage bindable)
+        protected override async void OnAttachedTo(ContentPage bindable)
         {
             base.OnAttachedTo(bindable);
             this.dataForm = bindable.Content.FindByName<SfDataForm>("dataForm");
@@ -110,12 +133,28 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             if (this.dataForm != null)
             {
                 this.dataForm.ColumnCount = 2;
-                dataForm.DataObject = new AttendanceEntry();
+                entity = new AttendanceEntry();
+                dataForm.DataObject = entity;// new AttendanceEntry();
+                dataForm.CommitMode = DataFormCommitMode.PropertyChanged;
                 
+               
                 this.dataForm.RegisterEditor(nameof(AttendanceEntry.EmployeeId), DataFormEditorType.ComboBox);
                 this.dataForm.RegisterEditor(nameof(AttendanceEntry.StoreId), DataFormEditorType.ComboBox);
                 this.dataForm.RegisterEditor("IsTailoring", DataFormEditorType.Switch);
                 this.dataForm.GenerateDataFormItem += this.OnGenerateDataFormItem;
+               
+                //((AttendanceEntry)dataForm.DataObject).StoreId = "ARD";
+                //dataForm.UpdateEditor("StoreId");
+
+                //dataForm.Commit();
+
+                //if ((await this.FetchAttendance())==true)
+                //{
+                //    dataForm.DataObject = entity;
+                //    dataForm.Commit(); 
+                    
+                //}
+                
             }
 
             this.primaryButton = bindable.Content.FindByName<Button>("PrimaryButton");
@@ -134,8 +173,11 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 e.DataFormItem.LabelText = "Store";
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
+                comboBoxItem.IsEditable = true;
                 var result = await RestService.GetStoreListAsync();
-                comboBoxItem.ItemsSource = result;
+                comboBoxItem.ItemsSource = result.ToList();
+                e.DataFormItem.BindingContext = result;
+                
                 
             }
 
@@ -144,8 +186,9 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 e.DataFormItem.LabelText = "Employee";
                 cbEmp.DisplayMemberPath = "Value";
                 cbEmp.SelectedValuePath = "ID";
+                cbEmp.IsEditable = true;
                 var result = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
-                cbEmp.ItemsSource = result;
+                cbEmp.ItemsSource = result.ToList(); ;
             }
 
             if (e.DataFormItem != null)

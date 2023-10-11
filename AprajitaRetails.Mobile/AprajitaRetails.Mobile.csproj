@@ -92,9 +92,7 @@
 		<PackageReference Include="Syncfusion.Maui.TreeView" Version="23.1.38" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\..\..\Aprajita Retails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />
-	</ItemGroup>
+	
 
 	<ItemGroup>
 	  <Compile Update="Pages\Payroll\AttendancePage_old.xaml.cs">

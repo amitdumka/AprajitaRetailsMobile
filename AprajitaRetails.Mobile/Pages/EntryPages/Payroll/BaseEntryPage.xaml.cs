@@ -8,6 +8,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         public BaseEntryPage()
         {
             
+            BasicData.LoadDataSources();
             InitializeComponent();
             Atvm attendanceEntry = new Atvm();
             this.BindingContext = attendanceEntry;

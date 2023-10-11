@@ -10,8 +10,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 {
-    [INotifyPropertyChanged]
-    internal partial class AttendanceEntry
+    //[INotifyPropertyChanged]
+    internal partial class AttendanceEntry: ObservableValidator 
     {
 
         public AttendanceEntry()
@@ -22,73 +22,93 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             this.EntryTime = DateTime.Now.ToShortTimeString();
             this.Status = AttUnit.SundayHoliday;
             this.Remarks = string.Empty;
-            this.StoreId = "ARD";
+            this.StoreId = "ARJ";
             this.EmployeeId = "ARD-2016-SM-1";
             this.OnDate = DateTime.Now;
         }
 
         [Required(ErrorMessage = "Please select Store")]
-        //[ObservableProperty]
-        public string StoreId { get; set; }
+        [ObservableProperty]
+        private string _storeId ;//{ get; set; }
+        //public string StoreId { get; set; }
 
         [ReadOnly(true)]
         [Editable(false)]
+        [ObservableProperty]
         [Display(AutoGenerateField = false)]
-        public string AttendanceId { get; set; }
+        private string _attendanceId ;//{ get; set; }
+
+        //public string AttendanceId { get; set; }
 
         //[Display(Name = "Employee")]
         [Required(ErrorMessage = "Please select Employee")]
-        public string EmployeeId { get; set; }
+        [ObservableProperty]
+        private string _employeeId;// { get; set; }
+        //public string EmployeeId { get; set; }
 
         [Display(GroupName = "Date Time", Name = "Date")]
-        [DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
+        //[DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Please select Date")]
-        public DateTime OnDate { get; set; }
+        [ObservableProperty]
+        private DateTime _onDate ;//{ get; set; }
+        //public DateTime OnDate { get; set; }
 
         [Display(GroupName = "Date Time")]
         [DataType(DataType.Time)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Entry Time should not be empty")]
-        [DataFormValueConverter(typeof(StringToTimeConverter))]
-        public string EntryTime { get; set; }
+        //[DataFormValueConverter(typeof(StringToTimeConverter))]
+        [ObservableProperty]
+        //public string EntryTime { get; set; }
+        private string _entryTime;// { get; set; }
 
         [Display(Name = "Attndance")]
         [Required(ErrorMessage = "Please select Attendance status")]
-        public AttUnit Status { get; set; }
+        [ObservableProperty]
+        private AttUnit _status;// { get; set; }
+       // public AttUnit Status { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Remarks is requried")]
-        public string? Remarks { get; set; }
+        [ObservableProperty]
+        // public string? Remarks { get; set; }
+        private string? _remarks ;//{ get; set; }
 
         [Display(Name = "Tailor")]
-        public bool IsTailoring { get; set; }
+        [ObservableProperty]
+        private bool _isTailoring;// { get; set; }
+        //public bool IsTailoring { get; set; }
 
         //[Display(Name = "Store")]
     }
-    public class ItemSourceProvider : IDataFormSourceProvider
+    public class BasicData
     {
-        public ItemSourceProvider() { 
-         LoadDataSources();
-        }
-
-        public List<SelectOption> Stores { get; set; }
-        public List<SelectOption> Employees { get; set; }
-        private async void LoadDataSources()
+        public static List<SelectOption> Stores { get; set; }
+        public static List<SelectOption> Employees { get; set; }
+        public static async void LoadDataSources()
         {
+            if(Stores== null)   
             Stores = await RestService.GetStoreListAsync();
+            if(Employees== null)
             Employees = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
 
         }
+    }
+
+    public class ItemSourceProvider : IDataFormSourceProvider
+    {
+         
+        
         public object GetSource(string sourceName)
         {
             if (sourceName == "Store" || sourceName == "Stores" || sourceName == "StoreId")
             {
-                //List<SelectOption> departmentDetails = new List<SelectOption>();
-                //departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Dumka", ID = "ARD" });
-                //departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Jamshedpur", ID = "ARJ" });
-                //departmentDetails.Add(new SelectOption() { Value = "Jockey Dumka", ID = "JCK" });
-                //departmentDetails.Add(new SelectOption() { Value = "Personal Dumka", ID = "ARO" });
-                if (Stores == null) Stores = new List<SelectOption>();
-                return Stores;
+                List<SelectOption> departmentDetails = new List<SelectOption>();
+                departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Dumka", ID = "ARD" });
+                departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Jamshedpur", ID = "ARJ" });
+                departmentDetails.Add(new SelectOption() { Value = "Jockey Dumka", ID = "JCK" });
+                departmentDetails.Add(new SelectOption() { Value = "Personal Dumka", ID = "ARO" });
+                //if (Stores == null) Stores = new List<SelectOption>();
+               return departmentDetails;
             }
             if (sourceName == "Employee" || sourceName == "Employees" || sourceName == "EmployeeId")
             {
@@ -97,8 +117,8 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 //departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Jamshedpur", ID = "ARJ" });
                 //departmentDetails.Add(new SelectOption() { Value = "Jockey Dumka", ID = "JCK" });
                 //departmentDetails.Add(new SelectOption() { Value = "Personal Dumka", ID = "ARO" });
-                if (Employees == null) Employees = new List<SelectOption>();
-                return Employees;
+                //if (Employees == null) Employees = new List<SelectOption>();
+                return BasicData.Employees;
             }
 
             return new List<string>();
@@ -107,6 +127,11 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
     internal class AttendanceBehvior : BaseEntryBehavior<AttendanceEntry, AttendanceDataModel>
     {
         AttendanceEntry entity;
+
+        public AttendanceBehvior()
+        {
+            //BasicData.LoadDataSources();
+        }
 
         private async Task<bool> FetchAttendance()
         {
@@ -156,7 +181,8 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 if (attd != null && string.IsNullOrEmpty(attd.AttendanceId))
                 {
                     Notify.NotifyVShort("Attendance is saved!");
-                    this.primaryButton.IsEnabled=false;
+                    dataForm.DataObject = new AttendanceEntry();
+                   // this.primaryButton.IsEnabled=false;
                 }
                 else 
                     Notify.NotifyVLong("Error Occured while saving");
@@ -187,22 +213,22 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 this.dataForm.RegisterEditor("IsTailoring", DataFormEditorType.Switch);
                 this.dataForm.GenerateDataFormItem += this.OnGenerateDataFormItem;
                 
-                //if ((await this.FetchAttendance()) == true)
-                //{
-                //    dataForm.DataObject = entity;
-                //    dataForm.UpdateEditor("EmployeeId");
-                //    dataForm.UpdateEditor("StoreId");
+                if ((await this.FetchAttendance()) == true)
+                {
+                    dataForm.DataObject = entity;
+                    dataForm.UpdateEditor("EmployeeId");
+                    dataForm.UpdateEditor("StoreId");
 
-                //    dataForm.Commit();
+                    //dataForm.Commit();
 
-                //}
-                ((AttendanceEntry)dataForm.DataObject).StoreId = "ARD";
-                dataForm.UpdateEditor("StoreId");
+                }
+                // ((AttendanceEntry)dataForm.DataObject).StoreId = "ARD";
+                // dataForm.UpdateEditor("StoreId");
 
-                dataForm.Commit();
+                // dataForm.Commit();
 
-                
-                
+
+
             }
 
             this.primaryButton = bindable.Content.FindByName<Button>("PrimaryButton");

@@ -1,0 +1,45 @@
+﻿Add the AppActions.Icons.Maui nuget package to your MAUI project.
+.UseAppActionIcons() // Add this line
+
+
+
+
+.AddAppAction("home_sc", "Home", icon: AppActionIcon.Home)
+                .OnAppAction(App.HandleAppActions);
+
+
+
+                // Initialise the .Net Maui Icons - Fluent
+		builder.UseMauiApp<App>().UseFluentMauiIcons();
+		
+		// Initialise the .Net Maui Icons - Material
+		builder.UseMauiApp<App>().UseMaterialMauiIcons();
+
+		<fluent:MauiIcon Icon="Accounts"/>
+
+<!-- Fluent Icon Image Extension -->
+<Image Aspect="Center" Source="{fluent:Icon Icon=ActionCenterQuiet}"/>
+
+<!-- Material Icon Control -->
+<material:MauiIcon Icon="ABC"/>
+
+<!-- Material Icon Image Extension -->
+<Image Aspect="Center" Source="{material:Icon Icon=AddRoad}"/>
+
+e library consists of three NuGet packages:
+
+SimpleToolkit.Core - set of simple .NET MAUI controls and helpers
+
+NuGet
+
+SimpleToolkit.SimpleShell - simplified implementation of .NET MAUI Shell
+
+NuGet
+
+SimpleToolkit.SimpleShell.Controls - collection of ready-to-use, navigation-related controls
+
+NuGet
+
+
+.NET MAUI Markup Community Toolkit
+

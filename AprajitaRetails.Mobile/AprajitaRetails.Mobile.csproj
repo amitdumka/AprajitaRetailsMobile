@@ -92,8 +92,11 @@
 		<PackageReference Include="Syncfusion.Maui.TreeView" Version="23.1.38" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\AprajitaRetails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />
+	  <ProjectReference Include="..\..\..\AprajitaRetails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />
 	</ItemGroup>
+	<!--<ItemGroup>
+	  <ProjectReference Include="..\..\AprajitaRetails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />
+	</ItemGroup>-->
 
 	
 
@@ -111,6 +114,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Auths\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\EntryPages\Payroll\APage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\EntryPages\Payroll\BaseEntryPage.xaml">

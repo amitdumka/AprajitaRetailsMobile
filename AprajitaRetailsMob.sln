@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AprajitaRetails.Mobile", "A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{3429EB44-815B-4751-B002-4918F5F002AE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AprajitaRetails.Shared", "..\AprajitaRetails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj", "{50357357-F0F5-4680-9749-DF2D931BFDFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AprajitaRetails.Shared", "..\..\AprajitaRetails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj", "{767205CC-EB46-4C1F-B12A-CDA770E987DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,18 +25,18 @@ Global
 		{D998BB04-2539-41B3-B678-C00A8139B57C}.ReleaseLinux|Any CPU.ActiveCfg = Release|Any CPU
 		{D998BB04-2539-41B3-B678-C00A8139B57C}.ReleaseLinux|Any CPU.Build.0 = Release|Any CPU
 		{D998BB04-2539-41B3-B678-C00A8139B57C}.ReleaseLinux|Any CPU.Deploy.0 = Release|Any CPU
-		{50357357-F0F5-4680-9749-DF2D931BFDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{50357357-F0F5-4680-9749-DF2D931BFDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{50357357-F0F5-4680-9749-DF2D931BFDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{50357357-F0F5-4680-9749-DF2D931BFDFC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{50357357-F0F5-4680-9749-DF2D931BFDFC}.ReleaseLinux|Any CPU.ActiveCfg = ReleaseLinux|Any CPU
-		{50357357-F0F5-4680-9749-DF2D931BFDFC}.ReleaseLinux|Any CPU.Build.0 = ReleaseLinux|Any CPU
+		{767205CC-EB46-4C1F-B12A-CDA770E987DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{767205CC-EB46-4C1F-B12A-CDA770E987DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{767205CC-EB46-4C1F-B12A-CDA770E987DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{767205CC-EB46-4C1F-B12A-CDA770E987DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{767205CC-EB46-4C1F-B12A-CDA770E987DD}.ReleaseLinux|Any CPU.ActiveCfg = ReleaseLinux|Any CPU
+		{767205CC-EB46-4C1F-B12A-CDA770E987DD}.ReleaseLinux|Any CPU.Build.0 = ReleaseLinux|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{50357357-F0F5-4680-9749-DF2D931BFDFC} = {3429EB44-815B-4751-B002-4918F5F002AE}
+		{767205CC-EB46-4C1F-B12A-CDA770E987DD} = {3429EB44-815B-4751-B002-4918F5F002AE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4FF9ED2-B8E5-4135-8FB2-CF5C8C2DD6F1}

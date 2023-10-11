@@ -3,6 +3,19 @@
     public partial class APage : ContentPage
     {
         AttVM vm = new AttVM();
+        private void MainPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+
+        {
+
+            if (!string.IsNullOrEmpty(e.PropertyName))
+
+            {
+
+                dataForm.UpdateEditor(e.PropertyName);
+
+            }
+
+        }
         public APage()
         {
             InitializeComponent();
@@ -19,8 +32,14 @@
             };
 
             this.BindingContext = vm;
-
+            (dataForm.DataObject as AttendanceEntry).PropertyChanged += MainPage_PropertyChanged;
+            
 
         }
     }
 }
+
+ 
+
+
+

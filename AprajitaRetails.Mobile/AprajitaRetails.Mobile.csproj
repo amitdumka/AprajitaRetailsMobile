@@ -91,6 +91,9 @@
 		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.38" />
 		<PackageReference Include="Syncfusion.Maui.TreeView" Version="23.1.38" />
 	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\AprajitaRetails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />
+	</ItemGroup>
 
 	
 

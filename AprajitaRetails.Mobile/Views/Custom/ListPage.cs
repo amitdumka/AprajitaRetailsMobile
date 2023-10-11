@@ -9,17 +9,18 @@ namespace AprajitaRetails.Mobile.Views.Custom
         protected RecordListingView rlv;
         public ToolbarItem tbAdd, tbRefesh,tbDelete;
 
-        public ListPage()
+        private void AddToolBar()
         {
             tbAdd = new ToolbarItem
             {
                 Text = "Add",
                 IconImageSource = ImageSource.FromFile("add.png"),
-                Order = ToolbarItemOrder.Primary, 
-                Command=AddTBCommand
+                Order = ToolbarItemOrder.Primary,
+                Command = AddTBCommand
 
-             };
-            tbRefesh = new ToolbarItem {
+            };
+            tbRefesh = new ToolbarItem
+            {
                 Command = RefreshTBCommand,
                 Order = ToolbarItemOrder.Secondary,
                 Text = "Refresh",
@@ -38,8 +39,12 @@ namespace AprajitaRetails.Mobile.Views.Custom
             this.ToolbarItems.Add(tbRefesh);
             this.ToolbarItems.Add(tbDelete);
 
-           // BindingContext = viewModel = vm;
-           
+        }
+
+        public ListPage()
+        {
+
+            AddToolBar();
             rlv = new RecordListingView
             {
                 BindingContext = this,
@@ -47,7 +52,7 @@ namespace AprajitaRetails.Mobile.Views.Custom
                 RefreshButtonText = "Refresh",
 
                 HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand
+                VerticalOptions = LayoutOptions.Center
             };
             Content = new VerticalStackLayout
             {

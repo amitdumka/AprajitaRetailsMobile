@@ -10,12 +10,6 @@ public partial class RecordListingView : ContentView
     public RecordListingView()
 	{
 		InitializeComponent();
-        // var p = this.Parent;
-        //var c = p.BindingContext;
-        //BindingContext = this.Parent.BindingContext;
-        //DataGrid = dataGrid;
-        //if (gridColumns != null) 
-        //   dataGrid.Columns = gridColumns;
         if(Cols!=null)
             dataGrid.Columns = Cols;
 	}

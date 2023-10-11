@@ -9,22 +9,15 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         {
             
             InitializeComponent();
-            
             Atvm attendanceEntry = new Atvm();
-
             this.BindingContext = attendanceEntry;
             this.Behaviors.Add(new AttendanceBehvior());
-            
-
-
-
         }
 
         [INotifyPropertyChanged]
         partial class Atvm
         {
-            //[ObservableProperty]
-            //protected AttendanceEntry _entity;//{ get; set; }
+          
             [ObservableProperty]
             protected string _formTitle;// { get; set; }   
             [ObservableProperty]

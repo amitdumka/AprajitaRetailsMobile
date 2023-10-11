@@ -3,6 +3,7 @@ using AprajitaRetails.Mobile.Behaviors;
 using AprajitaRetails.Mobile.DataModels.Payroll;
 using AprajitaRetails.Mobile.RemoteServices;
 using AprajitaRetails.Shared.Models.Auth;
+using AprajitaRetails.Shared.ViewModels;
 using Syncfusion.Maui.DataForm;
 using System.ComponentModel.DataAnnotations;
 //using static Android.Icu.Text.CaseMap;
@@ -12,18 +13,21 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
     [INotifyPropertyChanged]
     internal partial class AttendanceEntry
     {
+
         public AttendanceEntry()
         {
+
+
             this.AttendanceId = string.Empty;
             this.EntryTime = DateTime.Now.ToShortTimeString();
-            this.Status = AttUnit.StoreClosed;
+            this.Status = AttUnit.SundayHoliday;
             this.Remarks = string.Empty;
-            this.StoreId = CurrentSession.StoreCode;
-            this.EmployeeId = string.Empty;
+            this.StoreId = "ARD";
+            this.EmployeeId = "ARD-2016-SM-1";
             this.OnDate = DateTime.Now;
         }
 
-       [Required(ErrorMessage = "Please select Store")]
+        [Required(ErrorMessage = "Please select Store")]
         //[ObservableProperty]
         public string StoreId { get; set; }
 
@@ -60,7 +64,46 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 
         //[Display(Name = "Store")]
     }
+    public class ItemSourceProvider : IDataFormSourceProvider
+    {
+        public ItemSourceProvider() { 
+         LoadDataSources();
+        }
 
+        public List<SelectOption> Stores { get; set; }
+        public List<SelectOption> Employees { get; set; }
+        private async void LoadDataSources()
+        {
+            Stores = await RestService.GetStoreListAsync();
+            Employees = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
+
+        }
+        public object GetSource(string sourceName)
+        {
+            if (sourceName == "Store" || sourceName == "Stores" || sourceName == "StoreId")
+            {
+                //List<SelectOption> departmentDetails = new List<SelectOption>();
+                //departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Dumka", ID = "ARD" });
+                //departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Jamshedpur", ID = "ARJ" });
+                //departmentDetails.Add(new SelectOption() { Value = "Jockey Dumka", ID = "JCK" });
+                //departmentDetails.Add(new SelectOption() { Value = "Personal Dumka", ID = "ARO" });
+                if (Stores == null) Stores = new List<SelectOption>();
+                return Stores;
+            }
+            if (sourceName == "Employee" || sourceName == "Employees" || sourceName == "EmployeeId")
+            {
+                //List<SelectOption> departmentDetails = new List<SelectOption>();
+                //departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Dumka", ID = "ARD" });
+                //departmentDetails.Add(new SelectOption() { Value = "Aprajita Retail Jamshedpur", ID = "ARJ" });
+                //departmentDetails.Add(new SelectOption() { Value = "Jockey Dumka", ID = "JCK" });
+                //departmentDetails.Add(new SelectOption() { Value = "Personal Dumka", ID = "ARO" });
+                if (Employees == null) Employees = new List<SelectOption>();
+                return Employees;
+            }
+
+            return new List<string>();
+        }
+    }
     internal class AttendanceBehvior : BaseEntryBehavior<AttendanceEntry, AttendanceDataModel>
     {
         AttendanceEntry entity;
@@ -78,8 +121,8 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             var list = (await dataModel.GetByStoreDTO(CurrentSession.StoreCode)).FirstOrDefault();
             if (list == null) return false;
             entity = new AttendanceEntry {
-            AttendanceId=list.AttendanceId, EmployeeId=list.EmployeeId, EntryTime=entity.EntryTime, IsTailoring=list.IsTailoring, 
-             OnDate=entity.OnDate, Remarks = list.Remarks, Status = list.Status, StoreId=list.StoreId
+            AttendanceId=list.AttendanceId, EmployeeId=list.EmployeeId, EntryTime=list.EntryTime, IsTailoring=list.IsTailoring, 
+             OnDate=list.OnDate, Remarks = list.Remarks, Status = list.Status, StoreId=list.StoreId
             };
             return true;
         }
@@ -124,7 +167,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         {
             throw new NotImplementedException();
         }
-
+        
         protected override async void OnAttachedTo(ContentPage bindable)
         {
             base.OnAttachedTo(bindable);
@@ -133,27 +176,32 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             if (this.dataForm != null)
             {
                 this.dataForm.ColumnCount = 2;
+               
                 entity = new AttendanceEntry();
                 dataForm.DataObject = entity;// new AttendanceEntry();
                 dataForm.CommitMode = DataFormCommitMode.PropertyChanged;
-                
-               
+
+                dataForm.ItemsSourceProvider = new ItemSourceProvider();
                 this.dataForm.RegisterEditor(nameof(AttendanceEntry.EmployeeId), DataFormEditorType.ComboBox);
                 this.dataForm.RegisterEditor(nameof(AttendanceEntry.StoreId), DataFormEditorType.ComboBox);
                 this.dataForm.RegisterEditor("IsTailoring", DataFormEditorType.Switch);
                 this.dataForm.GenerateDataFormItem += this.OnGenerateDataFormItem;
-               
-                //((AttendanceEntry)dataForm.DataObject).StoreId = "ARD";
-                //dataForm.UpdateEditor("StoreId");
-
-                //dataForm.Commit();
-
-                //if ((await this.FetchAttendance())==true)
+                
+                //if ((await this.FetchAttendance()) == true)
                 //{
                 //    dataForm.DataObject = entity;
-                //    dataForm.Commit(); 
-                    
+                //    dataForm.UpdateEditor("EmployeeId");
+                //    dataForm.UpdateEditor("StoreId");
+
+                //    dataForm.Commit();
+
                 //}
+                ((AttendanceEntry)dataForm.DataObject).StoreId = "ARD";
+                dataForm.UpdateEditor("StoreId");
+
+                dataForm.Commit();
+
+                
                 
             }
 
@@ -165,7 +213,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 this.primaryButton.Clicked += OnPrimaryButtonClicked;
             }
         }
-
+        
         private async void OnGenerateDataFormItem(object sender, GenerateDataFormItemEventArgs e)
         {
             if (e.DataFormItem != null && (e.DataFormItem.FieldName == "StoreId" || e.DataFormItem.FieldName == "Store") && e.DataFormItem is DataFormComboBoxItem comboBoxItem)
@@ -174,9 +222,9 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
                 comboBoxItem.IsEditable = true;
-                var result = await RestService.GetStoreListAsync();
-                comboBoxItem.ItemsSource = result.ToList();
-                e.DataFormItem.BindingContext = result;
+                //var result = await RestService.GetStoreListAsync();
+                //comboBoxItem.ItemsSource = result.ToList();
+               // e.DataFormItem.BindingContext = result;
                 
                 
             }
@@ -187,8 +235,8 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 cbEmp.DisplayMemberPath = "Value";
                 cbEmp.SelectedValuePath = "ID";
                 cbEmp.IsEditable = true;
-                var result = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
-                cbEmp.ItemsSource = result.ToList(); ;
+               // var result = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
+               // cbEmp.ItemsSource = result.ToList(); ;
             }
 
             if (e.DataFormItem != null)

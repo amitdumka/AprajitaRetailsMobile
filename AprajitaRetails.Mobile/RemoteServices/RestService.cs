@@ -391,6 +391,11 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     var data = JsonSerializer.Deserialize<List<SelectOption>>(content);
+                    foreach (var item in data)
+                    {
+                        item.Value = item.Value.Trim().ToString(); 
+                        item.ID=item.ID.Trim().ToString();  
+                    }
                     return data;
                 }
                 else
@@ -419,6 +424,11 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     var data = JsonSerializer.Deserialize<List<SelectOption>>(content);
+                    foreach (var item in data)
+                    {
+                        item.Value = item.Value.Trim().ToString();
+                        item.ID = item.ID.Trim().ToString();
+                    }
                     return data;
                 }
                 else

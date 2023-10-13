@@ -37,7 +37,7 @@
         ContentTemplate="{DataTemplate df:PaymentForm}"
         FlyoutIcon="{StaticResource  CircleIcon}"
         Route="Main" />-->
-    <ShellContent Title="Attendance Entry" ContentTemplate="{DataTemplate tt:Payroll.BaseEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main2" />
+    <!--<ShellContent Title="Attendance Entry" ContentTemplate="{DataTemplate tt:Payroll.BaseEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main2" />-->
     <ShellContent Title=" Entry" ContentTemplate="{DataTemplate tt:Payroll.APage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main3" />
    
     <FlyoutItem Title="Inventory">

@@ -45,7 +45,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             this.Status = AttUnit.SundayHoliday;
             this.Remarks = string.Empty;
             this.StoreId = "ARD";
-            this.EmployeeId = "ARD002";
+            this.EmployeeId = "ARD001";
             this.OnDate = DateTime.Now;
         }
 
@@ -205,6 +205,11 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         {
             LoadDataSources();
         }
+
+
+string storejson="[{id:ARD, value:dumka}, {id:ARJ, value:Jamshedpur}]";
+
+string empjson="[{id:ARD004, value:alok},{id:ARD001,value:mukesh}]";
 
         public List<SelectOption> Stores { get; set; }
         public List<SelectOption> Employees { get; set; }

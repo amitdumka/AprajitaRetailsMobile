@@ -32,12 +32,13 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 ServerCertificateCustomValidationCallback =
        HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
             };
-            _client = new HttpClient(handler2);// new HttpClient();
-                                               //_client = new HttpClient();
-                                               // if (string.IsNullOrEmpty(authorizationKey))
-                                               // {
-                                               //     authorizationKey = ClientSetting.GetSecureAsync("AuthToken").Result;
-                                               // }
+            _client = new HttpClient(handler2);
+            // new HttpClient();
+            //_client = new HttpClient();
+            // if (string.IsNullOrEmpty(authorizationKey))
+            // {
+            //     authorizationKey = ClientSetting.GetSecureAsync("AuthToken").Result;
+            // }
 
             // _client.DefaultRequestHeaders.Add("Authorization", authorizationKey);
             _client.DefaultRequestHeaders.Add("Accept", "application/json");
@@ -391,11 +392,11 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     var data = JsonSerializer.Deserialize<List<SelectOption>>(content);
-                    foreach (var item in data)
-                    {
-                        item.Value = item.Value.Trim().ToString(); 
-                        item.ID=item.ID.Trim().ToString();  
-                    }
+                    //foreach (var item in data)
+                    //{
+                    //    item.Value = item.Value.Trim().ToString();
+                    //    item.ID = item.ID.Trim().ToString();
+                    //}
                     return data;
                 }
                 else
@@ -416,7 +417,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
         {
             var client = GetClient();
             Uri uri = new Uri($"{Constants.RestUrl}helper/Employees?StoreId={storeid}");
-           // Notify.NotifyLong(uri.ToString());
+            // Notify.NotifyLong(uri.ToString());
             try
             {
                 HttpResponseMessage response = await client.GetAsync(uri);
@@ -424,11 +425,11 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     var data = JsonSerializer.Deserialize<List<SelectOption>>(content);
-                    foreach (var item in data)
-                    {
-                        item.Value = item.Value.Trim().ToString();
-                        item.ID = item.ID.Trim().ToString();
-                    }
+                    //foreach (var item in data)
+                    //{
+                    //    item.Value = item.Value.Trim().ToString();
+                    //    item.ID = item.ID.Trim().ToString();
+                    //}
                     return data;
                 }
                 else

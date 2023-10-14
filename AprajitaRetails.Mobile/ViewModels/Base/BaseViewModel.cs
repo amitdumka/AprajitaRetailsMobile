@@ -9,7 +9,7 @@ using System.ComponentModel;
 namespace AprajitaRetails.Mobile.ViewModels.Base
 {
     [ObservableRecipient]
-    public abstract partial class BaseViewModel<T, DM> : ObservableValidator
+    public abstract partial class BaseViewModel<T, DM> : ObservableObject
     {
         public const string Descending = "Descending";
         public const string Ascending = "Ascending";
@@ -154,7 +154,7 @@ namespace AprajitaRetails.Mobile.ViewModels.Base
     }
 
     [ObservableRecipient]
-    public abstract partial class BaseEntryViewModel<T, DM> : ObservableValidator
+    public abstract partial class BaseEntryViewModel<T, DM> : ObservableObject
     {
         protected DM DataModel;
 

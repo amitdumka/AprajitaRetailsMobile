@@ -1,0 +1,19 @@
+{
+  "productDescription": "Aprajita Retails App , is a mobile UI for Web based SRP. AKS Labs(India), had made this app for retails garments chain!.",
+  "productIcon": "Icon.png",
+  "productVersion": "2.0",
+  "bannerImage": "TheArvindStore004.jpg",
+
+  "employeeDetails": [
+    {
+      "employeeName": "Amit Kumar",
+      "image": "Amit.jpg",
+      "designation": "M.D."
+    },
+    {
+      "employeeName": "Shalini Sah",
+      "image": "Shalini.jpg",
+      "designation": "VP Operations"
+    }
+  ]
+}

@@ -32,24 +32,27 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             }
 
         }
+
+        string old1="ARD"; 
+        string old2="ARD-2016-SM-1";
+
         private void PrimaryButton_Clicked(object sender, EventArgs e)
         {
+            
+           
+            dataForm.Commit();
+            var x = dataForm.DataObject as Attendance;
+            Notify.NotifyVShort(x.StoreId);
+            Notify.NotifyShort(x.EmployeeId);
+            var x1 = x.StoreId; 
+            var x2 = x.EmployeeId;
 
-            //viewModel.Attendance = new Attendance
-            //{
-            //    AttendanceId = string.Empty,
-            //    EntryTime = DateTime.Now.ToShortTimeString(),
-            //    Status = AttUnit.SundayHoliday,
-            //    Remarks = string.Empty,
-            //    StoreId = "JCK",
-            //    EmployeeId = "ARD-2016-SM-1",
-            //    OnDate = DateTime.Now.AddDays(-11)
-            //};
-
-            //viewModel.Attendance.AttendanceId = "1";
-            //viewModel.Attendance.EntryTime = "1";
-            viewModel.Attendance.StoreId     = "ARD";
-            viewModel.Attendance.EmployeeId = "ARD-2016-SM-4";
+            viewModel.Attendance.StoreId = old1;
+            viewModel.Attendance.EmployeeId = old2;
+            dataForm.UpdateEditor("StoreId");
+            dataForm.UpdateEditor("EmployeeId");
+            old1=x1; 
+            old2=x2;
 
             //dataForm.DataObject = viewModel.Attendance;
         }
@@ -122,7 +125,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             });
             
             await Task.Delay(1000);
-           // storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(stores);
+            storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(stores);
             return storeDetails;
         }
         private async Task<List<SelectOption>> GetEmployeeListAsync(string sc)
@@ -155,7 +158,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 ID = "ARD-2016-SM-3"
             });
             await Task.Delay(1000);
-          // storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(emp);
+           storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(emp);
             return storeDetails;
         }
     }

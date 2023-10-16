@@ -1,4 +1,5 @@
 ﻿using AprajitaRetails.Mobil.Converters;
+using AprajitaRetails.Mobile.DataModels.Payroll;
 using AprajitaRetails.Mobile.RemoteServices;
 using AprajitaRetails.Shared.ViewModels;
 using Syncfusion.Maui.DataForm;
@@ -14,9 +15,9 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 
             cbx.SelectedValuePath = "ID";
             cbx.DisplayMemberPath = "Value";
-            // dataForm.BindingContext = viewModel;
-            (dataForm.DataObject as Attendance).PropertyChanged += MainPage_PropertyChanged;
-            viewModel.Attendance.PropertyChanged += MainPage_PropertyChanged;
+           
+           // (dataForm.DataObject as Attendance).PropertyChanged += MainPage_PropertyChanged;
+           // viewModel.Attendance.PropertyChanged += MainPage_PropertyChanged;
             
         }
         private void MainPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -40,28 +41,70 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         {
             
            
-            dataForm.Commit();
+           
             var x = dataForm.DataObject as Attendance;
-            Notify.NotifyVShort(x.StoreId);
-            Notify.NotifyShort(x.EmployeeId);
+            if (x.StoreId != null && x.EmployeeId != null)
+            {
+                Notify.NotifyVShort(x.StoreId);
+                Notify.NotifyVShort(x.EmployeeId);
+            }
+            else { Notify.NotifyVShort("Values are null"); }
             var x1 = x.StoreId; 
             var x2 = x.EmployeeId;
 
             viewModel.Attendance.StoreId = old1;
             viewModel.Attendance.EmployeeId = old2;
+            dataForm.DataObject = viewModel.Attendance;
             dataForm.UpdateEditor("StoreId");
             dataForm.UpdateEditor("EmployeeId");
+            
             old1=x1; 
             old2=x2;
 
             //dataForm.DataObject = viewModel.Attendance;
         }
 
-        private void SecondaryButton_Clicked(object sender, EventArgs e)
+        private async void SecondaryButton_Clicked(object sender, EventArgs e)
         {
-            cbx.SelectedValuePath = "ID";
-            cbx.DisplayMemberPath = "Value";
-            cbx.ItemsSource = viewModel.Employees;
+            AttendanceDataModel dataModel;
+             
+                dataModel = new AttendanceDataModel
+                {
+                    Mode = DBType.API,
+                    StoreCode = CurrentSession.StoreCode
+                };
+                dataModel.Connect();
+            
+            var list = (await dataModel.GetByStoreDTO(CurrentSession.StoreCode)).FirstOrDefault();
+
+            if (list != null)
+            {
+
+                var x = new Attendance
+                {
+                    AttendanceId = list.AttendanceId,
+                    EmployeeId = list.EmployeeId,
+                    EntryTime = list.EntryTime,
+                    IsTailoring = list.IsTailoring,
+                    OnDate = list.OnDate.Date,
+                    Remarks = list.Remarks + "TESTME",
+                    Status = list.Status,
+                    StoreId = list.StoreId
+                };
+                viewModel.Attendance = x;
+                //dataForm.DataObject= viewModel.Attendance;
+                dataForm.UpdateEditor("StoreId");
+                dataForm.UpdateEditor("EmployeeId");
+                //(dataForm.DataObject as Attendance).StoreId = list.StoreId;
+                //(dataForm.DataObject as Attendance).EmployeeId = list.EmployeeId;
+                dataForm.UpdateEditor("StoreId");
+                dataForm.UpdateEditor("EmployeeId");
+
+
+            }
+            else Notify.NotifyVShort("list is null");
+            //await Task.Delay(500);
+            
         }
     }
 
@@ -87,12 +130,12 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         private async void LoadDataSources()
         {
             // if (Stores == null || !Stores.Any())
-           // var x = RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
-            //var y = RestService.GetStoreListAsync();
+           Employees= await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
+           Stores=await RestService.GetStoreListAsync();
 
-            Stores = await GetStoreListAsync();
+            //Stores = await GetStoreListAsync();
             // if (Employees == null || !Employees.Any())
-            Employees = await GetEmployeeListAsync(CurrentSession.StoreCode);
+            //Employees = await GetEmployeeListAsync(CurrentSession.StoreCode);
         }
         private async Task<List<SelectOption>> GetStoreListAsync()
         {
@@ -231,6 +274,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         //public bool IsTailoring { get; set; }
     }
 
+    
     public class AttendanceFormBehvour : Behavior<SfDataForm>
     {
         private Attendance Attendance { get; set; }
@@ -294,7 +338,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 // e.DataFormItem.LabelText = "Store";
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
-                comboBoxItem.IsEditable = true;
+                //comboBoxItem.IsEditable = true;
 
                 var viewModel = DataForm.BindingContext as AttendanceDFViewModel;
                 comboBoxItem.BindingContext = viewModel;
@@ -306,7 +350,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 // e.DataFormItem.LabelText = "Employee";
                 cbEmp.DisplayMemberPath = "Value";
                 cbEmp.SelectedValuePath = "ID";
-                cbEmp.IsEditable = true;
+               // cbEmp.IsEditable = true;
 
                 var viewModel = DataForm.BindingContext as AttendanceDFViewModel;
                 cbEmp.BindingContext = viewModel;

@@ -95,6 +95,8 @@
 		<PackageReference Include="Syncfusion.Maui.Inputs" Version="23.1.40" />
 		<PackageReference Include="Syncfusion.Maui.Picker" Version="23.1.40" />
 		<PackageReference Include="Syncfusion.Maui.TreeView" Version="23.1.40" />
+		<PackageReference Include="Telerik.UI.for.Maui.Trial" Version="6.3.0" />
+		
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\AprajitaRetails\AprajitaRetails\Shared\AprajitaRetails.Shared.csproj" />

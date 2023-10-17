@@ -141,68 +141,31 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         {
             var stores = "[{\"ID\":\"ARD\",\"Value\":\"Aprajita Retails, #: Dumka\"},{\"ID\":\"ARJ\",\"Value\":\"Aprajita Retails, Jamshedpur, #: Jamshedpur\"},{\"ID\":\"JKD\",\"Value\":\"Aprajita Retails(Jockey EBO), #: Dumka\"}]";
 
-            List<SelectOption> storeDetails = new List<SelectOption>();
-            storeDetails.Add(new SelectOption()
+            List<SelectOption> storeDetails  = JsonSerializer.Deserialize<List<SelectOption>>(stores);
+            List<SelectOption> sd = new List<SelectOption>();
+            foreach (var item in storeDetails)
             {
-                Value =
-            "Aprajita Retail Dumka",
-                ID = "ARD"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            " Retail Jamshedpur",
-                ID = "ARJ"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Jockey Dumka",
-                ID = "JCK"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Personal Dumka",
-                ID = "ARO"
-            });
+                sd.Add(new SelectOption { ID=item.ID.Trim().ToString(), Value=item.ToString().Trim()});
+            }
             
-            await Task.Delay(1000);
-            storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(stores);
-            return storeDetails;
+            await Task.Delay(500);
+           
+            return sd;
         }
         private async Task<List<SelectOption>> GetEmployeeListAsync(string sc)
         {
             var emp = "[{\"ID\":\"ARD-2023-HK\",\"Value\":\"Keli Devi\"},{\"ID\":\"ARD-2016-SM-1\",\"Value\":\"Alok Kumar\"},{\"ID\":\"ARD-2020-ACC-11\",\"Value\":\"Geetanjali Kumari Verma\"}]";
 
-            List<SelectOption> storeDetails = new List<SelectOption>();
-            storeDetails.Add(new SelectOption()
+            List<SelectOption> storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(emp);
+            List<SelectOption> sd = new List<SelectOption>();
+            foreach (var item in storeDetails)
             {
-                Value =
-            "Alok",
-                ID = "ARD-2016-SM-1"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            " Amit Thakur",
-                ID = "ARD-2016-SM-2"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Mukesh",
-                ID = "ARD-2016-SM-4"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Geetanjali",
-                ID = "ARD-2016-SM-3"
-            });
-            await Task.Delay(1000);
-           storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(emp);
-            return storeDetails;
+                sd.Add(new SelectOption { ID = item.ID.Trim().ToString(), Value = item.ToString().Trim() });
+            }
+
+            await Task.Delay(500);
+
+            return sd;
         }
     }
 
@@ -300,8 +263,10 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 dataForm.Commit();
                 dataForm.GenerateDataFormItem += OnGenerateDataFormItem;
                // (dataForm.DataObject as Attendance).PropertyChanged += OnDataObjectPropertyChanged;
+
+                
                
-                //await WorkArroundForComboBoxLoad();
+               await WorkArroundForComboBoxLoad();
             }
         }
 
@@ -339,10 +304,13 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
                 //comboBoxItem.IsEditable = true;
-
+                comboBoxItem.FieldName = "cbStoreId";
+                comboBoxItem.PlaceholderText = "Select Store";
+                
+                
                 var viewModel = DataForm.BindingContext as AttendanceDFViewModel;
                 comboBoxItem.BindingContext = viewModel;
-                comboBoxItem.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Stores));
+                comboBoxItem.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Stores), BindingMode.TwoWay);
             }
 
             if (e.DataFormItem != null && (e.DataFormItem.FieldName == "EmployeeId" || e.DataFormItem.FieldName == "Employee") && e.DataFormItem is DataFormComboBoxItem cbEmp)
@@ -355,7 +323,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 var viewModel = DataForm.BindingContext as AttendanceDFViewModel;
                 cbEmp.BindingContext = viewModel;
 
-                cbEmp.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Employees));
+                cbEmp.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Employees),BindingMode.TwoWay);
 
                 //Notify.NotifyVShort(viewModel.Employees.First().ID);
             }

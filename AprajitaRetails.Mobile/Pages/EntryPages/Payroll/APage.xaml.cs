@@ -1,5 +1,4 @@
-﻿using AprajitaRetails.Mobil.Converters;
-using AprajitaRetails.Mobile.DataModels.Payroll;
+﻿using AprajitaRetails.Mobile.DataModels.Payroll;
 using AprajitaRetails.Mobile.RemoteServices;
 using AprajitaRetails.Shared.ViewModels;
 using Syncfusion.Maui.DataForm;
@@ -9,39 +8,41 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 {
     public partial class APage : ContentPage
     {
+
+        
+        public APage(ComboBoxOptionList cbList)
+        {
+            InitializeComponent();
+
+            cbx.SelectedValuePath = "ID";
+            cbx.DisplayMemberPath = "Value";
+            viewModel.ComboBoxOptions=cbList;
+            // (dataForm.DataObject as Attendance).PropertyChanged += MainPage_PropertyChanged;
+            // viewModel.Attendance.PropertyChanged += MainPage_PropertyChanged;
+        }
         public APage()
         {
             InitializeComponent();
 
             cbx.SelectedValuePath = "ID";
             cbx.DisplayMemberPath = "Value";
-           
-           // (dataForm.DataObject as Attendance).PropertyChanged += MainPage_PropertyChanged;
-           // viewModel.Attendance.PropertyChanged += MainPage_PropertyChanged;
-            
         }
+
         private void MainPage_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 
         {
-
-            if ( !string.IsNullOrEmpty(e.PropertyName))
+            if (!string.IsNullOrEmpty(e.PropertyName))
 
             {
-
                 dataForm.UpdateEditor(e.PropertyName);
-
             }
-
         }
 
-        string old1="ARD"; 
-        string old2="ARD-2016-SM-1";
+        private string old1 = "ARD";
+        private string old2 = "ARD-2016-SM-1";
 
         private void PrimaryButton_Clicked(object sender, EventArgs e)
         {
-            
-           
-           
             var x = dataForm.DataObject as Attendance;
             if (x.StoreId != null && x.EmployeeId != null)
             {
@@ -49,7 +50,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 Notify.NotifyVShort(x.EmployeeId);
             }
             else { Notify.NotifyVShort("Values are null"); }
-            var x1 = x.StoreId; 
+            var x1 = x.StoreId;
             var x2 = x.EmployeeId;
 
             viewModel.Attendance.StoreId = old1;
@@ -57,9 +58,9 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             dataForm.DataObject = viewModel.Attendance;
             dataForm.UpdateEditor("StoreId");
             dataForm.UpdateEditor("EmployeeId");
-            
-            old1=x1; 
-            old2=x2;
+
+            old1 = x1;
+            old2 = x2;
 
             //dataForm.DataObject = viewModel.Attendance;
         }
@@ -67,19 +68,18 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         private async void SecondaryButton_Clicked(object sender, EventArgs e)
         {
             AttendanceDataModel dataModel;
-             
-                dataModel = new AttendanceDataModel
-                {
-                    Mode = DBType.API,
-                    StoreCode = CurrentSession.StoreCode
-                };
-                dataModel.Connect();
-            
+
+            dataModel = new AttendanceDataModel
+            {
+                Mode = DBType.API,
+                StoreCode = CurrentSession.StoreCode
+            };
+            dataModel.Connect();
+
             var list = (await dataModel.GetByStoreDTO(CurrentSession.StoreCode)).FirstOrDefault();
 
             if (list != null)
             {
-
                 var x = new Attendance
                 {
                     AttendanceId = list.AttendanceId,
@@ -99,12 +99,9 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 //(dataForm.DataObject as Attendance).EmployeeId = list.EmployeeId;
                 dataForm.UpdateEditor("StoreId");
                 dataForm.UpdateEditor("EmployeeId");
-
-
             }
             else Notify.NotifyVShort("list is null");
             //await Task.Delay(500);
-            
         }
     }
 
@@ -112,46 +109,74 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
     public partial class AttendanceDFViewModel : ObservableObject, INotifyPropertyChanged
     {
         [ObservableProperty]
+        private bool isReady;
+
+        [ObservableProperty]
         private List<SelectOption> stores;
 
         [ObservableProperty]
         private List<SelectOption> employees;
 
         [ObservableProperty]
+        private List<string> employeeId;
+
+        [ObservableProperty]
+        private List<string> employeeValue;
+
+        [ObservableProperty]
+        private List<string> storeId;
+
+        [ObservableProperty]
+        private List<string> storeValue;
+
+        [ObservableProperty]
         private Attendance attendance;//{ get; set; }
+        [ObservableProperty]
+        private ComboBoxOptionList comboBoxOptions;
 
         //public Attendance Attendance { get; set; }
         public AttendanceDFViewModel()
         {
-            LoadDataSources();
+            
+            //LoadDataSources();
             Attendance = new Attendance();
+            SetFormValue();
         }
 
         private async void LoadDataSources()
         {
+            StoreId = new List<string>();
+            StoreValue = new List<string>();
+            EmployeeId = new List<string>(); EmployeeValue = new List<string>();
             // if (Stores == null || !Stores.Any())
-           Employees= await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
-           Stores=await RestService.GetStoreListAsync();
+            //Employees= await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
+            //Stores=await RestService.GetStoreListAsync();
+            Stores = await GetStoreListAsync();
+            Employees = await GetEmployeeListAsync(CurrentSession.StoreCode);
 
             //Stores = await GetStoreListAsync();
             // if (Employees == null || !Employees.Any())
             //Employees = await GetEmployeeListAsync(CurrentSession.StoreCode);
         }
+
         private async Task<List<SelectOption>> GetStoreListAsync()
         {
             var stores = "[{\"ID\":\"ARD\",\"Value\":\"Aprajita Retails, #: Dumka\"},{\"ID\":\"ARJ\",\"Value\":\"Aprajita Retails, Jamshedpur, #: Jamshedpur\"},{\"ID\":\"JKD\",\"Value\":\"Aprajita Retails(Jockey EBO), #: Dumka\"}]";
 
-            List<SelectOption> storeDetails  = JsonSerializer.Deserialize<List<SelectOption>>(stores);
+            List<SelectOption> storeDetails = JsonSerializer.Deserialize<List<SelectOption>>(stores);
             List<SelectOption> sd = new List<SelectOption>();
+
             foreach (var item in storeDetails)
             {
-                sd.Add(new SelectOption { ID=item.ID.Trim().ToString(), Value=item.ToString().Trim()});
+                StoreId.Add(item.ID.Trim().ToString());
+                StoreValue.Add(item.Value.ToString().Trim());
             }
-            
+
             await Task.Delay(500);
-           
+
             return sd;
         }
+
         private async Task<List<SelectOption>> GetEmployeeListAsync(string sc)
         {
             var emp = "[{\"ID\":\"ARD-2023-HK\",\"Value\":\"Keli Devi\"},{\"ID\":\"ARD-2016-SM-1\",\"Value\":\"Alok Kumar\"},{\"ID\":\"ARD-2020-ACC-11\",\"Value\":\"Geetanjali Kumari Verma\"}]";
@@ -160,17 +185,61 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             List<SelectOption> sd = new List<SelectOption>();
             foreach (var item in storeDetails)
             {
-                sd.Add(new SelectOption { ID = item.ID.Trim().ToString(), Value = item.ToString().Trim() });
+                EmployeeId.Add(item.ID.Trim().ToString());
+                EmployeeValue.Add(item.Value.ToString().Trim());
             }
 
             await Task.Delay(500);
 
             return sd;
         }
+
+        private async void SetFormValue()
+        {
+            do
+            {
+                if (ComboBoxOptions.IsReady && !IsReady)
+                {
+                    Attendance = new Attendance
+                    {
+                        StoreId = ComboBoxOptions.StoreValue.ElementAt(ComboBoxOptions.StoreId.IndexOf(Attendance.StoreId)),
+                        EmployeeId = ComboBoxOptions.EmployeeValue.ElementAt(ComboBoxOptions.EmployeeId.IndexOf(Attendance.EmployeeId))
+                    };
+                    IsReady = true;
+                }
+                else
+                {
+                    await Task.Delay(500);
+                }
+            }
+            while (!IsReady);
+            //while (StoreId == null && !StoreId.Any() && EmployeeId == null && !EmployeeId.Any());
+        }
+
+        private async void SetFormValue(Attendance att)
+        {
+            do
+            {
+                if (StoreId != null && StoreId.Any() && EmployeeId != null && EmployeeId.Any() && !IsReady)
+                {
+                    Attendance = new Attendance
+                    {
+                        StoreId = StoreValue.ElementAt(StoreId.IndexOf(att.StoreId)),
+                        EmployeeId = EmployeeValue.ElementAt(EmployeeId.IndexOf(att.StoreId))
+                    };
+                    IsReady = true;
+                }
+                else
+                {
+                    await Task.Delay(500);
+                }
+            }
+            while (StoreId == null && !StoreId.Any() && EmployeeId == null && !EmployeeId.Any());
+        }
     }
 
     [INotifyPropertyChanged]
-    public partial class Attendance 
+    public partial class Attendance
     {
         public Attendance()
         {
@@ -179,21 +248,22 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             this.Status = AttUnit.SundayHoliday;
             this.Remarks = string.Empty;
             this.StoreId = "ARD";
-            this.EmployeeId = "ARD-2016-SM-2";
+            this.EmployeeId = "ARD-2016-SM-1";
             this.OnDate = DateTime.Now;
         }
 
-       // [Required(ErrorMessage = "Please select Store")]
+        // [Required(ErrorMessage = "Please select Store")]
         [ObservableProperty]
         private string storeId;
-        //public string StoreId { get; set; }
 
+        //public string StoreId { get; set; }
 
         [ReadOnly(true)]
         [Editable(false)]
         [Display(AutoGenerateField = false)]
         [ObservableProperty]
         private string attendanceId;
+
         //public string AttendanceId { get; set; }
 
         //[Required(ErrorMessage = "Please select Employee")]
@@ -210,34 +280,38 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         //[Required(ErrorMessage = "Please select Date")]
         [ObservableProperty]
         private DateTime onDate;
+
         //public DateTime OnDate { get; set; }
 
         [Display(GroupName = "Date Time")]
         //[DataType(DataType.Time)]
-       // [Required(AllowEmptyStrings = false, ErrorMessage = "Entry Time should not be empty")]
+        // [Required(AllowEmptyStrings = false, ErrorMessage = "Entry Time should not be empty")]
         //[DataFormValueConverter(typeof(StringToTimeConverter))]
         [ObservableProperty]
         private string entryTime;
+
         //public string EntryTime { get; set; }
 
         [Display(Name = "Attndance")]
         //[Required(ErrorMessage = "Please select Attendance status")]
         [ObservableProperty]
         private AttUnit status;
+
         //public AttUnit Status { get; set; }
 
-       // [Required(AllowEmptyStrings = false, ErrorMessage = "Remarks is requried")]
+        // [Required(AllowEmptyStrings = false, ErrorMessage = "Remarks is requried")]
         [ObservableProperty]
         private string? remarks;
+
         //public string? Remarks { get; set; }
 
         [Display(Name = "Tailor")]
         [ObservableProperty]
         private bool isTailoring;
+
         //public bool IsTailoring { get; set; }
     }
 
-    
     public class AttendanceFormBehvour : Behavior<SfDataForm>
     {
         private Attendance Attendance { get; set; }
@@ -262,11 +336,9 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 viewModel = DataForm.BindingContext as AttendanceDFViewModel;
                 dataForm.Commit();
                 dataForm.GenerateDataFormItem += OnGenerateDataFormItem;
-               // (dataForm.DataObject as Attendance).PropertyChanged += OnDataObjectPropertyChanged;
+                // (dataForm.DataObject as Attendance).PropertyChanged += OnDataObjectPropertyChanged;
 
-                
-               
-               await WorkArroundForComboBoxLoad();
+                //await WorkArroundForComboBoxLoad();
             }
         }
 
@@ -301,29 +373,27 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             if (e.DataFormItem != null && (e.DataFormItem.FieldName == "StoreId" || e.DataFormItem.FieldName == "Store") && e.DataFormItem is DataFormComboBoxItem comboBoxItem)
             {
                 // e.DataFormItem.LabelText = "Store";
-                comboBoxItem.DisplayMemberPath = "Value";
-                comboBoxItem.SelectedValuePath = "ID";
+                //comboBoxItem.DisplayMemberPath = "Value";
+                //comboBoxItem.SelectedValuePath = "ID";
                 //comboBoxItem.IsEditable = true;
-                comboBoxItem.FieldName = "cbStoreId";
-                comboBoxItem.PlaceholderText = "Select Store";
-                
-                
+                // comboBoxItem.FieldName = "cbStoreId";
+                // comboBoxItem.PlaceholderText = "Select Store";
+
                 var viewModel = DataForm.BindingContext as AttendanceDFViewModel;
                 comboBoxItem.BindingContext = viewModel;
-                comboBoxItem.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Stores), BindingMode.TwoWay);
+                comboBoxItem.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.StoreValue), BindingMode.TwoWay);
             }
 
             if (e.DataFormItem != null && (e.DataFormItem.FieldName == "EmployeeId" || e.DataFormItem.FieldName == "Employee") && e.DataFormItem is DataFormComboBoxItem cbEmp)
             {
                 // e.DataFormItem.LabelText = "Employee";
-                cbEmp.DisplayMemberPath = "Value";
-                cbEmp.SelectedValuePath = "ID";
-               // cbEmp.IsEditable = true;
+                //cbEmp.DisplayMemberPath = "Value";
+                //cbEmp.SelectedValuePath = "ID";
+                // cbEmp.IsEditable = true;
 
                 var viewModel = DataForm.BindingContext as AttendanceDFViewModel;
                 cbEmp.BindingContext = viewModel;
-
-                cbEmp.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Employees),BindingMode.TwoWay);
+                cbEmp.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.EmployeeValue), BindingMode.TwoWay);
 
                 //Notify.NotifyVShort(viewModel.Employees.First().ID);
             }
@@ -336,20 +406,17 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
                 }
             }
         }
-        private void OnDataObjectPropertyChanged(object sender,PropertyChangedEventArgs e)
+
+        private void OnDataObjectPropertyChanged(object sender, PropertyChangedEventArgs e)
 
         {
-
-            if (DataForm!=null&& !string.IsNullOrEmpty(e.PropertyName))
+            if (DataForm != null && !string.IsNullOrEmpty(e.PropertyName))
 
             {
-
                 DataForm.UpdateEditor(e.PropertyName);
-
             }
-
         }
-        
+
         protected override void OnDetachingFrom(SfDataForm dataForm)
         {
             base.OnDetachingFrom(dataForm);
@@ -357,122 +424,94 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             if (dataForm != null)
             {
                 dataForm.GenerateDataFormItem -= this.OnGenerateDataFormItem;
-               // (dataForm.DataObject as Attendance).PropertyChanged -= OnDataObjectPropertyChanged;
+                // (dataForm.DataObject as Attendance).PropertyChanged -= OnDataObjectPropertyChanged;
             }
         }
     }
 
-    public class ItemSourceProvider2 : IDataFormSourceProvider
+
+
+    /// <summary>
+    /// Make this a singleton so It can instantisate once and work ever time
+    /// </summary>
+    public partial class ComboBoxOptionList : ObservableObject, INotifyPropertyChanged
     {
-        public ItemSourceProvider2()
+        [ObservableProperty]
+        private static bool isReady;
+
+        //[ObservableProperty]
+        //private List<SelectOption> stores;
+
+        //[ObservableProperty]
+        //private List<SelectOption> employees;
+        [ObservableProperty]
+        private static List<string> employeeId;
+
+        [ObservableProperty]
+        private static List<string> employeeValue;
+
+        [ObservableProperty]
+        private static List<string> storeId;
+
+        [ObservableProperty]
+        private static List<string> storeValue;
+
+        public ComboBoxOptionList()
+        { OnInit(); }
+
+        private async void OnInit()
         {
-            LoadDataSources();
+            storeId = new List<string>();
+            storeValue = new List<string>();
+            var x = await GetStoreListAsync();
+            var y = await GetEmployeeListAsync(CurrentSession.StoreCode);
+            SetStore();
         }
-
-
-string storejson="[{id:ARD, value:dumka}, {id:ARJ, value:Jamshedpur}]";
-
-string empjson="[{id:ARD004, value:alok},{id:ARD001,value:mukesh}]";
-
-        public List<SelectOption> Stores { get; set; }
-        public List<SelectOption> Employees { get; set; }
-
-        private async void LoadDataSources()
+        private async void SetStore()
         {
-            Stores = await GetStoresListAsync();
-            Employees = await GetEmployeeListAsync();
-        }
-
-        private async Task<List<SelectOption>> GetStoresListAsync()
-        {
-            List<SelectOption> storeDetails = new List<SelectOption>();
-            storeDetails.Add(new SelectOption()
+            do
             {
-                Value =
-            "Aprajita Retail Dumka",
-                ID = "ARD"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            " Retail Jamshedpur",
-                ID = "ARJ"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Jockey Dumka",
-                ID = "JCK"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Personal Dumka",
-                ID = "ARO"
-            });
-            await Task.Delay(1000);
-            return storeDetails;
-        }
-
-        private async Task<List<SelectOption>> GetEmployeeListAsync()
-        {
-            List<SelectOption> storeDetails = new List<SelectOption>();
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Alok",
-                ID = "ARD004"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            " Amit Thakur",
-                ID = "ARD003"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Mukesh",
-                ID = "ARD002"
-            });
-            storeDetails.Add(new SelectOption()
-            {
-                Value =
-            "Geetanjali",
-                ID = "ARD001"
-            });
-            await Task.Delay(1000);
-            return storeDetails;
-        }
-
-        public object GetSource(string sourceName)
-        {
-            if (sourceName == "Store" || sourceName == "Stores" ||
-            sourceName == "StoreId")
-            {
-                //   NTOE: THIS ALWAYS NULL
-                if (Stores == null)
+                if (StoreId != null && StoreId.Any() && EmployeeId != null && EmployeeId.Any() && !IsReady)
                 {
-                    Stores = new List<SelectOption>();
-                    return Stores;
+                    
+                    IsReady = true;
                 }
                 else
-                    return Stores;
-
-                //return new List<SelectOption>();
-            }
-            if (sourceName == "Employee" || sourceName == "Employees" ||
-                sourceName == "EmployeeId")
-            {
-                // NTOE: THIS ALWAYS NULL
-                if (Employees == null)
                 {
-                    Employees = new List<SelectOption>();
-                    return Employees;
+                    await Task.Delay(500);
                 }
-                else return Employees;
             }
-            return new List<SelectOption>();
+            while (StoreId == null && !StoreId.Any() && EmployeeId == null && !EmployeeId.Any());
+        }
+        private void LoadLegders()
+        {
+        }
+
+        private async Task<List<SelectOption>> GetStoreListAsync()
+        {
+            List<SelectOption> storeDetails = await RestService.GetStoreListAsync();
+            foreach (var item in storeDetails)
+            {
+                StoreId.Add(item.ID.Trim().ToString());
+                StoreValue.Add(item.Value.ToString().Trim());
+            }
+            await Task.Delay(500);
+            return storeDetails;
+        }
+
+        private async Task<List<SelectOption>> GetEmployeeListAsync(string sc)
+        {
+            List<SelectOption> storeDetails = await RestService.GetEmployeeListAsync(CurrentSession.StoreCode);
+
+            foreach (var item in storeDetails)
+            {
+                EmployeeId.Add(item.ID.Trim().ToString());
+                EmployeeValue.Add(item.Value.ToString().Trim());
+            }
+
+            await Task.Delay(500);
+
+            return storeDetails;
         }
     }
 }

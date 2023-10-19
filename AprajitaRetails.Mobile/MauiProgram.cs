@@ -12,6 +12,7 @@ using AprajitaRetails.Mobile.Pages.Banking;
 using AprajitaRetails.Mobile.ViewModels.List.Accounting;
 using AprajitaRetails.Mobile.Pages.Accounting;
 using AprajitaRetails.Mobile.Pages.EntryPages;
+using AprajitaRetails.Mobile.Pages.EntryPages.Payroll;
 //using AprajitaRetails.Mobile.ViewModels.EntryPages;
 
 namespace AprajitaRetails.Mobile
@@ -31,6 +32,7 @@ namespace AprajitaRetails.Mobile
             builder.ConfigureSyncfusionCore();
             // builder.ConfigureSyncfusionDataGrid();
 
+            builder.Services.AddSingleton<ComboBoxOptionList>();
             //Accounting
             //Voucher
             builder.Services.AddSingleton<VoucherViewModel>();

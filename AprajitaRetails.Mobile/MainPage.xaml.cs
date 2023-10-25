@@ -1,4 +1,6 @@
-﻿namespace AprajitaRetails.Mobile
+﻿using AprajitaRetails.Mobile.Features.Test;
+
+namespace AprajitaRetails.Mobile
 {
     public partial class MainPage : ContentPage
     {
@@ -19,6 +21,11 @@
             //    CounterBtn.Text = $"Clicked {count} times";
 
             //SemanticScreenReader.Announce(CounterBtn.Text);
+
+            //var autoFormPage = new AutoFormPage<Person>();
+            //Navigation.PushAsync(autoFormPage);
+            var formPage= new FormPage();
+            Navigation.PushAsync(formPage);
         }
     }
 }

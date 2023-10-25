@@ -39,12 +39,12 @@
                 FontSize="18"
                 HorizontalOptions="Center" />
 
-            <!--<Button
+            <Button
                 x:Name="CounterBtn"
                 Text="Click me"
                 SemanticProperties.Hint="Counts the number of times you click"
                 Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />-->
+                HorizontalOptions="Center" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

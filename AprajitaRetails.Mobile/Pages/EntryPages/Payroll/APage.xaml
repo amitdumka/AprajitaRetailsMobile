@@ -1,30 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ContentPage x:Class="AprajitaRetails.Mobile.Pages.EntryPages.Payroll.APage"
-             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             BackgroundColor="AntiqueWhite"
-              xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
-             xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
-             xmlns:local="clr-namespace:AprajitaRetails.Mobile.Pages.EntryPages.Payroll">
+<ContentPage
+    x:Class="AprajitaRetails.Mobile.Pages.EntryPages.Payroll.APage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+    xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:local="clr-namespace:AprajitaRetails.Mobile.Pages.EntryPages.Payroll"
+    xmlns:signaturePad="clr-namespace:Syncfusion.Maui.SignaturePad;assembly=Syncfusion.Maui.SignaturePad"
+     xmlns:pdfviewer="clr-namespace:Syncfusion.Maui.PdfViewer;assembly=Syncfusion.Maui.PdfViewer" 
+    BackgroundColor="AntiqueWhite">
     <ContentPage.Content>
         <Grid>
 
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
 
-                <dataForm:SfDataForm x:Name="dataForm" Grid.Row="0"  DataObject="{Binding Attendance,Mode=TwoWay}"   ValidationMode="PropertyChanged">
+                <dataForm:SfDataForm
+                    x:Name="dataForm"
+                    Grid.Row="0"
+                    DataObject="{Binding Attendance,Mode=TwoWay}"
+                    ValidationMode="PropertyChanged">
                     <dataForm:SfDataForm.BindingContext>
-                        <local:AttendanceDFViewModel x:Name="viewModel"/>
+                        <local:AttendanceDFViewModel x:Name="viewModel" />
                     </dataForm:SfDataForm.BindingContext>
                     <dataForm:SfDataForm.Behaviors>
-                        <local:AttendanceFormBehvour/>
+                        <local:AttendanceFormBehvour />
                     </dataForm:SfDataForm.Behaviors>
                 </dataForm:SfDataForm>
-                <Button x:Name="PrimaryButton" Text="Load" Clicked="PrimaryButton_Clicked"  Grid.Row="1" />
-                <editors:SfComboBox x:Name="cbx" Grid.Row="2" ItemsSource="{Binding Stores}"/>
-                <Button x:Name="SecondaryButton" Text="Load combo" Clicked="SecondaryButton_Clicked"      Grid.Row="3" />
+                <Button
+                    x:Name="PrimaryButton"
+                    Grid.Row="1"
+                    Clicked="PrimaryButton_Clicked"
+                    Text="Load" />
+                <editors:SfComboBox
+                    x:Name="cbx"
+                    Grid.Row="2"
+                    ItemsSource="{Binding Stores}" />
+                <Button
+                    x:Name="SecondaryButton"
+                    Grid.Row="3"
+                    Clicked="SecondaryButton_Clicked"
+                    Text="Load combo" />
+
+                <Border Grid.Row="4"
+                Stroke="Red" Padding="20" Margin="10"
+                StrokeThickness="{OnPlatform Default=2.5, iOS=1, MacCatalyst=1}"
+                StrokeShape="RoundRectangle">
+
+                    <signaturePad:SfSignaturePad StrokeColor="Blue" MinimumStrokeThickness="1" 
+                             MaximumStrokeThickness="3" x:Name="signaturePad"  BackgroundColor="White" />
+                </Border>
+                <Border  Grid.Row="5"            Stroke="#D2D2D2" StrokeThickness="{OnPlatform Default=1, Android=0, iOS=0}" 
+            StrokeShape="Rectangle" Padding="0">
+                    <pdfviewer:SfPdfViewer   x:Name="PdfViewer"  DocumentSource="{Binding DocumentStream}"/>
+                </Border>
             </Grid>
-            
-            
+
+
 
             <!--<dataForm:SfDataForm x:Name="dataForm"
                       DataObject="{Binding DataFormModel}" ValidationMode="PropertyChanged" CommitMode="PropertyChanged">

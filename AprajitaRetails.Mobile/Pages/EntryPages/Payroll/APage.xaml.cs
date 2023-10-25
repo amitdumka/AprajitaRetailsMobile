@@ -1,6 +1,8 @@
 ﻿using AprajitaRetails.Mobile.DataModels.Payroll;
 using AprajitaRetails.Mobile.RemoteServices;
 using AprajitaRetails.Shared.ViewModels;
+using Microsoft.Maui.Platform;
+using Syncfusion.Maui.Core.Internals;
 using Syncfusion.Maui.DataForm;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,21 +11,27 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
     public partial class APage : ContentPage
     {
 
-        
+
         public APage(ComboBoxOptionList cbList)
         {
             InitializeComponent();
-
+            string basePath = "AprajitaRetails.Mobile.Pdf.Invoice.pdf";
+            // if (BaseConfig.IsIndividualSB)
+            //   basePath = "SampleBrowser.Maui.PdfViewer.Samples.Pdf.";
+            viewModel.DocumentStream = this.GetType().Assembly.GetManifestResourceStream(basePath);
             cbx.SelectedValuePath = "ID";
             cbx.DisplayMemberPath = "Value";
-            viewModel.ComboBoxOptions=cbList;
+            viewModel.ComboBoxOptions = cbList;
             // (dataForm.DataObject as Attendance).PropertyChanged += MainPage_PropertyChanged;
             // viewModel.Attendance.PropertyChanged += MainPage_PropertyChanged;
         }
         public APage()
         {
             InitializeComponent();
-
+            string basePath = "AprajitaRetails.Mobile.Pdf.Invoice.pdf";
+            // if (BaseConfig.IsIndividualSB)
+            //   basePath = "SampleBrowser.Maui.PdfViewer.Samples.Pdf.";
+            viewModel.DocumentStream = this.GetType().Assembly.GetManifestResourceStream(basePath);
             cbx.SelectedValuePath = "ID";
             cbx.DisplayMemberPath = "Value";
         }
@@ -67,47 +75,61 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 
         private async void SecondaryButton_Clicked(object sender, EventArgs e)
         {
-            AttendanceDataModel dataModel;
+            var xx = await this.signaturePad.GetStreamAsync(Syncfusion.Maui.Core.ImageFileFormat.Png);
+            //TODO: Save File using IFilesave singleton object in .net maui comunity tool kit
+            //Notify.NotifyLong(xx.ToString());
+            string fileName = "";
+            string basePath = "AprajitaRetails.Mobile.Pdf.Invoice.pdf";
+           // if (BaseConfig.IsIndividualSB)
+             //   basePath = "SampleBrowser.Maui.PdfViewer.Samples.Pdf.";
+           viewModel.DocumentStream = this.GetType().Assembly.GetManifestResourceStream(basePath );
+            var xxs= this.GetType().Assembly.GetManifestResourceStream(basePath);
+            Notify.NotifyShort((xxs != null)?""+xxs.Length:""+0) ;
 
-            dataModel = new AttendanceDataModel
-            {
-                Mode = DBType.API,
-                StoreCode = CurrentSession.StoreCode
-            };
-            dataModel.Connect();
+            //Notify.NotifyLong();
+            //AttendanceDataModel dataModel;
 
-            var list = (await dataModel.GetByStoreDTO(CurrentSession.StoreCode)).FirstOrDefault();
+            //dataModel = new AttendanceDataModel
+            //{
+            //    Mode = DBType.API,
+            //    StoreCode = CurrentSession.StoreCode
+            //};
+            //dataModel.Connect();
 
-            if (list != null)
-            {
-                var x = new Attendance
-                {
-                    AttendanceId = list.AttendanceId,
-                    EmployeeId = list.EmployeeId,
-                    EntryTime = list.EntryTime,
-                    IsTailoring = list.IsTailoring,
-                    OnDate = list.OnDate.Date,
-                    Remarks = list.Remarks + "TESTME",
-                    Status = list.Status,
-                    StoreId = list.StoreId
-                };
-                viewModel.Attendance = x;
-                //dataForm.DataObject= viewModel.Attendance;
-                dataForm.UpdateEditor("StoreId");
-                dataForm.UpdateEditor("EmployeeId");
-                //(dataForm.DataObject as Attendance).StoreId = list.StoreId;
-                //(dataForm.DataObject as Attendance).EmployeeId = list.EmployeeId;
-                dataForm.UpdateEditor("StoreId");
-                dataForm.UpdateEditor("EmployeeId");
-            }
-            else Notify.NotifyVShort("list is null");
-            //await Task.Delay(500);
+            //var list = (await dataModel.GetByStoreDTO(CurrentSession.StoreCode)).FirstOrDefault();
+
+            //if (list != null)
+            //{
+            //    var x = new Attendance
+            //    {
+            //        AttendanceId = list.AttendanceId,
+            //        EmployeeId = list.EmployeeId,
+            //        EntryTime = list.EntryTime,
+            //        IsTailoring = list.IsTailoring,
+            //        OnDate = list.OnDate.Date,
+            //        Remarks = list.Remarks + "TESTME",
+            //        Status = list.Status,
+            //        StoreId = list.StoreId
+            //    };
+            //    viewModel.Attendance = x;
+            //    //dataForm.DataObject= viewModel.Attendance;
+            //    dataForm.UpdateEditor("StoreId");
+            //    dataForm.UpdateEditor("EmployeeId");
+            //    //(dataForm.DataObject as Attendance).StoreId = list.StoreId;
+            //    //(dataForm.DataObject as Attendance).EmployeeId = list.EmployeeId;
+            //    dataForm.UpdateEditor("StoreId");
+            //    dataForm.UpdateEditor("EmployeeId");
+            //}
+            //else Notify.NotifyVShort("list is null");
+            ////await Task.Delay(500);
         }
     }
 
     [ObservableRecipient]
     public partial class AttendanceDFViewModel : ObservableObject, INotifyPropertyChanged
     {
+        [ObservableProperty]
+        private Stream? _documentStream;
         [ObservableProperty]
         private bool isReady;
 
@@ -137,7 +159,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         //public Attendance Attendance { get; set; }
         public AttendanceDFViewModel()
         {
-            
+
             //LoadDataSources();
             Attendance = new Attendance();
             SetFormValue();
@@ -196,6 +218,11 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
 
         private async void SetFormValue()
         {
+            if (ComboBoxOptions == null)
+            {
+                ComboBoxOptions = new ComboBoxOptionList();
+                await Task.Delay(500);
+            }
             do
             {
                 if (ComboBoxOptions.IsReady && !IsReady)
@@ -463,6 +490,9 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
         {
             storeId = new List<string>();
             storeValue = new List<string>();
+            employeeId = new List<string>(); 
+            employeeValue = new List<string>();
+
             var x = await GetStoreListAsync();
             var y = await GetEmployeeListAsync(CurrentSession.StoreCode);
             SetStore();
@@ -473,7 +503,7 @@ namespace AprajitaRetails.Mobile.Pages.EntryPages.Payroll
             {
                 if (StoreId != null && StoreId.Any() && EmployeeId != null && EmployeeId.Any() && !IsReady)
                 {
-                    
+
                     IsReady = true;
                 }
                 else

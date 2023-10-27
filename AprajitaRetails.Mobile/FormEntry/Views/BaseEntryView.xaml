@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="AprajitaRetails.Mobile.FormEntry.Views.BaseEntryView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:dataForm="clr-namespace:Syncfusion.Maui.DataForm;assembly=Syncfusion.Maui.DataForm"
+    xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
+    xmlns:efbv="clr-namespace:AprajitaRetails.Mobile.FormEntry.Behviours"
+    xmlns:efVm="clr-namespace:AprajitaRetails.Mobile.FormEntry.ViewModels"
+    xmlns:local="clr-namespace:AprajitaRetails.Mobile.FormEntry.Views">
+    <ContentView.Content>
+        <Grid>
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+                <Label
+                    x:Name="HeadingText"
+                    Grid.Row="0"
+                    FontAttributes="Italic"
+                    FontSize="Header"
+                    HorizontalOptions="Center"
+                    Text="{Binding HeaderText}"
+                    TextColor="CadetBlue" />
+                <dataForm:SfDataForm
+                    x:Name="dataForm"
+                    Grid.Row="1"
+                    Grid.ColumnSpan="2"
+                    CommitMode="Manual"
+                    DataObject="{Binding Entity,Mode=TwoWay}"
+                    InputTransparent="False"
+                    LayoutType="TextInputLayout"
+                    ValidationMode="PropertyChanged">
+                    <dataForm:SfDataForm.TextInputLayoutSettings>
+                        <dataForm:TextInputLayoutSettings ContainerType="Outlined" ShowHelperText="True">
+                            <dataForm:TextInputLayoutSettings.HelperTextStyle>
+                                <dataForm:DataFormTextStyle FontAttributes="Italic" TextColor="Violet" />
+                            </dataForm:TextInputLayoutSettings.HelperTextStyle>
+                        </dataForm:TextInputLayoutSettings>
+                    </dataForm:SfDataForm.TextInputLayoutSettings>
+                </dataForm:SfDataForm>
+                <Grid
+                    Grid.Row="2"
+                    Background="LightBlue"
+                    ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
+                    HorizontalOptions="Center"
+                    Padding="10">
+                    <Button x:Name="PrimaryButton" Grid.Column="0" Command="{Binding SaveCommand}" Text="Save"/>
+                    <Button
+                        x:Name="CancleButton"
+                        Grid.Column="1"
+                        Clicked="PrimaryButton_Clicked"
+                        Text="Cancle" />
+                    <Button
+                        x:Name="BackButton"
+                        Grid.Column="2"
+                        Clicked="PrimaryButton_Clicked"
+                        Text="Back" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </ContentView.Content>
+</ContentView>
+
+<!--</dataForm:SfDataForm.TextInputLayoutSettings <dataForm:SfDataForm.BindingContext>
+<efVm:AttendanceEntryViewModel x:Name="viewModel" />
+</dataForm:SfDataForm.BindingContext>
+<dataForm:SfDataForm.Behaviors>
+    <efbv:AttendanceEntryFormBehavior />
+</dataForm:SfDataForm.Behaviors>-->

@@ -32,7 +32,7 @@ namespace AprajitaRetails.Mobile
             builder.ConfigureSyncfusionCore();
             // builder.ConfigureSyncfusionDataGrid();
 
-            builder.Services.AddSingleton<ComboBoxOptionList>();
+            //builder.Services.AddSingleton<ComboBoxOptionList>();
             //Accounting
             //Voucher
             builder.Services.AddSingleton<VoucherViewModel>();

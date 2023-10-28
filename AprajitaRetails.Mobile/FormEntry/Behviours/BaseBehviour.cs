@@ -1,22 +1,25 @@
 ﻿using AprajitaRetails.Mobile.FormEntry.Models;
 using AprajitaRetails.Mobile.FormEntry.ViewModels;
+using AprajitaRetails.Mobile.FormEntry.Views;
 using Syncfusion.Maui.DataForm;
 
 namespace AprajitaRetails.Mobile.FormEntry.Behviours
 {
-    
-    public class BaseEntryBehavior<T,VM> : Behavior<SfDataForm>,INotifyPropertyChanged
+
+    public abstract partial class BaseEntryBehavior<T, VM> : Behavior<ContentPage>, INotifyPropertyChanged
     {
         protected SfDataForm DataForm { get; set; }
         protected VM viewModel;
+        protected Button primaryButton,secondaryButton, backButton, cancleButton;
 
-        protected override void OnDetachingFrom(SfDataForm dataForm)
+        protected override void OnDetachingFrom(ContentPage bindable)
         {
-            base.OnDetachingFrom(dataForm);
 
-            if (dataForm != null)
+            base.OnDetachingFrom(bindable);
+
+            if (DataForm != null)
             {
-                dataForm.GenerateDataFormItem -= this.OnGenerateDataFormItem;
+                DataForm.GenerateDataFormItem -= this.OnGenerateDataFormItem;
                 // (dataForm.DataObject as Attendance).PropertyChanged -= OnDataObjectPropertyChanged;
             }
         }
@@ -24,7 +27,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
         {
             if (e.DataFormItem != null && (e.DataFormItem.FieldName == "StoreId" || e.DataFormItem.FieldName == "Store") && e.DataFormItem is DataFormComboBoxItem comboBoxItem)
             {
-                 e.DataFormItem.LabelText = "Store";
+                e.DataFormItem.LabelText = "Store";
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
                 //comboBoxItem.IsEditable = true;
@@ -38,12 +41,12 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
 
             if (e.DataFormItem != null && (e.DataFormItem.FieldName == "EmployeeId" || e.DataFormItem.FieldName == "Employee") && e.DataFormItem is DataFormComboBoxItem cbEmp)
             {
-                 e.DataFormItem.LabelText = "Employee";
+                e.DataFormItem.LabelText = "Employee";
                 cbEmp.DisplayMemberPath = "Value";
                 cbEmp.SelectedValuePath = "ID";
                 // cbEmp.IsEditable = true;
 
-                var viewModel = DataForm.BindingContext as  BaseEntryViewModel<T>; ;
+                var viewModel = DataForm.BindingContext as BaseEntryViewModel<T>; ;
                 cbEmp.BindingContext = viewModel;
                 cbEmp.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Employees), BindingMode.TwoWay);
 
@@ -58,36 +61,63 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 }
             }
         }
+
+        protected abstract  void OnPrimaryButtonClicked(object? sender, EventArgs e);
+        protected abstract void OnSecondaryButtonClicked(object? sender, EventArgs e);
+        protected abstract void OnBackButtonClicked(object? sender, EventArgs e);
+        protected abstract void OnCancleButtonClicked(object? sender, EventArgs e);
+
+
+
     }
-    public partial class AttendanceEntryFormBehavior : BaseEntryBehavior<AttendanceEM,AttendanceEntryViewModel>
+    public partial class AttendanceEntryFormBehavior : BaseEntryBehavior<AttendanceEM, AttendanceEntryViewModel>
     {
 
-        protected override async void OnAttachedTo(SfDataForm dataForm)
+        protected override async void OnAttachedTo(ContentPage bindable)
         {
-            base.OnAttachedTo(dataForm);
-            // dataForm = bindable.Content.FindByName<SfDataForm>("dataForm");
+            base.OnAttachedTo(bindable);
+            var ev = bindable.Content.FindByName<BaseEntryView>("entryView");
+            var dataForm = ev.Content.FindByName<SfDataForm>("dataForm");
 
             if (dataForm != null)
             {
                 DataForm = dataForm;
                 dataForm.ColumnCount = 2;
-             
+
                 dataForm.RegisterEditor(nameof(Attendance.EmployeeId), DataFormEditorType.ComboBox);
                 dataForm.RegisterEditor(nameof(Attendance.StoreId), DataFormEditorType.ComboBox);
                 dataForm.RegisterEditor("IsTailoring", DataFormEditorType.Switch);
-                
+
                 viewModel = DataForm.BindingContext as AttendanceEntryViewModel;
                 dataForm.Commit();
                 dataForm.GenerateDataFormItem += OnGenerateDataFormItem;
-                
 
-                
+                this.primaryButton = ev.Content.FindByName<Button>("PrimaryButton");
+                if (this.primaryButton != null)
+                {
+                    this.primaryButton.Clicked += OnPrimaryButtonClicked;
+                }
+
+            }
+        }
+        protected override async void OnPrimaryButtonClicked(object? sender, EventArgs e)
+        {
+            if (this.DataForm != null)
+            {
+                if (this.DataForm.Validate())
+                {
+                     Notify.NotifyShort((DataForm.DataObject as AttendanceEM).StoreId + " Attendance is save Successful");
+                }
+                else
+                {
+                    Notify.NotifyLong((DataForm.DataObject as AttendanceEM).EmployeeId+  " Please enter the required details" );
+                }
             }
         }
 
         private async Task WorkArroundForComboBoxLoad()
         {
-          var  Attendance = new AttendanceEM
+            var Attendance = new AttendanceEM
             {
                 AttendanceId = "11",
 
@@ -111,9 +141,9 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             }
         }
 
-        protected  override void OnGenerateDataFormItem(object sender, GenerateDataFormItemEventArgs e)
+        protected override void OnGenerateDataFormItem(object sender, GenerateDataFormItemEventArgs e)
         {
-            base.OnGenerateDataFormItem (sender, e);
+            base.OnGenerateDataFormItem(sender, e);
 
 
         }
@@ -128,27 +158,61 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             }
         }
 
-        protected override void OnDetachingFrom(SfDataForm dataForm)
+        protected override void OnDetachingFrom(ContentPage bindable)
         {
-            base.OnDetachingFrom(dataForm);
+            base.OnDetachingFrom(bindable);
 
-            if (dataForm != null)
+            if (DataForm != null)
             {
-                dataForm.GenerateDataFormItem -= this.OnGenerateDataFormItem;
+                DataForm.GenerateDataFormItem -= this.OnGenerateDataFormItem;
                 // (dataForm.DataObject as Attendance).PropertyChanged -= OnDataObjectPropertyChanged;
             }
         }
 
-        [RelayCommand]
-        protected void Save() { 
+        
+        protected void Save()
+        {
             DataForm.Commit();
             Notify.NotifyVShort((DataForm.DataObject as AttendanceEM).EntryTime);
-           
+
+        }
+
+        protected override void OnSecondaryButtonClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnCancleButtonClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 
-    public class EmployeeEntryFormBehavior: BaseEntryBehavior<EmployeeEM, EmployeeEntryViewModel>
+    public class EmployeeEntryFormBehavior : BaseEntryBehavior<EmployeeEM, EmployeeEntryViewModel>
     {
+        protected override void OnBackButtonClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
 
+        protected override void OnCancleButtonClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnPrimaryButtonClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override void OnSecondaryButtonClicked(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

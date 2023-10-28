@@ -1,4 +1,5 @@
 ﻿using AprajitaRetails.Mobile.Features.Test;
+using AprajitaRetails.Mobile.FormEntry.Views;
 
 namespace AprajitaRetails.Mobile
 {
@@ -24,7 +25,7 @@ namespace AprajitaRetails.Mobile
 
             //var autoFormPage = new AutoFormPage<Person>();
             //Navigation.PushAsync(autoFormPage);
-            var formPage= new FormPage();
+            var formPage= new AttendanceEntryPage();
             Navigation.PushAsync(formPage);
         }
     }

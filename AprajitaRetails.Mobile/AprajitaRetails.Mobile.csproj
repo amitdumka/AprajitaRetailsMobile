@@ -111,7 +111,7 @@
 		<PackageReference Include="Syncfusion.Maui.SignaturePad" Version="23.1.42" />
 		<PackageReference Include="Syncfusion.Maui.TabView" Version="23.1.42" />
 		<PackageReference Include="Syncfusion.Maui.TreeView" Version="23.1.42" />
-		<PackageReference Include="Telerik.UI.for.Maui.Trial" Version="6.3.0" />
+		<!--<PackageReference Include="Telerik.UI.for.Maui.Trial" Version="6.3.0" />-->
 		
 	</ItemGroup>
 	<ItemGroup>

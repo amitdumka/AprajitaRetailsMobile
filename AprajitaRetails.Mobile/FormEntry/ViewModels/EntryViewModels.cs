@@ -11,13 +11,7 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
             HeaderText = "Attendance";
             Entity = new AttendanceEM();
         }
-        [RelayCommand]
-        protected void Save()
-        {
-           
-            Notify.NotifyVShort(Entity.EmployeeId);
-
-        }
+         
 
     }
     public partial class EmployeeEntryViewModel : BaseEntryViewModel<EmployeeEM>

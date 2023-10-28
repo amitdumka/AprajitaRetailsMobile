@@ -17,44 +17,23 @@
         <efVm:AttendanceEntryViewModel x:Name="viewModel" />
 
     </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <Grid>
             <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
-                <!--<dataForm:SfDataForm x:Name="dataForm" Grid.Row="0" CommitMode="Manual" DataObject="{Binding Entity,Mode=TwoWay}" InputTransparent="False" LayoutType="TextInputLayout" ValidationMode="PropertyChanged">
-                    <dataForm:SfDataForm.TextInputLayoutSettings>
-                        <dataForm:TextInputLayoutSettings ContainerType="Outlined" ShowHelperText="True">
-                            <dataForm:TextInputLayoutSettings.HelperTextStyle>
-                                <dataForm:DataFormTextStyle FontAttributes="Italic" TextColor="Violet" />
-                            </dataForm:TextInputLayoutSettings.HelperTextStyle>
-                        </dataForm:TextInputLayoutSettings>
-                    </dataForm:SfDataForm.TextInputLayoutSettings>
-                    <dataForm:SfDataForm.BindingContext>
-                        <efVm:AttendanceEntryViewModel x:Name="viewModel" />
-                    </dataForm:SfDataForm.BindingContext>
-                    <dataForm:SfDataForm.Behaviors>
-                        <efbv:AttendanceEntryFormBehavior />
-                    </dataForm:SfDataForm.Behaviors>
-                </dataForm:SfDataForm>-->
 
-                
+
+
                 <baseEntry:BaseEntryView Grid.Row="0" x:Name="entryView"/>
 
-                
-                
+
+
             </Grid>
 
-            <!--<dataForm:SfDataForm x:Name="dataForm"
-                      DataObject="{Binding DataFormModel}" ValidationMode="PropertyChanged" CommitMode="PropertyChanged">
-                <dataForm:SfDataForm.BindingContext>
-                    <local:DataFormViewModel x:Name="viewModel" />
-                </dataForm:SfDataForm.BindingContext>
-                <dataForm:SfDataForm.Behaviors>
-                    <local:DataFormBehavior />
-                </dataForm:SfDataForm.Behaviors>
-            </dataForm:SfDataForm>-->
+
         </Grid>
     </ContentPage.Content>
-    <!--<ContentPage.Behaviors>
+    <ContentPage.Behaviors> 
         <efbv:AttendanceEntryFormBehavior x:Name="eBh"/>
-    </ContentPage.Behaviors>-->
+    </ContentPage.Behaviors>
 </ContentPage>

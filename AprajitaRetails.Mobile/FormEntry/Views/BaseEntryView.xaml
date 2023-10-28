@@ -42,16 +42,16 @@
                     ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
                     HorizontalOptions="Center"
                     Padding="10">
-                    <Button x:Name="PrimaryButton" Grid.Column="0" Command="{Binding SaveCommand}" Text="Save"/>
+                    <Button x:Name="PrimaryButton" Grid.Column="0"   Text="Save"/>
                     <Button
                         x:Name="CancleButton"
                         Grid.Column="1"
-                        Clicked="PrimaryButton_Clicked"
+                       
                         Text="Cancle" />
                     <Button
                         x:Name="BackButton"
                         Grid.Column="2"
-                        Clicked="PrimaryButton_Clicked"
+                       
                         Text="Back" />
                 </Grid>
             </Grid>

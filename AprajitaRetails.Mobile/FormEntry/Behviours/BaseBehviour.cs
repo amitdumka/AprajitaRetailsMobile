@@ -76,7 +76,8 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
         protected override async void OnAttachedTo(ContentPage bindable)
         {
             base.OnAttachedTo(bindable);
-            var ev = bindable.Content.FindByName<BaseEntryView>("entryView");
+           var ev = bindable.Content.FindByName<BaseEntryView>("entryView");
+           
             var dataForm = ev.Content.FindByName<SfDataForm>("dataForm");
 
             if (dataForm != null)
@@ -92,7 +93,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 dataForm.Commit();
                 dataForm.GenerateDataFormItem += OnGenerateDataFormItem;
 
-                this.primaryButton = ev.Content.FindByName<Button>("PrimaryButton");
+               // this.primaryButton = ev.Content.FindByName<Button>("PrimaryButton");
                 if (this.primaryButton != null)
                 {
                     this.primaryButton.Clicked += OnPrimaryButtonClicked;

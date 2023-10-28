@@ -7,6 +7,7 @@
     xmlns:editors="clr-namespace:Syncfusion.Maui.Inputs;assembly=Syncfusion.Maui.Inputs"
     xmlns:efbv="clr-namespace:AprajitaRetails.Mobile.FormEntry.Behviours"
     xmlns:efVm="clr-namespace:AprajitaRetails.Mobile.FormEntry.ViewModels"
+    x:Name="entryView"
     xmlns:local="clr-namespace:AprajitaRetails.Mobile.FormEntry.Views">
     <ContentView.Content>
         <Grid>
@@ -59,9 +60,3 @@
     </ContentView.Content>
 </ContentView>
 
-<!--</dataForm:SfDataForm.TextInputLayoutSettings <dataForm:SfDataForm.BindingContext>
-<efVm:AttendanceEntryViewModel x:Name="viewModel" />
-</dataForm:SfDataForm.BindingContext>
-<dataForm:SfDataForm.Behaviors>
-    <efbv:AttendanceEntryFormBehavior />
-</dataForm:SfDataForm.Behaviors>-->

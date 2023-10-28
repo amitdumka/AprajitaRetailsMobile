@@ -8,7 +8,6 @@ namespace AprajitaRetails.Mobile.FormEntry.Views
         public BaseEntryView()
         {
             InitializeComponent();
-           
             
         }
 

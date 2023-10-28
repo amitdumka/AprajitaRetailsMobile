@@ -13,6 +13,7 @@ using AprajitaRetails.Mobile.ViewModels.List.Accounting;
 using AprajitaRetails.Mobile.Pages.Accounting;
 using AprajitaRetails.Mobile.Pages.EntryPages;
 using AprajitaRetails.Mobile.Pages.EntryPages.Payroll;
+using CommunityToolkit.Maui.Markup;
 //using AprajitaRetails.Mobile.ViewModels.EntryPages;
 
 namespace AprajitaRetails.Mobile
@@ -27,7 +28,7 @@ namespace AprajitaRetails.Mobile
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("fa-solid-900.ttf", "FontAwesome");
-            }).UseMauiCommunityToolkit();
+            }).UseMauiCommunityToolkit().UseMauiCommunityToolkitMarkup();
 
             builder.ConfigureSyncfusionCore();
             // builder.ConfigureSyncfusionDataGrid();

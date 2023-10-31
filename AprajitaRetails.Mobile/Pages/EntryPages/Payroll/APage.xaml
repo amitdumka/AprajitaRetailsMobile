@@ -13,24 +13,14 @@
     BackgroundColor="AliceBlue">
 
     <ContentPage.BindingContext>
-
         <efVm:AttendanceEntryViewModel x:Name="viewModel" />
-
     </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <Grid>
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
-
-
-
+            <Grid RowDefinitions="Auto,Auto">
                 <baseEntry:BaseEntryView Grid.Row="0" x:Name="entryView"/>
-
-
-
             </Grid>
-
-
         </Grid>
     </ContentPage.Content>
     <ContentPage.Behaviors> 

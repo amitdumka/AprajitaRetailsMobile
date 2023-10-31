@@ -1,6 +1,9 @@
 ﻿using AprajitaRetails.Mobile.FormEntry.Models;
 using AprajitaRetails.Mobile.FormEntry.ViewModels;
 using AprajitaRetails.Mobile.FormEntry.Views;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Maui.Controls;
+using Syncfusion.DocIO.DLS;
 using Syncfusion.Maui.DataForm;
 
 namespace AprajitaRetails.Mobile.FormEntry.Behviours
@@ -73,18 +76,19 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
     public partial class AttendanceEntryFormBehavior : BaseEntryBehavior<AttendanceEM, AttendanceEntryViewModel>
     {
 
-        protected override async void OnAttachedTo(ContentPage bindable)
+        protected override void OnAttachedTo(ContentPage bindable)
         {
             base.OnAttachedTo(bindable);
-           var ev = bindable.Content.FindByName<BaseEntryView>("entryView");
-           
-            var dataForm = ev.Content.FindByName<SfDataForm>("dataForm");
+            var ev = ((AttendanceEntryPage)bindable).entryView;
+            //var ev =bindable.Content.FindByName<ContentView>("entryView");
+
+            var dataForm = ev.FindByName<SfDataForm>("dataForm"); ;//.Content.FindByName<SfDataForm>("dataForm");
 
             if (dataForm != null)
             {
-                DataForm = dataForm;
+               
                 dataForm.ColumnCount = 2;
-
+                DataForm = dataForm;
                 dataForm.RegisterEditor(nameof(Attendance.EmployeeId), DataFormEditorType.ComboBox);
                 dataForm.RegisterEditor(nameof(Attendance.StoreId), DataFormEditorType.ComboBox);
                 dataForm.RegisterEditor("IsTailoring", DataFormEditorType.Switch);
@@ -93,13 +97,22 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 dataForm.Commit();
                 dataForm.GenerateDataFormItem += OnGenerateDataFormItem;
 
-               // this.primaryButton = ev.Content.FindByName<Button>("PrimaryButton");
+                 this.primaryButton = ev.FindByName<Button>("PrimaryButton");
                 if (this.primaryButton != null)
                 {
                     this.primaryButton.Clicked += OnPrimaryButtonClicked;
                 }
+                backButton = ev.FindByName<Button>("BackButton");
+                if (this.backButton != null)
+                {
+                    this.backButton.Clicked += OnBackButtonClicked;
+                }
 
             }
+        }
+        protected override async void OnBackButtonClicked(object? sender, EventArgs e)
+        {
+           // await Navigation.PopAsync();
         }
         protected override async void OnPrimaryButtonClicked(object? sender, EventArgs e)
         {
@@ -107,7 +120,12 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             {
                 if (this.DataForm.Validate())
                 {
-                     Notify.NotifyShort((DataForm.DataObject as AttendanceEM).StoreId + " Attendance is save Successful");
+                     Notify.NotifyShort((DataForm.DataObject as AttendanceEM).StoreId + " Attendance is save Successful")
+                        ;
+                    DataForm.DataObject = new AttendanceEM { EntryTime = DateTime.Now.ToShortTimeString(), OnDate = DateTime.Now, Status = AttUnit.Absent, Remarks = ""
+                    ,StoreId="ARJ"
+                    
+                    };
                 }
                 else
                 {
@@ -183,10 +201,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             throw new NotImplementedException();
         }
 
-        protected override void OnBackButtonClicked(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         protected override void OnCancleButtonClicked(object sender, EventArgs e)
         {

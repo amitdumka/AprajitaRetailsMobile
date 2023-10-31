@@ -9,7 +9,11 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
         {
 
             HeaderText = "Attendance";
-            Entity = new AttendanceEM();
+            Entity = new AttendanceEM { 
+                OnDate=DateTime.Now, EmployeeId="ARD-2016-SM-1", StoreId="ARD", 
+                 EntryTime=DateTime.Now.ToShortTimeString(), Remarks="", Status=AttUnit.Absent
+            
+            };
         }
          
 

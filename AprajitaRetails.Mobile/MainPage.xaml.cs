@@ -25,7 +25,7 @@ namespace AprajitaRetails.Mobile
 
             //var autoFormPage = new AutoFormPage<Person>();
             //Navigation.PushAsync(autoFormPage);
-            var formPage= new AttendanceEntryPage();
+            var formPage= new EmployeeEntryPage();
             Navigation.PushAsync(formPage);
         }
     }

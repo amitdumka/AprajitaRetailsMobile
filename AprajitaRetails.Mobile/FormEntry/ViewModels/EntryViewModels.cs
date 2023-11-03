@@ -9,13 +9,18 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
         {
 
             HeaderText = "Attendance";
-            Entity = new AttendanceEM { 
-                OnDate=DateTime.Now, EmployeeId="ARD-2016-SM-1", StoreId="ARD", 
-                 EntryTime=DateTime.Now.ToShortTimeString(), Remarks="", Status=AttUnit.Absent
-            
+            Entity = new AttendanceEM
+            {
+                OnDate = DateTime.Now,
+                EmployeeId = "ARD-2016-SM-1",
+                StoreId = CurrentSession.StoreCode,
+                EntryTime = DateTime.Now.ToShortTimeString(),
+                Remarks = "",
+                Status = AttUnit.Absent
+
             };
         }
-         
+
 
     }
     public partial class EmployeeEntryViewModel : BaseEntryViewModel<EmployeeEM>
@@ -23,8 +28,8 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
 
         public EmployeeEntryViewModel() : base()
         {
-            HeaderText= "Employee";
-            Entity = new EmployeeEM();
+            HeaderText = "Employee";
+            Entity = new EmployeeEM { StoreId = CurrentSession.StoreCode, IsActive = true, IsWorking = true, Gender = Gender.Male, BirthDate = DateTime.Now.AddYears(-18), Category = EmpType.Salesman, JoiningDate = DateTime.Now, City = string.IsNullOrEmpty(CurrentSession.CityName) ? "" : CurrentSession.CityName };
         }
 
 

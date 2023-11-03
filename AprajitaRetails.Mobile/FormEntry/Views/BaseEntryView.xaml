@@ -11,7 +11,7 @@
     xmlns:local="clr-namespace:AprajitaRetails.Mobile.FormEntry.Views">
     <ContentView.Content>
         <Grid>
-            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
+            <Grid RowDefinitions="*,*,*">
                 <Label
                     x:Name="HeadingText"
                     Grid.Row="0"
@@ -21,6 +21,7 @@
                     Text="{Binding HeaderText}"
                     TextColor="CadetBlue" />
                 <dataForm:SfDataForm
+                    MinimumHeightRequest="600"
                     x:Name="dataForm"
                     Grid.Row="1"
                     Grid.ColumnSpan="2"
@@ -38,7 +39,7 @@
                     </dataForm:SfDataForm.TextInputLayoutSettings>
                 </dataForm:SfDataForm>
                 <Grid
-                    Grid.Row="2"
+                    Grid.Row="6"
                     Background="LightBlue"
                     ColumnDefinitions="Auto,Auto,Auto,Auto,Auto"
                     HorizontalOptions="Center"

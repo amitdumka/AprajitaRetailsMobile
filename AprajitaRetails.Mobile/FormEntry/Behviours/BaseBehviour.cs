@@ -33,9 +33,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 e.DataFormItem.LabelText = "Store";
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
-                //comboBoxItem.IsEditable = true;
-                // comboBoxItem.FieldName = "cbStoreId";
-                // comboBoxItem.PlaceholderText = "Select Store";
+                
 
                 var viewModel = DataForm.BindingContext as BaseEntryViewModel<T>;
                 comboBoxItem.BindingContext = viewModel;
@@ -47,13 +45,13 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 e.DataFormItem.LabelText = "Employee";
                 cbEmp.DisplayMemberPath = "Value";
                 cbEmp.SelectedValuePath = "ID";
-                // cbEmp.IsEditable = true;
+                
 
                 var viewModel = DataForm.BindingContext as BaseEntryViewModel<T>; ;
                 cbEmp.BindingContext = viewModel;
                 cbEmp.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Employees), BindingMode.TwoWay);
 
-                //Notify.NotifyVShort(viewModel.Employees.First().ID);
+                
             }
 
             if (e.DataFormItem != null)
@@ -65,11 +63,12 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             }
         }
 
-        protected abstract  void OnPrimaryButtonClicked(object? sender, EventArgs e);
+        protected abstract void OnPrimaryButtonClicked(object? sender, EventArgs e);
         protected abstract void OnSecondaryButtonClicked(object? sender, EventArgs e);
         protected abstract void OnBackButtonClicked(object? sender, EventArgs e);
         protected abstract void OnCancleButtonClicked(object? sender, EventArgs e);
-
+         
+         
 
 
     }
@@ -213,22 +212,81 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
     {
         protected override void OnBackButtonClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void OnCancleButtonClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void OnPrimaryButtonClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         protected override void OnSecondaryButtonClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+        }
+        protected override void OnGenerateDataFormItem(object sender, GenerateDataFormItemEventArgs e)
+        {
+            base.OnGenerateDataFormItem(sender, e);
+
+            if (e.DataFormItem != null && (e.DataFormItem.FieldName == "Title" || e.DataFormItem.FieldName == "Title") && e.DataFormItem is DataFormComboBoxItem cbTitles)
+            {
+                e.DataFormItem.LabelText = "Tile";
+                var tiles = new List<string> { "Mr", "Mrs.", "Ms", "Master" };
+                cbTitles.ItemsSource = tiles;
+                cbTitles.MaxDropDownHeight = 100;
+                
+            }
+            if(e.DataFormItem != null && e.DataFormItem.FieldName == "IsWorking")
+            {
+                e.DataFormItem.LabelText = "Working";
+            }
+
+            if(e.DataFormItem!=null && (e.DataFormItem.FieldName=="IsActive"|| e.DataFormItem.FieldName == "HasErrors"))
+            {
+                e.DataFormItem.IsVisible = false; 
+               
+            }
+
+
+        }
+        protected override void OnAttachedTo(ContentPage bindable)
+        {
+            base.OnAttachedTo(bindable);
+            var ev = ((EmployeeEntryPage)bindable).entryView;
+           
+
+            var dataForm = ev.FindByName<SfDataForm>("dataForm");
+
+            if (dataForm != null)
+            {
+
+                dataForm.ColumnCount = 4;
+                DataForm = dataForm;
+                dataForm.RegisterEditor(nameof(EmployeeEM.StoreId), DataFormEditorType.ComboBox);
+                dataForm.RegisterEditor(nameof(EmployeeEM.Title), DataFormEditorType.ComboBox);
+                dataForm.RegisterEditor("IsWorking", DataFormEditorType.Switch);
+
+                viewModel = DataForm.BindingContext as EmployeeEntryViewModel;
+                dataForm.Commit();
+                dataForm.GenerateDataFormItem += OnGenerateDataFormItem;
+
+                this.primaryButton = ev.FindByName<Button>("PrimaryButton");
+                if (this.primaryButton != null)
+                {
+                    this.primaryButton.Clicked += OnPrimaryButtonClicked;
+                }
+                backButton = ev.FindByName<Button>("BackButton");
+                if (this.backButton != null)
+                {
+                    this.backButton.Clicked += OnBackButtonClicked;
+                }
+
+            }
         }
     }
 }

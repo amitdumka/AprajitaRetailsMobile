@@ -12,10 +12,10 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 
 		<!-- Display name -->
-		<ApplicationTitle>AprajitaRetails.Mobile</ApplicationTitle>
+		<ApplicationTitle>Aprajita Retails App</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.aprajitaretails.mobile</ApplicationId>
+		<ApplicationId>com.aksLabs.aprajitaretails.mobile</ApplicationId>
 		<ApplicationIdGuid>25f1193a-c3da-4a7c-91f7-d4ab87e53597</ApplicationIdGuid>
 
 		<!-- Versions -->

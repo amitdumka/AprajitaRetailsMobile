@@ -21,10 +21,10 @@
                     Text="{Binding HeaderText}"
                     TextColor="CadetBlue" />
                 <dataForm:SfDataForm
-                    MinimumHeightRequest="{OnIdiom Phone=200,Default=250, Desktop=450, Tablet=550}"
+                    MinimumHeightRequest="{OnIdiom Phone=575,Default=250, Desktop=450, Tablet=550}"
                     x:Name="dataForm"
                     Grid.Row="1"
-                    Grid.ColumnSpan="4"
+                    Grid.ColumnSpan="{OnIdiom Phone=3 ,Default=4 }"
                     CommitMode="Manual"
                     DataObject="{Binding Entity,Mode=TwoWay}"
                     InputTransparent="False"

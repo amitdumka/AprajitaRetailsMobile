@@ -16,12 +16,12 @@ namespace AprajitaRetails.Mobile.Pages.Auths
     {
         [Display(Prompt = "Enter User name", Name = "User Name")]
         //[EmailAddress(ErrorMessage = "Enter your email - example@mail.com")]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = "AmitKumar";
 
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "Enter the password")]
-        public string Password { get; set; }
+        public string Password { get; set; } = "Dumka@1234";
     }
     public class SignInFormViewModel
     {

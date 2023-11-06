@@ -339,7 +339,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             if (dataForm != null)
             {
 
-                dataForm.ColumnCount = 4;
+                dataForm.ColumnCount = 1;
                 DataForm = dataForm;
                 dataForm.RegisterEditor(nameof(EmployeeEM.StoreId), DataFormEditorType.ComboBox);
                 dataForm.RegisterEditor(nameof(EmployeeEM.Title), DataFormEditorType.ComboBox);

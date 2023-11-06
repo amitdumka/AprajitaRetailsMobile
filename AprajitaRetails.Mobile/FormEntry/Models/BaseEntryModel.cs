@@ -9,7 +9,109 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
     {
     }
 
-    public partial class EmployeeEM : BaseEntryModel
+    public partial class EmployeeEM
+    {
+
+        public EmployeeEM() { 
+        
+            this.JoiningDate=DateTime.Now;
+            this.City = CurrentSession.CityName;  this.State = "Jharkhand";
+            this.ZipCode = "814101"; this.Country = "India";
+            this.EmailId = this.Address = ""; this.Category = EmpType.Salesman;
+            this.StoreId = CurrentSession.StoreCode;
+            this.Gender = Gender.Male; this.MobileNumber= this.PhoneNumber = ""; 
+            this.BirthDate= DateTime.Now.AddYears(-18);
+            this.IsWorking = true; this.FirstName = this.LastName = "";
+             
+        }
+
+        [ReadOnly(true)]
+        [Editable(false)]
+        [Display(AutoGenerateField = false)]
+        public string EmployeeId { get; set; }
+
+        [Required(ErrorMessage = "Please select Store")]
+        public string StoreId { get; set; }
+
+
+
+
+        [Display(GroupName = "Name")]
+        public string? Title { get; set; }
+        [Display(GroupName = "Name")]
+
+        [Required(ErrorMessage = "Please type First Name, it cant be empty ")]
+        public string FirstName { get; set; }
+        [Display(GroupName = "Name")]
+
+        [Required(ErrorMessage = "Please type Last Name, it cant be empty ")]
+        public string LastName { get; set; }
+
+
+       
+        //[ObservableProperty]
+        [Required(ErrorMessage = "Please type Mobile Number, it cant be empty ")]
+        [DataType(DataType.PhoneNumber)]
+        [Display(GroupName = "Contact")]
+        public string MobileNumber{get;set;}
+        //[ObservableProperty]
+        [Display(GroupName = "Contact")]
+        [DataType(DataType.PhoneNumber)]
+        public string? PhoneNumber{get;set;}
+        [Display(GroupName = "Contact", Name = "Email")]
+        //[ObservableProperty]
+       
+        [DataType(DataType.EmailAddress)]
+        public string EmailId{get;set;}
+
+       
+        //[ObservableProperty]
+        [DataType(DataType.MultilineText)]
+        public string? Address{get;set;}
+
+
+
+        [Display(GroupName = "Address")]
+        //[ObservableProperty]
+        [Required(ErrorMessage = "Please type City Name, it cant be empty ")]
+        public string? City{get;set;}
+        [Display(GroupName = "Address")]
+        //[ObservableProperty]
+        [DataType(DataType.PostalCode)]
+        public string ZipCode{get;set;}
+
+        [Display(GroupName = "Address")]
+        //[ObservableProperty]
+        public string? State{get;set;}
+        [Display(GroupName = "Address")]
+        //[ObservableProperty]
+        public string? Country{get;set;}
+
+
+        //[ObservableProperty]
+        public Gender Gender{get;set;}
+
+        //[ObservableProperty]
+        [Required(ErrorMessage = "Please select Employee Type ")]
+        public EmpType Category{get;set;}
+        //[ObservableProperty]
+        [Required(ErrorMessage = "Please select date, it cant be empty ")]
+        [DataType(DataType.Date)]
+        public DateTime? BirthDate{get;set;}
+
+        //[ObservableProperty]
+        [DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
+        [Required(ErrorMessage = "Please select date, it cant be empty ")]
+        [DataType(DataType.Date)]
+        public DateTime JoiningDate{get;set;}// { get{get;set;} set{get;set;} }
+
+        //[ObservableProperty]
+        public bool IsWorking{get;set;}
+
+    }
+
+
+    public partial class EmployeeEM_O : BaseEntryModel
     {
         [ObservableProperty]
         [Required(ErrorMessage = "Please select Store")]
@@ -21,8 +123,9 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [Display(AutoGenerateField = false)]
         private string employeeId;
 
-        //[Display(GroupName = "Name")]
+
         [ObservableProperty]
+        [Display(GroupName = "Name")]
         private string? title;
         [Display(GroupName = "Name")]
         [ObservableProperty]
@@ -33,19 +136,25 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [Required(ErrorMessage = "Please type Last Name, it cant be empty ")]
         private string lastName;
 
-        [Display(GroupName = "Contact Details")]
+        //[Display(GroupName = "Contact Details")]
         [ObservableProperty]
         [Required(ErrorMessage = "Please type Mobile Number, it cant be empty ")]
+        [DataType(DataType.PhoneNumber)]
+        [Display(GroupName = "Contact")]
         private string mobileNumber;
         [ObservableProperty]
-        [Display(GroupName = "Contact Details")]
+        [Display(GroupName = "Contact")]
+        [DataType(DataType.PhoneNumber)]
         private string? phoneNumber;
-        [Display(GroupName = "Contact Details")]
+        [Display(GroupName = "Contact", Name = "Email")]
         [ObservableProperty]
+        //[Display(Name ="Email")]
+        [DataType(DataType.EmailAddress)]
         private string emailId;
 
-        [Display(GroupName = "Address")]
+        // [Display(GroupName = "Address")]
         [ObservableProperty]
+        [DataType(DataType.MultilineText)]
         private string? address;
 
 
@@ -54,8 +163,9 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [ObservableProperty]
         [Required(ErrorMessage = "Please type City Name, it cant be empty ")]
         private string? city;
-        [Display(GroupName = "Address")] 
+        [Display(GroupName = "Address")]
         [ObservableProperty]
+        [DataType(DataType.PostalCode)]
         private string zipCode;
 
         [Display(GroupName = "Address")]
@@ -64,14 +174,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [Display(GroupName = "Address")]
         [ObservableProperty]
         private string? country;
-        [Display(GroupName = "Address")]
 
-
-
-        [ObservableProperty]
-        [Required(ErrorMessage = "Please select date, it cant be empty ")]
-        [DataType(DataType.Date)]
-        private DateTime? birthDate;
 
         [ObservableProperty]
         private Gender gender;
@@ -79,7 +182,10 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [ObservableProperty]
         [Required(ErrorMessage = "Please select Employee Type ")]
         private EmpType category;
-
+        [ObservableProperty]
+        [Required(ErrorMessage = "Please select date, it cant be empty ")]
+        [DataType(DataType.Date)]
+        private DateTime? birthDate;
         [ObservableProperty]
         //[DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
         [Required(ErrorMessage = "Please select date, it cant be empty ")]
@@ -104,19 +210,19 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         }
 
         [Required(ErrorMessage = "Please select Store")]
-        //[ObservableProperty]
+
         public string StoreId { get; set; }
 
-        //public string StoreId { get{get;set;} set{get;set;} }
+
 
         [ReadOnly(true)]
         [Editable(false)]
         [Display(AutoGenerateField = false)]
-        //[ObservableProperty]
+
         public string AttendanceId { get; set; }
 
         [Required(ErrorMessage = "Please select Employee")]
-        //[ObservableProperty]
+
         public string EmployeeId { get; set; }
 
         [Display(GroupName = "Date Time", Name = "Date")]
@@ -125,9 +231,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [Required(ErrorMessage = "Please select Date")]
         public DateTime OnDate { get; set; }
 
-        //public DateTime onDate{get;set;}
 
-        //public DateTime OnDate { get{get;set;} set{get;set;} }
 
         [Display(GroupName = "Date Time")]
         [DataType(DataType.Time)]
@@ -135,14 +239,14 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [DataFormValueConverter(typeof(StringToTimeConverter))]
         public string EntryTime { get; set; }
 
-        //public string entryTime{get;set;}
+
 
         [Display(Name = "Attndance")]
         [Required(ErrorMessage = "Please select Attendance status")]
-        //[ObservableProperty]
+
         public AttUnit Status { get; set; }
 
-        //[ObservableProperty]
+
         public string? Remarks { get; set; }
     }
 }

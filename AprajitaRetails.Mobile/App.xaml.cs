@@ -11,7 +11,8 @@ namespace AprajitaRetails.Mobile
             InitializeComponent();
 
             //MainPage = new AppShell();
-            MainPage = new LoginPage(new AppShell());
+            //MainPage = new LoginPage(new AppShell());
+            MainPage = new SignInPage();
         }
     }
 }

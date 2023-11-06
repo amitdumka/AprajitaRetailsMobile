@@ -1,9 +1,9 @@
-﻿using AprajitaRetails.Mobile.FormEntry.Models;
+﻿
+using AprajitaRetails.Mobile.DataModels.Payroll;
+using AprajitaRetails.Mobile.FormEntry.Models;
 using AprajitaRetails.Mobile.FormEntry.ViewModels;
 using AprajitaRetails.Mobile.FormEntry.Views;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Microsoft.Maui.Controls;
-using Syncfusion.DocIO.DLS;
+
 using Syncfusion.Maui.DataForm;
 
 namespace AprajitaRetails.Mobile.FormEntry.Behviours
@@ -13,7 +13,8 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
     {
         protected SfDataForm DataForm { get; set; }
         protected VM viewModel;
-        protected Button primaryButton,secondaryButton, backButton, cancleButton;
+        protected Button primaryButton, secondaryButton, backButton, cancleButton;
+        protected INavigation Navigation;
 
         protected override void OnDetachingFrom(ContentPage bindable)
         {
@@ -33,7 +34,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 e.DataFormItem.LabelText = "Store";
                 comboBoxItem.DisplayMemberPath = "Value";
                 comboBoxItem.SelectedValuePath = "ID";
-                
+
 
                 var viewModel = DataForm.BindingContext as BaseEntryViewModel<T>;
                 comboBoxItem.BindingContext = viewModel;
@@ -45,13 +46,13 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 e.DataFormItem.LabelText = "Employee";
                 cbEmp.DisplayMemberPath = "Value";
                 cbEmp.SelectedValuePath = "ID";
-                
+
 
                 var viewModel = DataForm.BindingContext as BaseEntryViewModel<T>; ;
                 cbEmp.BindingContext = viewModel;
                 cbEmp.SetBinding(DataFormComboBoxItem.ItemsSourceProperty, nameof(viewModel.Employees), BindingMode.TwoWay);
 
-                
+
             }
 
             if (e.DataFormItem != null)
@@ -65,10 +66,16 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
 
         protected abstract void OnPrimaryButtonClicked(object? sender, EventArgs e);
         protected abstract void OnSecondaryButtonClicked(object? sender, EventArgs e);
-        protected abstract void OnBackButtonClicked(object? sender, EventArgs e);
+        protected virtual async void OnBackButtonClicked(object? sender, EventArgs e){
+            await Navigation.PopAsync();
+        }
         protected abstract void OnCancleButtonClicked(object? sender, EventArgs e);
-         
-         
+        protected override void OnAttachedTo(ContentPage bindable)
+        {
+            base.OnAttachedTo(bindable);
+            Navigation = bindable.Navigation;
+        }
+
 
 
     }
@@ -85,7 +92,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
 
             if (dataForm != null)
             {
-               
+
                 dataForm.ColumnCount = 2;
                 DataForm = dataForm;
                 dataForm.RegisterEditor(nameof(Attendance.EmployeeId), DataFormEditorType.ComboBox);
@@ -96,7 +103,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 dataForm.Commit();
                 dataForm.GenerateDataFormItem += OnGenerateDataFormItem;
 
-                 this.primaryButton = ev.FindByName<Button>("PrimaryButton");
+                this.primaryButton = ev.FindByName<Button>("PrimaryButton");
                 if (this.primaryButton != null)
                 {
                     this.primaryButton.Clicked += OnPrimaryButtonClicked;
@@ -111,7 +118,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
         }
         protected override async void OnBackButtonClicked(object? sender, EventArgs e)
         {
-           // await Navigation.PopAsync();
+            // await Navigation.PopAsync();
         }
         protected override async void OnPrimaryButtonClicked(object? sender, EventArgs e)
         {
@@ -119,16 +126,22 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             {
                 if (this.DataForm.Validate())
                 {
-                     Notify.NotifyShort((DataForm.DataObject as AttendanceEM).StoreId + " Attendance is save Successful")
-                        ;
-                    DataForm.DataObject = new AttendanceEM { EntryTime = DateTime.Now.ToShortTimeString(), OnDate = DateTime.Now, Status = AttUnit.Absent, Remarks = ""
-                    ,StoreId="ARJ"
-                    
+                    Notify.NotifyShort((DataForm.DataObject as AttendanceEM).StoreId + " Attendance is save Successful")
+                       ;
+                    DataForm.DataObject = new AttendanceEM
+                    {
+                        EntryTime = DateTime.Now.ToShortTimeString(),
+                        OnDate = DateTime.Now,
+                        Status = AttUnit.Absent,
+                        Remarks = ""
+                    ,
+                        StoreId = "ARJ"
+
                     };
                 }
                 else
                 {
-                    Notify.NotifyLong((DataForm.DataObject as AttendanceEM).EmployeeId+  " Please enter the required details" );
+                    Notify.NotifyLong((DataForm.DataObject as AttendanceEM).EmployeeId + " Please enter the required details");
                 }
             }
         }
@@ -187,7 +200,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             }
         }
 
-        
+
         protected void Save()
         {
             DataForm.Commit();
@@ -200,7 +213,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             throw new NotImplementedException();
         }
 
-        
+
 
         protected override void OnCancleButtonClicked(object sender, EventArgs e)
         {
@@ -210,19 +223,63 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
 
     public class EmployeeEntryFormBehavior : BaseEntryBehavior<EmployeeEM, EmployeeEntryViewModel>
     {
-        protected override void OnBackButtonClicked(object sender, EventArgs e)
-        {
-            //throw new NotImplementedException();
-        }
+        
+        
 
         protected override void OnCancleButtonClicked(object sender, EventArgs e)
         {
             //throw new NotImplementedException();
+            this.DataForm.DataObject = viewModel.Entity=new EmployeeEM();
+            
         }
 
-        protected override void OnPrimaryButtonClicked(object sender, EventArgs e)
+        protected override async void OnPrimaryButtonClicked(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
+            if (this.DataForm != null)
+            {
+                this.DataForm.Commit();
+                if (this.DataForm.Validate())
+                {
+
+
+                    Notify.NotifyShort($" Please Wait while Saving new Employee...");
+                    EmployeeDataModel dataModel = new EmployeeDataModel();
+                    //dataModel.Connect();
+                    var emp = this.DataForm.DataObject as EmployeeEM;
+                    var result = await dataModel.SaveAsync(new Employee
+                    {
+                        AddressLine = emp.Address,
+                        DOB = emp.BirthDate,
+                        FirstName = emp.FirstName,
+                        LastName = emp.LastName,
+                        Gender = emp.Gender,
+                        IsTailors = false,
+                        IsWorking = emp.IsWorking,
+                        JoiningDate = emp.JoiningDate,
+                        LeavingDate = DateTime.Now.AddYears(-10),
+                        MarkedDeleted = false,
+                        State = emp.State,
+                        StoreId = emp.StoreId,
+                        StreetName = emp.Address,
+                        Title = emp.Title,
+                        ZipCode = emp.ZipCode,
+                        Category = emp.Category,
+                        City = emp.City,
+                        Country = emp.Country, EmployeeId="", 
+                    });
+
+                    if (result != null)
+                    {
+
+                        Notify.NotifyShort($" Employee is added Successful with Employee Id {result.EmployeeId}");
+                        DataForm.DataObject =viewModel.Entity= new EmployeeEM();
+                    }
+                }
+                else
+                {
+                    Notify.NotifyLong((DataForm.DataObject as EmployeeEM).StoreId + " Please enter the required details");
+                }
+            };
         }
 
         protected override void OnSecondaryButtonClicked(object sender, EventArgs e)
@@ -239,17 +296,32 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 var tiles = new List<string> { "Mr", "Mrs.", "Ms", "Master" };
                 cbTitles.ItemsSource = tiles;
                 cbTitles.MaxDropDownHeight = 100;
-                
+
             }
-            if(e.DataFormItem != null && e.DataFormItem.FieldName == "IsWorking")
+            if (e.DataFormItem != null && e.DataFormItem.FieldName == "IsWorking")
             {
                 e.DataFormItem.LabelText = "Working";
             }
 
-            if(e.DataFormItem!=null && (e.DataFormItem.FieldName=="IsActive"|| e.DataFormItem.FieldName == "HasErrors"))
+            if (e.DataFormItem != null && (e.DataFormItem.FieldName == "IsActive" || e.DataFormItem.FieldName == "HasErrors"))
             {
-                e.DataFormItem.IsVisible = false; 
-               
+                e.DataFormItem.IsVisible = false;
+
+            }
+            if (e.DataFormGroupItem != null)
+            {
+                if (e.DataFormGroupItem.Name == "Name")
+                {
+                    e.DataFormGroupItem.ColumnCount = 4;
+                }
+                else if (e.DataFormGroupItem.Name == "Address")
+                {
+                    e.DataFormGroupItem.ColumnCount = 4;
+                }
+                else if (e.DataFormGroupItem.Name == "Contact")
+                {
+                    e.DataFormGroupItem.ColumnCount = 3;
+                }
             }
 
 
@@ -257,8 +329,10 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
         protected override void OnAttachedTo(ContentPage bindable)
         {
             base.OnAttachedTo(bindable);
+           // Navigation = bindable.Navigation;
             var ev = ((EmployeeEntryPage)bindable).entryView;
-           
+
+            viewModel = bindable.BindingContext as EmployeeEntryViewModel;
 
             var dataForm = ev.FindByName<SfDataForm>("dataForm");
 

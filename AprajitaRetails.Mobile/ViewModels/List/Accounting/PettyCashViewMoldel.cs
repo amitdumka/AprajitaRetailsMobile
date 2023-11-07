@@ -15,8 +15,8 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
     public class PettyCashViewMoldel : BaseViewModel<PettyCashSheet, PettyCashDataModel>
     {
         public PettyCashViewMoldel() { }
-       
-        protected override void AddButton()
+
+        public override void AddButton()
         {
             throw new NotImplementedException();
         }

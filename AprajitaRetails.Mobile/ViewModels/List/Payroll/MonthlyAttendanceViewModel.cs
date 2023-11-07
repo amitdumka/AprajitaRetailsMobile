@@ -18,7 +18,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
         {
 
         }
-        protected override void AddButton()
+        public override void AddButton()
         {
             throw new NotImplementedException();
         }

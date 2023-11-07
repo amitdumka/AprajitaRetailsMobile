@@ -12,7 +12,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
     public class StockViewModel : BaseViewModel<StockDTO, StockDataModel>
     {
         public StockViewModel() { }
-        protected override void AddButton()
+        public override void AddButton()
         {
             //TODO: Need to disable  and use for other purpose if desired
             throw new NotImplementedException();

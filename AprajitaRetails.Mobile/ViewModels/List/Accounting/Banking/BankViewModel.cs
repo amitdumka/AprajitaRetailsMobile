@@ -13,7 +13,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting.Banking
 {
     public class BankViewModel : BaseViewModel<Bank, BankDataModel>
     {
-        protected override async void AddButton()
+        public override async void AddButton()
         {
             await Shell.Current.GoToAsync($"banking/bank/Entry?vm={this}");
         }

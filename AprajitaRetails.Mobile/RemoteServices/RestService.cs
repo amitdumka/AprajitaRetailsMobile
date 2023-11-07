@@ -1,6 +1,7 @@
 ﻿using AprajitaRetails.Mobile.AppSettings;
 using AprajitaRetails.Shared.Models.Auth;
 using AprajitaRetails.Shared.ViewModels;
+using System.Net.Http.Json;
 using System.Text;
 
 namespace AprajitaRetails.Mobile.RemoteServices
@@ -10,7 +11,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
         private static HttpClient _client;
         private static JsonSerializerOptions _serializerOptions;
 
-        private static string authorizationKey;
+        private static readonly string authorizationKey;
 
         public RestService()
         {
@@ -55,9 +56,11 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 ServerCertificateCustomValidationCallback =
         HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
             };
-            HttpClient client = new HttpClient(handler2);// new HttpClient();
-            //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());// new HttpClient();
-            client.BaseAddress = new Uri(Constants.RestUrl);
+            HttpClient client = new HttpClient(handler2)
+            {
+                //HttpClient client = new HttpClient(handler.GetPlatformMessageHandler());// new HttpClient();
+                BaseAddress = new Uri(Constants.RestUrl)
+            };// new HttpClient();
             _serializerOptions = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
@@ -70,14 +73,16 @@ namespace AprajitaRetails.Mobile.RemoteServices
         public static async Task<LoggedUser> DoLoginAsync(string UserName, string Password)
         {
             var client = GetClient();
-            Uri uri = new Uri($"{Constants.RestUrl}Auths");
+            Uri uri = new($"{Constants.RestUrl}Auths");
             try
             {
                 string json = JsonSerializer.Serialize<LoginVM>(new LoginVM { UserName = UserName, Password = Password, RememberMe = true, StoreId = "ARD" }, _serializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, uri);
-                message.Content = content;
+                HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, uri)
+                {
+                    Content = content
+                };
 
                 HttpResponseMessage response = await client.SendAsync(message);
 
@@ -105,16 +110,11 @@ namespace AprajitaRetails.Mobile.RemoteServices
             }
         }
 
-        //public async Task SaveTodoItemAsync(TodoItem item, bool isNewItem = false)
-        //{
-        //    response = await _client.PutAsync(uri, content);
-        //}
-
         #region GetRegion
 
         public async Task<List<T>> GetAllAsync<T>(string apiUrl)
         {
-            Uri uri = new Uri($"{Constants.RestUrl}{apiUrl}");
+            Uri uri = new($"{Constants.RestUrl}{apiUrl}");
             Notify.NotifyLong(uri.ToString());
             try
             {
@@ -154,20 +154,20 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 else
                 {
                     Notify.NotifyLong($"\tERROR {response.StatusCode} # {response.ReasonPhrase}");
-                    return default(T);
+                    return default;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 Notify.NotifyLong($"\tERROR {ex.Message}");
-                return default(T);
+                return default;
             }
         }
 
         public async Task<T> GetByIdAsync<T>(string apiUrl, int Id)
         {
-            Uri uri = new Uri($"{Constants.RestUrl}{apiUrl}/{Id}");
+            Uri uri = new($"{Constants.RestUrl}{apiUrl}/{Id}");
             try
             {
                 HttpResponseMessage response = await _client.GetAsync(uri);
@@ -180,14 +180,14 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 else
                 {
                     Notify.NotifyLong($"\tERROR {response.StatusCode} # {response.ReasonPhrase}");
-                    return default(T);
+                    return default;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 Notify.NotifyLong($"\tERROR {ex.Message}");
-                return default(T);
+                return default;
             }
         }
 
@@ -206,14 +206,14 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 else
                 {
                     Notify.NotifyLong($"\tERROR {response.StatusCode} # {response.ReasonPhrase}");
-                    return default(T);
+                    return default;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 Notify.NotifyLong($"\tERROR {ex.Message}");
-                return default(T);
+                return default;
             }
         }
 
@@ -232,14 +232,14 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 else
                 {
                     Notify.NotifyLong($"\tERROR {response.StatusCode} # {response.ReasonPhrase}");
-                    return default(T);
+                    return default;
                 }
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 Notify.NotifyLong($"\tERROR {ex.Message}");
-                return default(T);
+                return default;
             }
         }
 
@@ -353,17 +353,24 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 if (response.IsSuccessStatusCode)
                 {
                     if (isNewItem)
-                    {
                         Notify.NotifyVShort("Save successfully");
-                    }
-                    else Notify.NotifyVShort("Updated successfully");
-                    return item;
+                    else
+                        Notify.NotifyVShort("Updated successfully");
+                    var obj = await response.Content.ReadFromJsonAsync<T>();
+                    return obj;
+                    //return item;
                 }
                 else
                 {
                     if (isNewItem)
                     {
-                        Notify.NotifyVShort($"Failed Save, {response.ReasonPhrase}");
+                        if (response.ReasonPhrase == "Conflict")
+                        {
+                            Notify.NotifyVShort($"Record is already added with same condition or  same  value, kindly check data and add!");
+                        }
+                        else
+                            Notify.NotifyVShort($"Failed Save, {response.ReasonPhrase}");
+
                     }
                     else Notify.NotifyVShort($"Failed update, {response.ReasonPhrase}");
                     return null;
@@ -392,11 +399,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     var data = JsonSerializer.Deserialize<List<SelectOption>>(content);
-                    //foreach (var item in data)
-                    //{
-                    //    item.Value = item.Value.Trim().ToString();
-                    //    item.ID = item.ID.Trim().ToString();
-                    //}
+                     
                     return data;
                 }
                 else
@@ -416,7 +419,7 @@ namespace AprajitaRetails.Mobile.RemoteServices
         public static async Task<List<SelectOption>> GetEmployeeListAsync(string storeid)
         {
             var client = GetClient();
-            Uri uri = new Uri($"{Constants.RestUrl}helper/Employees?StoreId={storeid}");
+            Uri uri = new($"{Constants.RestUrl}helper/Employees?StoreId={storeid}");
             // Notify.NotifyLong(uri.ToString());
             try
             {

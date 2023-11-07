@@ -38,7 +38,7 @@
         FlyoutIcon="{StaticResource  CircleIcon}"
         Route="Main" />-->
     <!--<ShellContent Title="Attendance Entry" ContentTemplate="{DataTemplate tt:Payroll.BaseEntryPage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main2" />-->
-    <ShellContent Title=" Entry" ContentTemplate="{DataTemplate tt:Payroll.APage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main3" />
+    <!--<ShellContent Title=" Entry" ContentTemplate="{DataTemplate tt:Payroll.APage}" FlyoutIcon="{StaticResource  CircleIcon}" Route="Main3" />-->
    
     <FlyoutItem Title="Inventory">
         <Tab Title="Sale" Icon="rain_icon.png">

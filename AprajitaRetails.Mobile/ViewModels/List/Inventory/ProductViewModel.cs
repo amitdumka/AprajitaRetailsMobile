@@ -11,7 +11,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
     public class ProductViewModel : BaseViewModel<ProductItemDTO, ProductItemDataModel>
     {
         public ProductViewModel() { }
-        protected override void AddButton()
+        public override void AddButton()
         {
 
             throw new NotImplementedException();

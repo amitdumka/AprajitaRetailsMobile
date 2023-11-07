@@ -15,7 +15,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
     public class DueRecoveryViewModel : BaseViewModel<DueRecovery, DueRecoveryDataModel>
     {
         public DueRecoveryViewModel() { }
-        protected override void AddButton()
+        public override void AddButton()
         {
             throw new NotImplementedException();
         }

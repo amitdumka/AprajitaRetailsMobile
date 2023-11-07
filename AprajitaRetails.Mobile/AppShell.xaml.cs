@@ -1,7 +1,5 @@
 ﻿using AprajitaRetails.Mobile.Pages.Auths;
-using AprajitaRetails.Mobile.Pages.EntryPages;
-//using AprajitaRetails.Mobile.ViewModels.EntryPages;
-
+ 
 namespace AprajitaRetails.Mobile
 {
     public partial class AppShell : Shell

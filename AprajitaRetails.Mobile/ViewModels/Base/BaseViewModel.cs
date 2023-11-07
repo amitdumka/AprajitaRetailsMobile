@@ -78,7 +78,7 @@ namespace AprajitaRetails.Mobile.ViewModels.Base
         //[RelayCommand]
         //protected abstract Task<List<T>> Filter(string fitler);
         [RelayCommand]
-        protected abstract void AddButton();
+        public abstract void AddButton();
 
         [RelayCommand]
         protected abstract void DeleteButton();
@@ -96,14 +96,13 @@ namespace AprajitaRetails.Mobile.ViewModels.Base
         //protected abstract void UpdateEntities(List<T> values);
         protected void UpdateEntities(List<T> values)
         {
-            if (Entities == null) 
-                Entities = new ObservableCollection<T>();
+            Entities ??= new ObservableCollection<T>();
             foreach (var item in values)
             {
                 Entities.Add(item);
             }
-            RecordCount = _entities.Count;
-            isRefreshing = false;
+            RecordCount = Entities.Count;
+            IsRefreshing = false;
         }
 
         [RelayCommand]

@@ -1,19 +1,53 @@
-
 using AprajitaRetails.Mobile.FormEntry.Behviours;
 using AprajitaRetails.Mobile.FormEntry.Models;
 using AprajitaRetails.Mobile.FormEntry.ViewModels;
-
-//using CommunityToolkit.Maui.Markup;
-//using static CommunityToolkit.Maui.Markup.GridExtensions;
-
 using static CommunityToolkit.Maui.Markup.GridRowsColumns;
 
 namespace AprajitaRetails.Mobile.FormEntry.Views;
 
+
+public class CashVoucherEntryPage : EntryPage<CashVoucherEM, CashVoucherEntryViewModel, CashVoucherEntryFormBehavior>
+{
+    public CashVoucherEntryPage()
+    {
+        viewModel = new CashVoucherEntryViewModel();
+        bhv = new CashVoucherEntryFormBehavior();
+        this.Title = viewModel.HeaderText;
+        this.BindingContext = viewModel;
+        this.Behaviors.Add(bhv);
+        entryView.BindingContext = viewModel;
+    }
+}
+public class VoucherEntryPage : EntryPage<VoucherEM, VoucherEntryViewModel, VoucherEntryFormBehavior>
+{
+    public VoucherEntryPage()
+    {
+        viewModel = new VoucherEntryViewModel();
+        bhv = new VoucherEntryFormBehavior();
+        this.Title = viewModel.HeaderText;
+        this.BindingContext = viewModel;
+        this.Behaviors.Add(bhv);
+        entryView.BindingContext = viewModel;
+    }
+}
+
+public class NoteEntryPage : EntryPage<NoteEM, NoteEntryViewModel, NoteEntryFormBehavior>
+{
+    public NoteEntryPage()
+    {
+        viewModel = new NoteEntryViewModel();
+        bhv = new NoteEntryFormBehavior();
+        this.Title = viewModel.HeaderText;
+        this.BindingContext = viewModel;
+        this.Behaviors.Add(bhv);
+        entryView.BindingContext = viewModel;
+    }
+}
+
+
+
 public class AttendanceEntryPage : EntryPage<AttendanceEM, AttendanceEntryViewModel, AttendanceEntryFormBehavior>
 {
-
-
     public AttendanceEntryPage()
     {
         viewModel = new AttendanceEntryViewModel();
@@ -22,15 +56,14 @@ public class AttendanceEntryPage : EntryPage<AttendanceEM, AttendanceEntryViewMo
         this.BindingContext = viewModel;
         this.Behaviors.Add(bhv);
         entryView.BindingContext = viewModel;
-
-
     }
 }
-public class EmployeeEntryPage:EntryPage<EmployeeEM, EmployeeEntryViewModel, EmployeeEntryFormBehavior>
+
+public class EmployeeEntryPage : EntryPage<EmployeeEM, EmployeeEntryViewModel, EmployeeEntryFormBehavior>
 {
     public EmployeeEntryPage()
     {
-        viewModel= new EmployeeEntryViewModel();
+        viewModel = new EmployeeEntryViewModel();
         bhv = new EmployeeEntryFormBehavior();
         this.Title = viewModel.HeaderText;
         this.BindingContext = viewModel;
@@ -39,17 +72,14 @@ public class EmployeeEntryPage:EntryPage<EmployeeEM, EmployeeEntryViewModel, Emp
     }
 }
 
-
 public class EntryPage<T, VM, B> : ContentPage where B : BaseEntryBehavior<T, VM>
 {
+    public BaseEntryView entryView;
     protected B bhv;
     protected VM viewModel;
 
-    public BaseEntryView entryView;
-
     public EntryPage()
     {
-
         entryView = new BaseEntryView();
         entryView.DataForm.ColumnCount = 2;
 
@@ -62,13 +92,5 @@ public class EntryPage<T, VM, B> : ContentPage where B : BaseEntryBehavior<T, VM
             Children={entryView}
             } }
         };
-
-
-
-
-
     }
-
 }
-enum Row { FormEntry, ExtraEntry }
-enum Column { Description, Input }

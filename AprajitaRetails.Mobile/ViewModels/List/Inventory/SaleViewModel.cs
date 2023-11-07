@@ -48,7 +48,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Inventory
             //Synced = await DataModel.SyncInvoices(_invoiceType);
         }
 
-        protected override async void AddButton()
+        public override async void AddButton()
         {
             await Shell.Current.GoToAsync($"sale/Entry?vm={this}&invType={_invoiceType}");
         }

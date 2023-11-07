@@ -1,6 +1,7 @@
 ﻿//using AKS.Shared.Commons.Models.Accounts;
 //using AKS.Shared.Commons.Ops;
 using AprajitaRetails.Mobile.DataModels.Accounting;
+using AprajitaRetails.Mobile.FormEntry.Views;
 using AprajitaRetails.Shared.Models.Vouchers;
 using CommunityToolkit.Mvvm.ComponentModel;
 //using AprajitaRetails.Mobile.MAUILib.DataModels.Accounting;
@@ -31,10 +32,18 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
             FetchAsync();
             //Icon = eStore_Maui.Resources.Styles.IconFont.FileInvoice;
         }
-        protected override void AddButton()
+        public override void AddButton()
         {
-            //var c = Delete();
-            Notify.NotifyLong("Delete: ");
+            CurrentPage.Navigation.PushAsync(new CashVoucherEntryPage());
+        }
+
+        protected override void DeleteButton()
+        {
+
+            Notify.NotifyVShort("This function is not allowed, Kindly contact your administrator!");
+#if DEBUG
+            throw new NotImplementedException();
+#endif
         }
 
         //protected override async Task<bool> Delete()
@@ -61,11 +70,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
         //    }
         //}
 
-        protected override void DeleteButton()
-        {
-            //var c = Delete();
-            //Notify.NotifyLong("Deleted: " + c.Result);
-        }
+        
 
         //protected override Task<bool> Edit(CashVoucher value)
         //{

@@ -1,4 +1,5 @@
 ﻿using AprajitaRetails.Mobile.DataModels.Payroll;
+using AprajitaRetails.Mobile.FormEntry.Views;
 using AprajitaRetails.Mobile.Helpers;
 using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Mobile.ViewModels.Base;
@@ -21,14 +22,18 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
            
         }
 
-        protected override void AddButton()
+        public override void AddButton()
         {
-            throw new NotImplementedException();
+          CurrentPage.Navigation.PushAsync(new EmployeeEntryPage());
         }
 
         protected override void DeleteButton()
         {
+            
+            Notify.NotifyVShort("This function is not allowed, Kindly contact your administrator!");
+#if DEBUG
             throw new NotImplementedException();
+#endif
         }
 
         protected override void InitViewModel()

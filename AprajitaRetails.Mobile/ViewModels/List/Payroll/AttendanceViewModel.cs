@@ -1,19 +1,7 @@
-﻿////using AKS.Shared.Commons.Ops;
-////using AKS.Shared.Payroll.Models;
-////using AprajitaRetails.Mobile.MAUILib.DataModels.Payroll;
-////using AprajitaRetails.Mobile.MAUILib.Helpers;
-////using AprajitaRetails.Mobile.MAUILib.ViewModels.Base;
+﻿ 
 using AprajitaRetails.Mobile.DataModels.Payroll;
-using AprajitaRetails.Mobile.Helpers;
-using AprajitaRetails.Mobile.Operations.Prefernces;
-using AprajitaRetails.Mobile.RemoteServices;
-using AprajitaRetails.Mobile.ViewModels.Base;
-using AprajitaRetails.Shared.AutoMapper.DTO;
-using AprajitaRetails.Shared.Models.Payroll;
-using AprajitaRetails.Shared.ViewModels;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using Syncfusion.Maui.DataForm;
-using Syncfusion.Maui.DataGrid;
+using AprajitaRetails.Mobile.FormEntry.Views;
+ 
 
 namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
 {
@@ -24,10 +12,10 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
 
 
         }
-        protected override async void AddButton()
+        public override void AddButton()
         {
-            await Shell.Current.GoToAsync("//Attendance/Entry");
-            
+            _ = CurrentPage.Navigation.PushAsync(new AttendanceEntryPage());
+
         }
 
         protected override void DeleteButton()

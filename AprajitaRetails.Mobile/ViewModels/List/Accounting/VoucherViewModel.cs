@@ -1,6 +1,7 @@
 ﻿//using AKS.Shared.Commons.Models.Accounts;
 //using AKS.Shared.Commons.Ops;
 using AprajitaRetails.Mobile.DataModels.Accounting;
+using AprajitaRetails.Mobile.FormEntry.Views;
 using AprajitaRetails.Mobile.Helpers;
 using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Mobile.ViewModels.Base;
@@ -39,9 +40,18 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
             FetchAsync();
 
         }
-        protected override async void AddButton()
+        public override void AddButton()
         {
-            await Shell.Current.GoToAsync($"voucher/Entry?vm={this}");
+            CurrentPage.Navigation.PushAsync(new VoucherEntryPage());
+        }
+
+        protected override void DeleteButton()
+        {
+
+            Notify.NotifyVShort("This function is not allowed, Kindly contact your administrator!");
+#if DEBUG
+            throw new NotImplementedException();
+#endif
         }
 
         //protected override async Task<bool> Delete()
@@ -72,11 +82,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
         //    }
         //}
 
-        protected override void DeleteButton()
-        {
-            //var c = Delete();
-            // Notify.NotifyLong("Deleted: " + c.Result);
-        }
+         
 
         //protected override Task<bool> Edit(Voucher value)
         //{

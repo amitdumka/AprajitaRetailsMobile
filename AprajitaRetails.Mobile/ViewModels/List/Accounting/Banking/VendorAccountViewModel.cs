@@ -12,7 +12,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting.Banking
 {
     public class VendorAccountViewModel : BaseViewModel<VendorBankAccount, VendorBankAccountDataModel>
     {
-        protected override void AddButton()
+        public override void AddButton()
         {
             throw new NotImplementedException();
         }

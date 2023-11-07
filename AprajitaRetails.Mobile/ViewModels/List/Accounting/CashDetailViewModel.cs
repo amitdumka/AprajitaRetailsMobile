@@ -14,7 +14,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
     public class CashDetailViewModel : BaseViewModel<CashDetailDTO, CashDetailDataModel>
     {
         public CashDetailViewModel() { }
-        protected override void AddButton()
+        public override void AddButton()
         {
             throw new NotImplementedException();
         }

@@ -125,38 +125,26 @@ namespace AprajitaRetails.Mobile.DataModels.Base
 
         public AppDBContext GetContext()
         {
-            AppDBContext db;
-            switch (Mode)
+            AppDBContext db = Mode switch
             {
-                case DBType.Local: db = _localDb; break;
-                case DBType.Azure: db = _azureDb; break;
-                default:
-                    db = _localDb;
-                    break;
-            }
+                DBType.Local => _localDb,
+                DBType.Azure => _azureDb,
+                _ => _localDb,
+            };
             return db;
         }
 
         [Obsolete]
         public int Count()
         {
-            AppDBContext db;
-            switch (Mode)
+            AppDBContext db = Mode switch
             {
                 //case DBType.API:
                 //  break;
-                case DBType.Local:
-                    db = _localDb;
-                    break;
-
-                case DBType.Azure:
-                    db = _azureDb;
-                    break;
-
-                default:
-                    db = _localDb; break;
-            }
-
+                DBType.Local => _localDb,
+                DBType.Azure => _azureDb,
+                _ => _localDb,
+            };
             return db.Set<T>().Count();
         }
 
@@ -167,56 +155,35 @@ namespace AprajitaRetails.Mobile.DataModels.Base
         //Get By ID
         public async Task<T> GetAsync(string id)
         {
-            switch (Mode)
+            return Mode switch
             {
-                case DBType.Local:
-                    return await _localDb.FindAsync<T>(id);
-
-                case DBType.Azure:
-                    return await _azureDb.FindAsync<T>(id);
-
-                case DBType.API:
-                    return await _apiDB.GetByIdAsync<T>(apiurl, id);
-
-                default:
-                    return null;
-            }
+                DBType.Local => await _localDb.FindAsync<T>(id),
+                DBType.Azure => await _azureDb.FindAsync<T>(id),
+                DBType.API => await _apiDB.GetByIdAsync<T>(apiurl, id),
+                _ => null,
+            };
         }
 
         public async Task<T> GetAsync(int id)
         {
-            switch (Mode)
+            return Mode switch
             {
-                case DBType.Local:
-                    return await _localDb.FindAsync<T>(id);
-
-                case DBType.Azure:
-                    return await _azureDb.FindAsync<T>(id);
-
-                case DBType.API:
-                    return await _apiDB.GetByIdAsync<T>(apiurl, id);
-
-                default:
-                    return null;
-            }
+                DBType.Local => await _localDb.FindAsync<T>(id),
+                DBType.Azure => await _azureDb.FindAsync<T>(id),
+                DBType.API => await _apiDB.GetByIdAsync<T>(apiurl, id),
+                _ => null,
+            };
         }
 
         public async Task<T> GetAsync(Guid id)
         {
-            switch (Mode)
+            return Mode switch
             {
-                case DBType.Local:
-                    return await _localDb.FindAsync<T>(id);
-
-                case DBType.Azure:
-                    return await _azureDb.FindAsync<T>(id);
-
-                case DBType.API:
-                    return await _apiDB.GetByIdAsync<T>(apiurl, id);
-
-                default:
-                    return null;
-            }
+                DBType.Local => await _localDb.FindAsync<T>(id),
+                DBType.Azure => await _azureDb.FindAsync<T>(id),
+                DBType.API => await _apiDB.GetByIdAsync<T>(apiurl, id),
+                _ => null,
+            };
         }
 
         public async Task<List<T>> GetByStoreDTO(string storeId)
@@ -547,38 +514,26 @@ namespace AprajitaRetails.Mobile.DataModels.Base
 
         public AppDBContext GetContext()
         {
-            AppDBContext db;
-            switch (Mode)
+            AppDBContext db = Mode switch
             {
-                case DBType.Local: db = _localDb; break;
-                case DBType.Azure: db = _azureDb; break;
-                default:
-                    db = _localDb;
-                    break;
-            }
+                DBType.Local => _localDb,
+                DBType.Azure => _azureDb,
+                _ => _localDb,
+            };
             return db;
         }
 
         [Obsolete]
         public int Count()
         {
-            AppDBContext db;
-            switch (Mode)
+            AppDBContext db = Mode switch
             {
                 //case DBType.API:
                 //  break;
-                case DBType.Local:
-                    db = _localDb;
-                    break;
-
-                case DBType.Azure:
-                    db = _azureDb;
-                    break;
-
-                default:
-                    db = _localDb; break;
-            }
-
+                DBType.Local => _localDb,
+                DBType.Azure => _azureDb,
+                _ => _localDb,
+            };
             return db.Set<T>().Count();
         }
 
@@ -589,56 +544,35 @@ namespace AprajitaRetails.Mobile.DataModels.Base
         //Get By ID
         public async Task<T> GetAsync(string id)
         {
-            switch (Mode)
+            return Mode switch
             {
-                case DBType.Local:
-                    return await _localDb.FindAsync<T>(id);
-
-                case DBType.Azure:
-                    return await _azureDb.FindAsync<T>(id);
-
-                case DBType.API:
-                    return await _apiDB.GetByIdAsync<T>(apiurl, id);
-
-                default:
-                    return null;
-            }
+                DBType.Local => await _localDb.FindAsync<T>(id),
+                DBType.Azure => await _azureDb.FindAsync<T>(id),
+                DBType.API => await _apiDB.GetByIdAsync<T>(apiurl, id),
+                _ => null,
+            };
         }
 
         public async Task<T> GetAsync(int id)
         {
-            switch (Mode)
+            return Mode switch
             {
-                case DBType.Local:
-                    return await _localDb.FindAsync<T>(id);
-
-                case DBType.Azure:
-                    return await _azureDb.FindAsync<T>(id);
-
-                case DBType.API:
-                    return await _apiDB.GetByIdAsync<T>(apiurl, id);
-
-                default:
-                    return null;
-            }
+                DBType.Local => await _localDb.FindAsync<T>(id),
+                DBType.Azure => await _azureDb.FindAsync<T>(id),
+                DBType.API => await _apiDB.GetByIdAsync<T>(apiurl, id),
+                _ => null,
+            };
         }
 
         public async Task<T> GetAsync(Guid id)
         {
-            switch (Mode)
+            return Mode switch
             {
-                case DBType.Local:
-                    return await _localDb.FindAsync<T>(id);
-
-                case DBType.Azure:
-                    return await _azureDb.FindAsync<T>(id);
-
-                case DBType.API:
-                    return await _apiDB.GetByIdAsync<T>(apiurl, id);
-
-                default:
-                    return null;
-            }
+                DBType.Local => await _localDb.FindAsync<T>(id),
+                DBType.Azure => await _azureDb.FindAsync<T>(id),
+                DBType.API => await _apiDB.GetByIdAsync<T>(apiurl, id),
+                _ => null,
+            };
         }
 
         public async Task<List<DTO>> GetByStoreDTO(string storeId)

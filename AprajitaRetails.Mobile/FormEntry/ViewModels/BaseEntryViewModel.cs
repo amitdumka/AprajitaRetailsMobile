@@ -29,10 +29,8 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
 
         private async void SetupBasicComboBoxField()
         {
-            if (Stores == null)
-                Stores = await GetStoreListAsync();
-            if (Employees == null)
-                Employees = await GetEmployeeListAsync(CurrentSession.StoreCode);
+            Stores ??= await GetStoreListAsync();
+            Employees ??= await GetEmployeeListAsync(CurrentSession.StoreCode);
         }
 
         private async Task<List<SelectOption>> GetStoreListAsync()

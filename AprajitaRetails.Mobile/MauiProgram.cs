@@ -1,20 +1,19 @@
 ﻿using CommunityToolkit.Maui.Core;
 using Microsoft.Extensions.Logging;
-using CommunityToolkit.Maui;
 
 using Syncfusion.Maui.Core.Hosting;
 using AprajitaRetails.Mobile.ViewModels.List.Payroll;
 using AprajitaRetails.Mobile.Pages.Payroll;
-using AprajitaRetails.Mobile.Views.Custom;
 using AprajitaRetails.Mobile.ViewModels.List.Inventory;
 using AprajitaRetails.Mobile.ViewModels.List.Accounting.Banking;
 using AprajitaRetails.Mobile.Pages.Banking;
 using AprajitaRetails.Mobile.ViewModels.List.Accounting;
 using AprajitaRetails.Mobile.Pages.Accounting;
-using AprajitaRetails.Mobile.Pages.EntryPages;
-using AprajitaRetails.Mobile.Pages.EntryPages.Payroll;
 using CommunityToolkit.Maui.Markup;
-//using AprajitaRetails.Mobile.ViewModels.EntryPages;
+
+
+enum Row { FormEntry, ExtraEntry }
+enum Column { Description, Input }
 
 namespace AprajitaRetails.Mobile
 {

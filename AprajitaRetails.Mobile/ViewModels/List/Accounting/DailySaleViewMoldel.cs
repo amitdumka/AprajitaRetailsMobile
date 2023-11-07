@@ -66,7 +66,7 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Accounting
 
 
 
-        protected override void AddButton()
+        public override void AddButton()
         {
             throw new NotImplementedException();
         }

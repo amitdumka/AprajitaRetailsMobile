@@ -90,35 +90,17 @@ namespace AprajitaRetails.Mobile.Pages.Auths
                 if (this.dataForm.Validate())
                 {
                     var usr = dataForm.DataObject as LoginFormModel;
-                    //await App.Current.MainPage.DisplayAlert("", "Signed in successfully", "OK");
                     var user = await RestService.DoLoginAsync(usr.UserName, usr.Password);
 
                     if (user != null)
                     {
-                        //CurrentSession.IsLoggedIn = true;
-                        //CurrentSession.LoggedTime = DateTime.Now;
-
                         Notify.NotifyVLong($"Welcome, {user.FullName}!, Now you can operate in , {user.Permission}, mode. ");
-
-                        //var store = await DataModel.GetStore(user.StoreId);
-
-                        //if (store != null)
-                        //{
-                        //    CurrentSession.Address = store.City + "\t" + store.State;
-                        //    CurrentSession.TaxNumber = store.GSTIN;
-                        //    CurrentSession.StoreName = store.StoreName;
-                        //    CurrentSession.PhoneNo = store.StorePhoneNumber;
-                        //    CurrentSession.CityName = store.City;
-
-                        //    return true;
-                        //}
-
                         Application.Current.MainPage = new AppShell();
-                       // return true;
-                    }
-                    Notify.NotifyVLong($"User {usr.UserName} not Found ....");
 
-                    //return false;
+                    }
+                    else
+                        Notify.NotifyVLong($"User {usr.UserName} not Found ....");
+                    
                 }
                 else
                 {

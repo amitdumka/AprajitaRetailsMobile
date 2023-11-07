@@ -66,6 +66,7 @@
 		<None Remove="Resources\Images\amit.jpg" />
 		<None Remove="Resources\Images\aprajitaretails.png" />
 		<None Remove="Resources\Images\arlogo.png" />
+		<None Remove="Resources\Images\login.png" />
 		<None Remove="Resources\Images\shalini.jpg" />
 		<None Remove="Resources\Images\thearvindstore004.jpg" />
 		<None Remove="Resources\Images\thearvindstore005.jpg" />
@@ -140,6 +141,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Auths\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Auths\SignInPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\EntryPages\Payroll\APage.xaml">

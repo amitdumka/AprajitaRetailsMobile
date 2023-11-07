@@ -11,13 +11,14 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AprajitaRetails.Mobile.DataModels.Payroll
 {
-    public class EmployeeDataModel : BaseDM<EmployeeDTO>
+    public class EmployeeDataModel : BaseDM<Employee,EmployeeDTO>
     {
         public EmployeeDataModel():base() {
             //$"Employees/bystoredto", $"?storeid={Setting.StoreCode}&isWorking=true")
-            apiurl = "Emlpoyees";
+            apiurl = "Employees";
             apiDtoURL= $"Employees/bystoredto?storeid={CurrentSession.StoreCode}&isWorking=false";
         }
+
         public override Task<string> GenrateID()
         {
             throw new NotImplementedException();
@@ -28,7 +29,7 @@ namespace AprajitaRetails.Mobile.DataModels.Payroll
             throw new NotImplementedException();
         }
 
-        public override Task<List<EmployeeDTO>> GetItemsAsync(string storeid)
+        public override Task<List<Employee>> GetItemsAsync(string storeid)
         {
             throw new NotImplementedException();
         }

@@ -70,6 +70,8 @@ namespace AprajitaRetails.Mobile.DataModels.Base
             ConType = ConType.Remote;
             Role = RolePermission.StoreManager;
             Mode = DBType.API;
+            this.StoreCode = CurrentSession.StoreCode;
+            this.Connect();
         }
 
         #endregion Constructor
@@ -490,6 +492,8 @@ namespace AprajitaRetails.Mobile.DataModels.Base
             ConType = ConType.Remote;
             Role = RolePermission.StoreManager;
             Mode = DBType.API;
+            this.StoreCode = CurrentSession.StoreCode;
+            this.Connect();
         }
 
         #endregion Constructor

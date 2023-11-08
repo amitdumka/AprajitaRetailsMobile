@@ -48,6 +48,13 @@ public class NoteEntryPage : EntryPage<NoteEM, NoteEntryViewModel, NoteEntryForm
 
 public class AttendanceEntryPage : EntryPage<AttendanceEM, AttendanceEntryViewModel, AttendanceEntryFormBehavior>
 {
+
+public AttendanceEntryPage(Attendance obj) 
+{
+viewModel.Enitity=new {
+
+} ;
+} 
     public AttendanceEntryPage()
     {
         viewModel = new AttendanceEntryViewModel();
@@ -77,6 +84,11 @@ public class EntryPage<T, VM, B> : ContentPage where B : BaseEntryBehavior<T, VM
     public BaseEntryView entryView;
     protected B bhv;
     protected VM viewModel;
+
+public EntryPage(T obj) 
+{
+EntryPage() ;
+} 
 
     public EntryPage()
     {

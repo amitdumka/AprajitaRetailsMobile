@@ -1,31 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentView
     x:Class="AprajitaRetails.Mobile.Views.Custom.RecordListingView"
+    x:Name="this"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:app="clr-namespace:AprajitaRetails.Mobile.Resources.Styles"
     xmlns:sfgrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
-     xmlns:syncfusion="http://schemas.syncfusion.com/maui"
-    x:Name="this"
+    xmlns:syncfusion="http://schemas.syncfusion.com/maui"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     BackgroundColor="{x:StaticResource Accent_Blue200}">
     <ContentView.Resources>
         <Style TargetType="syncfusion:DataGridTableSummaryCell">
-            <Setter Property="Background" Value="#0074E3"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="FontFamily" Value="TimesNewRoman"/>
+            <Setter Property="Background" Value="#0074E3" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontFamily" Value="TimesNewRoman" />
         </Style>
     </ContentView.Resources>
-    <VerticalStackLayout BackgroundColor="{x:StaticResource Accent_Blue200}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+    <VerticalStackLayout
+        BackgroundColor="{x:StaticResource Accent_Blue200}"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
         <HorizontalStackLayout HorizontalOptions="Center">
             <Image>
                 <Image.Source>
                     <FontImageSource
+                        Color="{StaticResource Primary}"
                         FontFamily="FontAwesome"
                         Glyph="{Binding Icon}"
-                        Size="24"
-                        Color="{StaticResource Primary}" />
+                        Size="24" />
                 </Image.Source>
             </Image>
             <Label
@@ -37,7 +42,11 @@
                 TextColor="Blue"
                 VerticalOptions="Center" />
         </HorizontalStackLayout>
-        <HorizontalStackLayout Margin="10" HorizontalOptions="CenterAndExpand" class="Button-Group" IsVisible="false">
+        <HorizontalStackLayout
+            Margin="10"
+            class="Button-Group"
+            HorizontalOptions="CenterAndExpand"
+            IsVisible="false">
             <Button
                 BackgroundColor="{StaticResource Accent_Blue100}"
                 Command="{Binding AddButtonCommand}"
@@ -51,8 +60,12 @@
                 Command="{Binding RefreshButtonCommand}"
                 Text="Refresh" />
         </HorizontalStackLayout>
-        
-        <VerticalStackLayout x:Name="DetailsLayout" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+        <VerticalStackLayout
+            x:Name="DetailsLayout"
+            Margin="10"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
             <sfgrid:SfDataGrid
                 x:Name="dataGrid"
                 AutoGenerateColumnsMode="None"
@@ -63,10 +76,24 @@
                 ItemsSource="{Binding Entities}"
                 MaximumHeightRequest="570"
                 RowHeight="48"
-                SelectionMode="SingleDeselect"
+                SelectionMode="Single"
                 SortingMode="Single"
                 VerticalOptions="FillAndExpand"
                 VerticalScrollBarVisibility="Default">
+                <sfgrid:SfDataGrid.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        Command="{Binding DataGrid_DoubleTapCommand}"
+                        EventName="CellDoubleTapped"
+                        x:TypeArguments="sfgrid:DataGridCellDoubleTappedEventArgs" />
+                    <!--<toolkit:EventToCommandBehavior
+                        Command="{Binding DataGrid_CellRightTappedCommand}"
+                        EventName="CellRightTapped"
+                        x:TypeArguments="sfgrid:DataGridCellRightTappedEventArgs" />-->
+                    <toolkit:EventToCommandBehavior
+                        Command="{Binding DataGrid_LongPressCommand}"
+                        EventName="CellLongPress"
+                        x:TypeArguments="sfgrid:DataGridCellLongPressEventArgs" />
+                </sfgrid:SfDataGrid.Behaviors>
                 <sfgrid:SfDataGrid.DefaultStyle>
                     <sfgrid:DataGridStyle
                         AlternateRowBackground="#AFD5AA"
@@ -86,13 +113,12 @@
             </sfgrid:SfDataGrid>
         </VerticalStackLayout>
         <Label
-            Padding="0,0,10,0"
             BackgroundColor="{x:StaticResource Accent_Blue100}"
             FontAttributes="Bold,Italic"
             FontAutoScalingEnabled="True"
             HorizontalTextAlignment="End"
+            Padding="0,0,10,0"
             Text="{Binding RecordCount, StringFormat='Count : {0}  ', Mode=TwoWay}"
             TextColor="{x:StaticResource TextOnSolid_Light}" />
     </VerticalStackLayout>
-   
 </ContentView>

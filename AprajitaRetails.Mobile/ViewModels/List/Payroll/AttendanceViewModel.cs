@@ -1,5 +1,6 @@
 ﻿ 
 using AprajitaRetails.Mobile.DataModels.Payroll;
+using AprajitaRetails.Mobile.FormEntry.Models;
 using AprajitaRetails.Mobile.FormEntry.Views;
  
 
@@ -12,6 +13,38 @@ namespace AprajitaRetails.Mobile.ViewModels.List.Payroll
 
 
         }
+        
+        protected override void DataGrid_LongPress(DataGridCellLongPressEventArgs e)
+        {
+            var rowIndex = e.RowColumnIndex.RowIndex;
+            var rowData = e.RowData as AttendanceDTO;
+            var columnIndex = e.RowColumnIndex.ColumnIndex;
+            var column = e.Column;
+
+            var evm = new AttendanceEM { AttendanceId = rowData.AttendanceId, EmployeeId = rowData.EmployeeId, EntryTime = rowData.EntryTime, OnDate = rowData.OnDate, Remarks = rowData.Remarks, Status = rowData.Status, StoreId = rowData.StoreId };
+            _ = CurrentPage.Navigation.PushAsync(new AttendanceEntryPage(evm));
+        }
+        protected override void DataGrid_DoubleTap(DataGridCellDoubleTappedEventArgs e)
+        {
+            var rowIndex = e.RowColumnIndex.RowIndex;
+            var rowData = e.RowData as AttendanceDTO;
+            var columnIndex = e.RowColumnIndex.ColumnIndex;
+            var column = e.Column;
+
+            var evm = new AttendanceEM { AttendanceId = rowData.AttendanceId, EmployeeId = rowData.EmployeeId, EntryTime = rowData.EntryTime, OnDate = rowData.OnDate, Remarks = rowData.Remarks, Status = rowData.Status, StoreId = rowData.StoreId };
+            _ = CurrentPage.Navigation.PushAsync(new AttendanceEntryPage(evm));
+
+        }
+        protected override void DataGrid_CellRightTapped(Syncfusion.Maui.DataGrid.DataGridCellRightTappedEventArgs e)
+        {
+            var rowIndex = e.RowColumnIndex.RowIndex;
+            var rowData = e.RowData as AttendanceDTO;
+            var columnIndex = e.RowColumnIndex.ColumnIndex;
+            var column = e.Column;
+            var evm = new AttendanceEM { AttendanceId = rowData.AttendanceId, EmployeeId = rowData.EmployeeId, EntryTime = rowData.EntryTime, OnDate = rowData.OnDate, Remarks = rowData.Remarks, Status = rowData.Status, StoreId = rowData.StoreId };
+            _ = CurrentPage.Navigation.PushAsync(new AttendanceEntryPage(evm));
+        }
+
         public override void AddButton()
         {
             _ = CurrentPage.Navigation.PushAsync(new AttendanceEntryPage());

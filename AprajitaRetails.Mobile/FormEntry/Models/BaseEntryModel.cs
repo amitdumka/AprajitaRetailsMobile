@@ -283,16 +283,16 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [Required(ErrorMessage = "Please select Employee")]
         public string EmployeeId { get; set; }
 
-        [Display(GroupName = "Date Time", Name = "Date")]
-        [DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
+        [Display(Name = "Date")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "Please select Date")]
+        [DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Attendance cannot be beyond 16/Feb/2016, date is invalid")]
         public DateTime OnDate { get; set; }
 
-        [Display(GroupName = "Date Time")]
-        [DataType(DataType.Time)]
+        [Display(Name = "Time")]
+        //[DataType(DataType.Time)]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Entry Time should not be empty")]
-        [DataFormValueConverter(typeof(StringToTimeConverter))]
+        //[DataFormValueConverter(typeof(StringToTimeConverter))]
         public string EntryTime { get; set; }
 
         [Display(Name = "Attndance")]

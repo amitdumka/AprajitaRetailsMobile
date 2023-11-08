@@ -46,6 +46,7 @@ public class StringToTimeConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
+        
         if (value == null || string.IsNullOrEmpty(value.ToString()))
         {
             return DateTime.Now.TimeOfDay;
@@ -53,7 +54,7 @@ public class StringToTimeConverter : IValueConverter
         else
         {
             TimeSpan dateTime;
-            TimeSpan.TryParse((string)value, out dateTime);
+            TimeSpan.TryParse((string)value,out dateTime);
             return dateTime;
         }
     }

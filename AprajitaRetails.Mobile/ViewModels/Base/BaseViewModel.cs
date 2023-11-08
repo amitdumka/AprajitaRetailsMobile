@@ -90,6 +90,31 @@ namespace AprajitaRetails.Mobile.ViewModels.Base
             Notify.NotifyShort("Refresh Cash Vouches....");
             FetchAsync();
         }
+        [RelayCommand]
+        protected virtual void DataGrid_LongPress(DataGridCellLongPressEventArgs e)
+        {
+            var rowIndex = e.RowColumnIndex.RowIndex;
+            var rowData = e.RowData;
+            var columnIndex = e.RowColumnIndex.ColumnIndex;
+            var column = e.Column;
+        }
+        [RelayCommand]
+        protected virtual void DataGrid_CellRightTapped( Syncfusion.Maui.DataGrid.DataGridCellRightTappedEventArgs e)
+        {
+            var rowIndex = e.RowColumnIndex.RowIndex;
+            var rowData = e.RowData;
+            var columnIndex = e.RowColumnIndex.ColumnIndex;
+            var column = e.Column;
+            var pointerDeviceType = e.PointerDeviceType;
+        }
+        [RelayCommand]
+        protected virtual void DataGrid_DoubleTap(DataGridCellDoubleTappedEventArgs e)
+        {
+            var rowIndex = e.RowColumnIndex.RowIndex;
+            var rowData = e.RowData;
+            var columnIndex = e.RowColumnIndex.ColumnIndex;
+            var column = e.Column;
+        }
         protected abstract  Task FetchAsync();
         protected abstract void InitViewModel();
 

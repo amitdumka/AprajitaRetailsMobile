@@ -51,9 +51,21 @@ public class AttendanceEntryPage : EntryPage<AttendanceEM, AttendanceEntryViewMo
 
     public AttendanceEntryPage(Attendance obj)
     {
-        viewModel.Entity = new AttendanceEM { AttendanceId = obj.AttendanceId , EmployeeId=obj.EmployeeId, EntryTime=obj.EntryTime, OnDate=obj.OnDate, Remarks=obj.Remarks, Status=obj.Status, StoreId=obj.StoreId};
-
+        
         viewModel = new AttendanceEntryViewModel();
+        viewModel.Entity = new AttendanceEM { AttendanceId = obj.AttendanceId, EmployeeId = obj.EmployeeId, EntryTime = obj.EntryTime, OnDate = obj.OnDate, Remarks = obj.Remarks, Status = obj.Status, StoreId = obj.StoreId };
+
+        bhv = new AttendanceEntryFormBehavior();
+        this.Title = viewModel.HeaderText;
+        this.BindingContext = viewModel;
+        this.Behaviors.Add(bhv);
+        entryView.BindingContext = viewModel;
+
+    }
+    public AttendanceEntryPage(AttendanceEM obj)
+    {
+        viewModel = new AttendanceEntryViewModel();
+        viewModel.Entity = obj;
         bhv = new AttendanceEntryFormBehavior();
         this.Title = viewModel.HeaderText;
         this.BindingContext = viewModel;
@@ -91,7 +103,7 @@ public class EntryPage<T, VM, B> : ContentPage where B : BaseEntryBehavior<T, VM
     protected B bhv;
     protected VM viewModel;
 
-     
+
 
     public EntryPage()
     {

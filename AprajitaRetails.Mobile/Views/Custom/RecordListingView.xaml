@@ -5,10 +5,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:app="clr-namespace:AprajitaRetails.Mobile.Resources.Styles"
     xmlns:sfgrid="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
+     xmlns:syncfusion="http://schemas.syncfusion.com/maui"
     x:Name="this"
     BackgroundColor="{x:StaticResource Accent_Blue200}">
-    
-    <VerticalStackLayout BackgroundColor="{x:StaticResource Accent_Blue200}">
+    <ContentView.Resources>
+        <Style TargetType="syncfusion:DataGridTableSummaryCell">
+            <Setter Property="Background" Value="#0074E3"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="FontFamily" Value="TimesNewRoman"/>
+        </Style>
+    </ContentView.Resources>
+    <VerticalStackLayout BackgroundColor="{x:StaticResource Accent_Blue200}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <HorizontalStackLayout HorizontalOptions="Center">
             <Image>
                 <Image.Source>
@@ -43,12 +52,12 @@
                 Text="Refresh" />
         </HorizontalStackLayout>
         
-        <VerticalStackLayout x:Name="DetailsLayout" Margin="10">
+        <VerticalStackLayout x:Name="DetailsLayout" Margin="10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
             <sfgrid:SfDataGrid
                 x:Name="dataGrid"
                 AutoGenerateColumnsMode="None"
                 BackgroundColor="Black"
-                ColumnWidthMode="FitByCell"
+                ColumnWidthMode="Auto"
                 HorizontalOptions="CenterAndExpand"
                 HorizontalScrollBarVisibility="Default"
                 ItemsSource="{Binding Entities}"
@@ -56,12 +65,12 @@
                 RowHeight="48"
                 SelectionMode="SingleDeselect"
                 SortingMode="Single"
-                VerticalOptions="CenterAndExpand"
+                VerticalOptions="FillAndExpand"
                 VerticalScrollBarVisibility="Default">
                 <sfgrid:SfDataGrid.DefaultStyle>
                     <sfgrid:DataGridStyle
                         AlternateRowBackground="#AFD5AA"
-                        GridLineColor="IndianRed"
+                        GridLineColor="BlueViolet"
                         HeaderRowBackground="#0074E3"
                         HeaderRowFontAttributes="Bold"
                         HeaderRowFontFamily="Roboto-Medium"
@@ -82,7 +91,7 @@
             FontAttributes="Bold,Italic"
             FontAutoScalingEnabled="True"
             HorizontalTextAlignment="End"
-            Text="{Binding RecordCount, StringFormat='Records : {0}  .', Mode=TwoWay}"
+            Text="{Binding RecordCount, StringFormat='Count : {0}  ', Mode=TwoWay}"
             TextColor="{x:StaticResource TextOnSolid_Light}" />
     </VerticalStackLayout>
    

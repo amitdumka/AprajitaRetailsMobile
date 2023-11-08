@@ -51,8 +51,8 @@ namespace AprajitaRetails.Mobile.Views.Custom
                 AddButtonText = "Add",
                 RefreshButtonText = "Refresh",
 
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
             Content = new VerticalStackLayout
             {
@@ -60,8 +60,8 @@ namespace AprajitaRetails.Mobile.Views.Custom
                 {
                  rlv
                 },
-                HorizontalOptions = LayoutOptions.Center,
-                VerticalOptions = LayoutOptions.Center
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                VerticalOptions = LayoutOptions.FillAndExpand
             };
         }
 

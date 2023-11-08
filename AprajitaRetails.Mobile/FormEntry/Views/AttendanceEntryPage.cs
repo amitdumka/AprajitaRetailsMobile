@@ -49,12 +49,10 @@ public class NoteEntryPage : EntryPage<NoteEM, NoteEntryViewModel, NoteEntryForm
 public class AttendanceEntryPage : EntryPage<AttendanceEM, AttendanceEntryViewModel, AttendanceEntryFormBehavior>
 {
 
-public AttendanceEntryPage(Attendance obj) 
-{
-viewModel.Enitity=new {
-
-} ;
-} 
+    public AttendanceEntryPage(Attendance obj)
+    {
+        viewModel.Entity = new AttendanceEM { AttendanceId = obj.AttendanceId , EmployeeId=obj.EmployeeId, EntryTime=obj.EntryTime, OnDate=obj.OnDate, Remarks=obj.Remarks, Status=obj.Status, StoreId=obj.StoreId};
+    }
     public AttendanceEntryPage()
     {
         viewModel = new AttendanceEntryViewModel();
@@ -85,10 +83,7 @@ public class EntryPage<T, VM, B> : ContentPage where B : BaseEntryBehavior<T, VM
     protected B bhv;
     protected VM viewModel;
 
-public EntryPage(T obj) 
-{
-EntryPage() ;
-} 
+     
 
     public EntryPage()
     {

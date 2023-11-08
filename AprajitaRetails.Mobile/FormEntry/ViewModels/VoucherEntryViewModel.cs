@@ -2,31 +2,6 @@
 
 namespace AprajitaRetails.Mobile.FormEntry.ViewModels
 {
-    public partial class AttendanceEntryViewModel : BaseEntryViewModel<AttendanceEM>
-    {
-        public AttendanceEntryViewModel() : base()
-        {
-            HeaderText = "Attendance";
-            Entity = new AttendanceEM
-            {
-                OnDate = DateTime.Now,
-                EmployeeId = "ARD-2016-SM-1",
-                StoreId = CurrentSession.StoreCode,
-                EntryTime = DateTime.Now.ToShortTimeString(),
-                Remarks = "",
-                Status = AttUnit.Absent
-            };
-        }
-    }
-
-    public partial class EmployeeEntryViewModel : BaseEntryViewModel<EmployeeEM>
-    {
-        public EmployeeEntryViewModel() : base()
-        {
-            HeaderText = "Employee";
-            Entity = new EmployeeEM { StoreId = CurrentSession.StoreCode, IsWorking = true, Gender = Gender.Male, BirthDate = DateTime.Now.AddYears(-18), Category = EmpType.Salesman, JoiningDate = DateTime.Now, City = string.IsNullOrEmpty(CurrentSession.CityName) ? "" : CurrentSession.CityName };
-        }
-    }
 
     public partial class VoucherEntryViewModel : BaseEntryViewModel<VoucherEM>
     {
@@ -38,15 +13,15 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
                 OnDate = DateTime.Now,
                 EmployeeId = "ARD-2016-SM-1",
                 StoreId = CurrentSession.StoreCode,
-                Remarks = "",
+                Remarks = string.Empty,
                 Amount = 0,
-                VoucherNumber = "",
-                PartyId = "",
-                Particulars = "",
-                PartyName = "",
+                VoucherNumber = string.Empty,
+                PartyId = string.Empty,
+                Particulars = string.Empty,
+                PartyName = string.Empty,
                 PaymentDetails = null,
                 PaymentMode = PaymentMode.Cash,
-                SlipNumber = "",
+                SlipNumber = string.Empty,
                 AccountId = null,
                 VoucherType = VoucherType.CashPayment
             };
@@ -63,15 +38,15 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
                 OnDate = DateTime.Now,
                 EmployeeId = "ARD-2016-SM-1",
                 StoreId = CurrentSession.StoreCode,
-                Remarks = "",
+                Remarks = string.Empty,
                 Amount = 0,
-                CashVoucherNumber = "",
-                PartyId = "",
-                Particulars = "",
-                PartyName = "",
-                 
-                SlipNumber = "",
-                TransactionId = "",
+                CashVoucherNumber = string.Empty,
+                PartyId = string.Empty,
+                Particulars = string.Empty,
+                PartyName = string.Empty,
+
+                SlipNumber = string.Empty,
+                TransactionId = string.Empty,
                 VoucherType = VoucherType.CashPayment
             };
         }
@@ -86,14 +61,14 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
             {
                 OnDate = DateTime.Now,
                 StoreId = CurrentSession.StoreCode,
-                Remarks = "",
+                Remarks = string.Empty,
                 Amount = 0,
-                NoteNumber = "",
+                NoteNumber = string.Empty,
                 NotesType = NotesType.DebitNote,
-                PartyName = "",
-                Reason = "",
+                PartyName = string.Empty,
+                Reason = string.Empty,
                 TaxRate = 0,
-                PartyId = "",
+                PartyId = string.Empty,
                 WithGST = false
             };
         }

@@ -65,6 +65,7 @@
 		<None Remove="Resources\Images\add_location.png" />
 		<None Remove="Resources\Images\amit.jpg" />
 		<None Remove="Resources\Images\aprajitaretails.png" />
+		<None Remove="Resources\Images\arlogin.png" />
 		<None Remove="Resources\Images\arlogo.png" />
 		<None Remove="Resources\Images\login.png" />
 		<None Remove="Resources\Images\shalini.jpg" />

@@ -129,30 +129,6 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
             }
         }
 
-        private async Task WorkArroundForComboBoxLoad()
-        {
-            var Attendance = new AttendanceEM
-            {
-                AttendanceId = "11",
-
-                EntryTime = DateTime.Now.ToShortTimeString(),
-                Status = AttUnit.SundayHoliday,
-                Remarks = "10:30 PM",
-                StoreId = "ARD",
-                EmployeeId = "ARD-2016-SM-3",
-                OnDate = DateTime.Now.AddDays(5),
-            };
-            if (viewModel.Stores != null && viewModel.Employees != null && viewModel.Stores.Any() && viewModel.Employees.Any())
-            {
-                viewModel.Entity = Attendance;
-                DataForm.DataObject = Attendance;
-            }
-            else
-            {
-                await Task.Delay(10000);
-                viewModel.Entity = Attendance;
-                DataForm.DataObject = Attendance;
-            }
-        }
+         
     }
 }

@@ -42,8 +42,9 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         public string Particulars { get; set; }
 
         [Display(Name = "Amount")]
-        [Required(ErrorMessage = "Please enter Amount, it cant be empty or Zero ")]
         [DataType(DataType.Currency)]
+        [Range(minimum: 1, maximum: 9999999999999, ErrorMessage = "Amount can't be zero or less then zero")]
+        [Required(ErrorMessage = "Please enter Amount, it cant be empty or Zero ")]
         public decimal Amount { get; set; }
 
         [Display(Name = "Payment Mode")]
@@ -103,9 +104,10 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [Required(ErrorMessage = "Please enter Particulars, it cant be empty ")]
         public string Particulars { get; set; }
 
-        [Display(Name = "Amount")]
-        [Required(ErrorMessage = "Please enter Amount, it cant be empty or Zero ")]
+        [Display(Name = "Amount")]        
         [DataType(DataType.Currency)]
+        [Range(minimum: 1, maximum: 9999999999999, ErrorMessage = "Amount can't be zero or less then zero")]
+        [Required(ErrorMessage = "Please enter Amount, it cant be empty or Zero ")]
         public decimal Amount { get; set; }
 
         [Display(Name = "Remarks")]
@@ -143,26 +145,31 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
         [Display(Name = "Party Name")]
         [Required(ErrorMessage = "Please enter party name , it can not be empty!")]
         public string PartyName { get; set; }
+        
+        [Required(ErrorMessage = "Please enter reson , it can not be empty!")]
+        public string Reason { get; set; }
+
+        [Display(Name = "Ledger")]
+        public string PartyId { get; set; }
+
+        [Display(Name = "Amount")]
+        [DataType(DataType.Currency)]
+        [Range(minimum: 1, maximum: 9999999999999, ErrorMessage = "Amount can't be zero or less then zero")]
+        [Required(ErrorMessage = "Please enter Amount, it cant be empty or Zero ")]
+        public decimal Amount { get; set; }
 
         [Display(Name = "GST")]
         public bool WithGST { get; set; }
-
-        [DataType(DataType.Currency)]
-        [Required(ErrorMessage = "Please enter Amount , it can not be empty!")]
-        public decimal Amount { get; set; }
 
         [Display(Name = "Tax Rate")]
         [Required(ErrorMessage = "Please enter tax Rate , it can not be empty!")]
         public decimal TaxRate { get; set; }
 
-        [Required(ErrorMessage = "Please enter reson , it can not be empty!")]
-        public string Reason { get; set; }
-
+        
         [Required(ErrorMessage = "Please enter remarks , it can not be empty!")]
         public string Remarks { get; set; }
 
-        [Display(Name = "Ledger")]
-        public string PartyId { get; set; }
+        
     }
 
     public partial class EmployeeEM

@@ -1,14 +1,11 @@
 ﻿////using AKS.Shared.Commons.Models.Accounts;
 using AprajitaRetails.Mobile.DataModels.Base;
-using AprajitaRetails.Mobile.Operations.Prefernces;
-using AprajitaRetails.Shared.AutoMapper.DTO;
 using AprajitaRetails.Shared.Models.Vouchers;
-using Microsoft.EntityFrameworkCore;
 
 namespace AprajitaRetails.Mobile.DataModels.Accounting
 {
 
-    public class VoucherDataModel : BaseDM<VoucherDTO>
+    public class VoucherDataModel : BaseDM<Voucher,VoucherDTO>
     {
         public VoucherDataModel() : base()
         {
@@ -27,7 +24,7 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
             throw new NotImplementedException();
         }
 
-        public override Task<List<VoucherDTO>> GetItemsAsync(string storeid)
+        public override Task<List<Voucher>> GetItemsAsync(string storeid)
         {
             throw new NotImplementedException();
         }

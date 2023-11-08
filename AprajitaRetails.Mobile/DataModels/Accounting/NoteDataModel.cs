@@ -2,10 +2,11 @@
 using AprajitaRetails.Mobile.DataModels.Base;
 using AprajitaRetails.Mobile.Operations.Prefernces;
 using AprajitaRetails.Shared.AutoMapper.DTO;
+using AprajitaRetails.Shared.Models.Vouchers;
 
 namespace AprajitaRetails.Mobile.DataModels.Accounting
 {
-    public class NoteDataModel : BaseDM<NoteDTO>
+    public class NoteDataModel : BaseDM<Note,NoteDTO>
     {
         public NoteDataModel() : base()
         {
@@ -24,7 +25,7 @@ namespace AprajitaRetails.Mobile.DataModels.Accounting
             throw new NotImplementedException();
         }
 
-        public override Task<List<NoteDTO>> GetItemsAsync(string storeid)
+        public override Task<List<Note>> GetItemsAsync(string storeid)
         {
             throw new NotImplementedException();
         }

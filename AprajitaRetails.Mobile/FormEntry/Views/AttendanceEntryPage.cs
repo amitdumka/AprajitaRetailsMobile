@@ -52,6 +52,14 @@ public class AttendanceEntryPage : EntryPage<AttendanceEM, AttendanceEntryViewMo
     public AttendanceEntryPage(Attendance obj)
     {
         viewModel.Entity = new AttendanceEM { AttendanceId = obj.AttendanceId , EmployeeId=obj.EmployeeId, EntryTime=obj.EntryTime, OnDate=obj.OnDate, Remarks=obj.Remarks, Status=obj.Status, StoreId=obj.StoreId};
+
+        viewModel = new AttendanceEntryViewModel();
+        bhv = new AttendanceEntryFormBehavior();
+        this.Title = viewModel.HeaderText;
+        this.BindingContext = viewModel;
+        this.Behaviors.Add(bhv);
+        entryView.BindingContext = viewModel;
+
     }
     public AttendanceEntryPage()
     {

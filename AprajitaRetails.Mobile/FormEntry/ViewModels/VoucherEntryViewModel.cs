@@ -23,7 +23,7 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
                 PaymentMode = PaymentMode.Cash,
                 SlipNumber = string.Empty,
                 AccountId = null,
-                VoucherType = VoucherType.CashPayment
+                VoucherType =(VchType) ((int)VoucherType.Expense)
             };
         }
     }
@@ -47,7 +47,7 @@ namespace AprajitaRetails.Mobile.FormEntry.ViewModels
 
                 SlipNumber = string.Empty,
                 TransactionId = string.Empty,
-                VoucherType = VoucherType.CashPayment
+                VoucherType = (CashVchType)VoucherType.CashPayment
             };
         }
     }

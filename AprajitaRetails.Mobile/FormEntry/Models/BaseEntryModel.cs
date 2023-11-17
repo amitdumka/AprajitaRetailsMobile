@@ -10,6 +10,13 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
     {
     }
 
+    public enum VchType {  Payment=0, Receipt=1, Expense =6}
+    public enum CashVchType { CashPayment = 8, CashReceipt = 7 }
+    //public enum NotesType { DebitNote=3, CreditNote = 4}
+    public enum VchExtType { Payment=0, Receipt=1, Contra=2, DebitNote=3, CreditNote=4, JV=5}
+
+    
+
     public partial class VoucherEM
     {
         [Key]
@@ -23,7 +30,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
 
         [Required(ErrorMessage = "Please select Voucher Type")]
         [Display(Name = "Voucher Type")]
-        public VoucherType VoucherType { get; set; }
+        public VchType VoucherType { get; set; }
 
         [DataFormDateRange(MinimumDate = "17/02/2016", ErrorMessage = "Voucher date cannot be beyond 16/Feb/2016, date is invalid")]
         [Required(ErrorMessage = "Please select date, it cant be empty ")]
@@ -82,7 +89,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Models
 
         [Required(ErrorMessage = "Please select Voucher Type")]
         [Display(Name = "Voucher Type")]
-        public VoucherType VoucherType { get; set; }
+        public CashVchType VoucherType { get; set; }
 
         [Required(ErrorMessage = "Please select Transcation Type")]
         [Display(Name = "Transcation Type")]

@@ -20,7 +20,13 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
 
             if (dataForm != null)
             {
+#if ANDROID
+                dataForm.ColumnCount = 2;
+#elif WINDOWS
+                  dataForm.ColumnCount = 3;
+#elif IOS
                 dataForm.ColumnCount = 1;
+#endif
                 DataForm = dataForm;
                 dataForm.RegisterEditor(nameof(VoucherEM.StoreId), DataFormEditorType.ComboBox);
                 dataForm.RegisterEditor(nameof(VoucherEM.EmployeeId), DataFormEditorType.ComboBox);
@@ -58,6 +64,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
         protected override void OnGenerateDataFormItem(object sender, GenerateDataFormItemEventArgs e)
         {
             base.OnGenerateDataFormItem(sender, e);
+
         }
 
         protected override async void OnPrimaryButtonClicked(object sender, EventArgs e)
@@ -68,7 +75,7 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
                 if (this.DataForm.Validate())
                 {
                     Notify.NotifyShort($" Please Wait while Saving new Voucher...");
-                    VoucherDataModel dataModel = new ();
+                    VoucherDataModel dataModel = new();
                     //dataModel.Connect();
                     var vch = this.DataForm.DataObject as VoucherEM;
                     //var result = await dataModel.SaveAsync(new Voucher

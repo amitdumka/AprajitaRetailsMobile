@@ -20,7 +20,13 @@ namespace AprajitaRetails.Mobile.FormEntry.Behviours
 
             if (dataForm != null)
             {
+#if ANDROID
+                dataForm.ColumnCount = 2;
+#elif WINDOWS
+                  dataForm.ColumnCount = 3;
+#elif IOS
                 dataForm.ColumnCount = 1;
+#endif
                 DataForm = dataForm;
                 dataForm.RegisterEditor(nameof(NoteEM.StoreId), DataFormEditorType.ComboBox);
                 dataForm.RegisterEditor(nameof(NoteEM.StoreId), DataFormEditorType.ComboBox);
